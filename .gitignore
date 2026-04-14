@@ -1,0 +1,45 @@
+# =============================================
+# Vitis HLS 合成產物 (可由 run_all.tcl 重新產生)
+# =============================================
+
+# HLS solution 底下的合成/實作結果
+**/solution*/impl/
+**/solution*/sim/
+**/solution*/csim/
+**/solution*/.autopilot/
+**/solution*/syn/report/
+**/solution*/syn/systemc/
+**/solution*/syn/verilog/
+**/solution*/syn/vhdl/
+
+# HLS project 設定檔 (可重建)
+**/hls.app
+
+# Vitis component 結構
+**/interleaver_rtl/tx_interleaver/
+**/interleaver_rtl/compile_commands.json
+**/interleaver_rtl/vitis-comp.json
+**/interleaver_rtl/logs/
+
+# output IP zip
+**/output/
+
+# 根目錄 HLS log
+/vitis_hls.log
+
+# 備份 log
+**/*.backup.log
+
+# 模擬暫存檔
+**/input_stimulus.dat
+**/golden_output.dat
+
+# Vivado journal / lock
+**/*.jou
+**/*.str
+**/*.backup.jou
+**/vivado_sim/
+
+# Windows
+Thumbs.db
+desktop.ini

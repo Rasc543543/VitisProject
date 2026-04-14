@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>Demapper System Architecture - Optimized</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                fontFamily: '"Segoe UI", "Microsoft JhengHei", sans-serif',
+                primaryColor: '#ffffff',
+                edgeLabelBackground: '#ffffff'
+            },
+            flowchart: {
+                curve: 'linear', 
+                htmlLabels: true,
+                rankSpacing: 60,
+                nodeSpacing: 20
+            }
+        });
+    </script>
+    <style>
+        body { background-color: #ffffff; display: flex; justify-content: center; padding-top: 50px; }
+        .container { width: 95%; max-width: 1200px; }
+        .header-line { border-top: 3px solid #3498db; margin-bottom: 5px; }
+        h1 { font-size: 20px; color: #2c3e50; text-align: left; margin: 10px 0 20px 0; font-weight: bold; }
+        .sub-header { background: #f8f9fa; padding: 12px; border-radius: 4px; text-align: center; color: #444; font-size: 14px; margin-bottom: 50px; border: 1px solid #e0e0e0; }
+        
+        /* 調整 Mermaid 內部的字體大小 */
+        .node text { font-size: 13px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-line"></div>
+    <h1>Figure 1: Demapper System Architecture (Packed / Interleaved)</h1>
+    <div class="sub-header">
+        <strong>Stream-Based Processing:</strong> 32-bit 輸入直接解包並進行 LLR 運算，無冗餘轉換，優化硬體資源使用。
+    </div>
+
+    <div class="mermaid">
+    graph LR
+        %% 定義節點
+        In[AXI-Stream Input<br/>32-bit Packed Word]:::orange
+        
+        %% Pre-Processing Stage 內部
+        Unpack[Unpacking Unit<br/>Bit Slicing]:::blue
+
+        %% LLR Core
+        LLR_Core{QPSK LLR<br/>Algorithm}:::purple
+
+        %% Post-Processing
+        Quant[Quantizer<br/>8-bit LLR]:::smallBlue
+        
+        %% Output Stage
+        Out[AXI-Stream Output<br/>8-bit Soft Bits]:::green
+
+        %% 橫向直線連線
+        In --> Unpack
+        Unpack -- "Low 16 (I)" --> LLR_Core
+        Unpack -- "High 16 (Q)" --> LLR_Core
+        LLR_Core --> Quant
+        Quant --> Out
+
+        %% 區塊設定
+        subgraph Pre [Pre-Processing Stage]
+            Unpack
+        end
+
+        subgraph Core [LLR Calculation Core]
+            LLR_Core
+        end
+
+        subgraph Post [Post-Processing Stage]
+            Quant
+        end
+
+        %% CSS Class 定義
+        classDef orange fill:#f6b26b,stroke:#b45f06,stroke-width:1px,color:white;
+        classDef green fill:#93c47d,stroke:#38761d,stroke-width:1px,color:white;
+        classDef blue fill:#cfe2f3,stroke:#3d85c6,stroke-width:1px;
+        classDef smallBlue fill:#cfe2f3,stroke:#3d85c6,stroke-width:1px,padding:2px;
+        classDef purple fill:#f4cccc,stroke:#990000,stroke-width:1px,stroke-dasharray: 5 5;
+
+        %% 區塊背景與間距優化
+        style Pre fill:#fff2cc,stroke:#d6b656,stroke-width:1px;
+        style Core fill:#fff2cc,stroke:#d6b656,stroke-width:1px;
+        style Post fill:#fff2cc,stroke:#d6b656,stroke-width:1px;
+    </div>
+</div>
+
+</body>
+</html>

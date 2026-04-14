@@ -1,0 +1,204 @@
+==============================================================
+Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2022.2 (64-bit)
+Tool Version Limit: 2019.12
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+==============================================================
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+INFO: [HLS 200-435] Setting 'open_solution -flow_target vivado' configuration: config_interface -m_axi_latency=0
+INFO: [HLS 200-1510] Running: set_part xczu48dr-fsvg1517-2-e 
+INFO: [HLS 200-1611] Setting target device to 'xczu48dr-fsvg1517-2-e'
+INFO: [HLS 200-1510] Running: create_clock -period 10 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1510] Running: set_clock_uncertainty 1.25 default 
+INFO: [SYN 201-201] Setting up clock 'default' with an uncertainty of 1.25ns.
+INFO: [HLS 200-1510] Running: csim_design -O -clean 
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch GCC as the compiler.
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-111] Finished Command csim_design CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 3.347 seconds; current allocated memory: 0.375 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.008 seconds; current allocated memory: 675.719 MB.
+INFO: [HLS 200-10] Analyzing design file 'C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 2.714 seconds; current allocated memory: 678.941 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:247:50)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:250:25)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:249:67)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:249:36)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:248:39)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:248:23)
+INFO: [HLS 214-131] Inlining function 'ap_range_ref<32, false>::ap_range_ref(ap_int_base<32, false>*, int, int)' into 'ap_int_base<32, false>::range(int, int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:1048:12)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<32, false>::range(int, int)' into 'ap_int_base<32, false>::operator()(int, int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:1085:18)
+INFO: [HLS 214-131] Inlining function 'ap_range_ref<32, false>::get() const' into 'ap_int_base<16, false>::ap_int_base<32, false>(ap_range_ref<32, false> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:358:20)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<16, false>::ap_int_base<32, false>(ap_range_ref<32, false> const&)' into 'ap_uint<16>::ap_uint<32, false>(ap_range_ref<32, false> const&)'
+INFO: [HLS 214-131] Inlining function 'ap_int_base<16, false>::to_uint() const' into 'fixed16_to_half(ap_uint<16>)' (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_defs.h:49:36)
+INFO: [HLS 214-131] Inlining function 'ssdm_int<16, false>::ssdm_int(unsigned short)' into 'ap_int_base<16, false>::ap_int_base(unsigned short)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:213:78)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<16, false>::ap_int_base(unsigned short)' into 'ap_uint<16>::ap_uint(unsigned short)'
+INFO: [HLS 214-131] Inlining function 'ssdm_int<32, false>::ssdm_int(unsigned int)' into 'ap_int_base<32, false>::ap_int_base<16, false>(ap_int_base<16, false> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:185:106)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<32, false>::ap_int_base<16, false>(ap_int_base<16, false> const&)' into 'ap_range_ref<32, false>& ap_range_ref<32, false>::operator=<16, false>(ap_int_base<16, false> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_ref.h:367:31)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<32, false>::operator()(int, int)' into 'pack_iq(half, half)' (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_defs.h:68:5)
+INFO: [HLS 214-131] Inlining function 'ap_range_ref<32, false>& ap_range_ref<32, false>::operator=<16, false>(ap_int_base<16, false> const&)' into 'pack_iq(half, half)' (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_defs.h:69:15)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<32, false>::operator()(int, int)' into 'pack_iq(half, half)' (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_defs.h:69:5)
+INFO: [HLS 214-131] Inlining function 'ap_range_ref<32, false>& ap_range_ref<32, false>::operator=<16, false>(ap_int_base<16, false> const&)' into 'pack_iq(half, half)' (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_defs.h:68:14)
+INFO: [HLS 214-131] Inlining function '_ZN8ssdm_intILi4ELb0EEC2EDq4_j' into 'ap_int_base<4, false>::ap_int_base(int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:214:67)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<4, false>::ap_int_base(int)' into 'ap_uint<4>::ap_uint(int)'
+INFO: [HLS 214-131] Inlining function '_ZN8ssdm_intILi1ELb0EEC2EDq1_j' into 'ap_int_base<1, false>::ap_int_base(int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:214:67)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<1, false>::ap_int_base(int)' into 'ap_uint<1>::ap_uint(int)'
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<32>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:258:51)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<32>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:261:26)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<32>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:260:68)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<32>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:260:37)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<32>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:259:40)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<32>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:259:24)
+INFO: [HLS 214-131] Inlining function 'hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>::read()' into 'ref_rx_packed(hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp:20:28)
+INFO: [HLS 214-131] Inlining function 'hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<32>, 0ul, 0ul, 0ul> const&)' into 'ref_rx_packed(hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp:110:27)
+INFO: [HLS 214-131] Inlining function 'pack_iq(half, half)' into 'ref_rx_packed(hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp:106:28)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<32, false>::operator()(int, int)' into 'ref_rx_packed(hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp:21:20)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<32, false>::operator()(int, int)' into 'ref_rx_packed(hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp:22:20)
+INFO: [HLS 214-291] Loop 'anonymous' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_defs.h:41:5)
+INFO: [HLS 214-186] Unrolling loop 'anonymous' (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_defs.h:41:5) in function 'half_to_u16' completely with a factor of 1 (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_defs.h:39:0)
+INFO: [HLS 214-178] Inlining function 'fixed16_to_half(ap_uint<16>)' into 'ref_rx_packed(hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp:6:0)
+INFO: [HLS 214-178] Inlining function 'half_to_u16(half)' into 'ref_rx_packed(hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp:6:0)
+INFO: [HLS 214-248] Applying array_partition to 'p_metric': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp:31:14)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 3.188 seconds; current allocated memory: 679.609 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0 seconds; current allocated memory: 679.609 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.062 seconds; current allocated memory: 693.254 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.09 seconds; current allocated memory: 704.262 MB.
+INFO: [XFORM 203-510] Pipelining loop 'Loop-3.1' in function 'ref_rx_packed' automatically.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.164 seconds; current allocated memory: 736.371 MB.
+WARNING: [HLS 200-960] Cannot flatten loop 'Loop_CFO_Scan' (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp:29:14) in function 'ref_rx_packed' more than one sub loop.
+WARNING: [HLS 200-960] Cannot flatten loop 'Loop_Process_Packed' (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp:55:14) in function 'ref_rx_packed' the outer loop is not a perfect loop.
+INFO: [HLS 200-472] Inferring partial write operation for 'buf_i.V' (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp:21:18)
+INFO: [HLS 200-472] Inferring partial write operation for 'buf_q.V' (C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp:22:18)
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.125 seconds; current allocated memory: 768.047 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'ref_rx_packed' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'ref_rx_packed_Pipeline_Load_Packed' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'Load_Packed'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'Load_Packed'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.088 seconds; current allocated memory: 771.914 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.03 seconds; current allocated memory: 773.230 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'ref_rx_packed_Pipeline_2' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'Loop 1'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 1, loop 'Loop 1'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.064 seconds; current allocated memory: 773.863 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.028 seconds; current allocated memory: 773.871 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'ref_rx_packed_Pipeline_Loop_Metric' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'Loop_Metric'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 14, loop 'Loop_Metric'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.134 seconds; current allocated memory: 774.746 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.118 seconds; current allocated memory: 775.031 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'ref_rx_packed_Pipeline_Loop_Interp' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'Loop_Interp'.
+WARNING: [HLS 200-880] The II Violation in module 'ref_rx_packed_Pipeline_Loop_Interp' (loop 'Loop_Interp'): Unable to enforce a carried dependence constraint (II = 1, distance = 1, offset = 0) between 'store' operation ('cur_h_r_write_ln77', C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp:77) of variable 'cur_h_r', C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp:80 on local variable 'cur_h_r' and 'load' operation ('cur_h_r_load', C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp:80) on local variable 'cur_h_r'.
+WARNING: [HLS 200-880] The II Violation in module 'ref_rx_packed_Pipeline_Loop_Interp' (loop 'Loop_Interp'): Unable to enforce a carried dependence constraint (II = 2, distance = 1, offset = 0) between 'store' operation ('cur_h_r_write_ln77', C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp:77) of variable 'cur_h_r', C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp:80 on local variable 'cur_h_r' and 'load' operation ('cur_h_r_load', C:/VitisProject/Vitis/OFDM/RX/Refer/ref_rx_packed.cpp:80) on local variable 'cur_h_r'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 3, Depth = 26, loop 'Loop_Interp'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.248 seconds; current allocated memory: 775.953 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.193 seconds; current allocated memory: 775.965 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'ref_rx_packed' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.36 seconds; current allocated memory: 777.020 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.309 seconds; current allocated memory: 777.613 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'ref_rx_packed_Pipeline_Load_Packed' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'ref_rx_packed_Pipeline_Load_Packed'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.265 seconds; current allocated memory: 779.156 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'ref_rx_packed_Pipeline_2' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'ref_rx_packed_Pipeline_2'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.091 seconds; current allocated memory: 780.359 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'ref_rx_packed_Pipeline_Loop_Metric' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'ref_rx_packed_Pipeline_Loop_Metric' pipeline 'Loop_Metric' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'fmul_32ns_32ns_32_2_max_dsp_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'hadd_16ns_16ns_16_2_full_dsp_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'hmul_16ns_16ns_16_2_max_dsp_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_42_16_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sitofp_32s_32_3_no_dsp_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sptohp_32ns_16_1_no_dsp_1': 2 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'ref_rx_packed_Pipeline_Loop_Metric'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.147 seconds; current allocated memory: 782.293 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'ref_rx_packed_Pipeline_Loop_Interp' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'ref_rx_packed_Pipeline_Loop_Interp' pipeline 'Loop_Interp' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'fadd_32ns_32ns_32_4_no_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'faddfsub_32ns_32ns_32_4_full_dsp_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'fcmp_32ns_32ns_1_2_no_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'fdiv_32ns_32ns_32_8_no_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'fmul_32ns_32ns_32_2_max_dsp_1': 3 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'hptosp_16ns_32_1_no_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sitofp_32s_32_3_no_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sptohp_32ns_16_1_no_dsp_1': 2 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'ref_rx_packed_Pipeline_Loop_Interp'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.353 seconds; current allocated memory: 785.004 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'ref_rx_packed' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] Design contains AXI ports. Reset is fixed to synchronous and active low.
+INFO: [RTGEN 206-500] Setting interface mode on port 'ref_rx_packed/input_stream_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'ref_rx_packed/input_stream_V_keep_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'ref_rx_packed/input_stream_V_strb_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'ref_rx_packed/input_stream_V_last_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'ref_rx_packed/output_stream_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'ref_rx_packed/output_stream_V_keep_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'ref_rx_packed/output_stream_V_strb_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'ref_rx_packed/output_stream_V_last_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on function 'ref_rx_packed' to 'ap_ctrl_none'.
+INFO: [RTGEN 206-100] Generating core module 'faddfsub_32ns_32ns_32_4_full_dsp_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'fmul_32ns_32ns_32_2_max_dsp_1': 4 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'hadd_16ns_16ns_16_2_full_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'hcmp_16ns_16ns_1_1_no_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'hptosp_16ns_32_1_no_dsp_1': 4 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sitofp_32s_32_3_no_dsp_1': 4 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sptohp_32ns_16_1_no_dsp_1': 4 instance(s).

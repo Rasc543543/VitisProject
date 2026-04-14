@@ -1,0 +1,46 @@
+==============================================================
+Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2022.2 (64-bit)
+Tool Version Limit: 2019.12
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+==============================================================
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+INFO: [HLS 200-435] Setting 'open_solution -flow_target vivado' configuration: config_interface -m_axi_latency=0
+INFO: [HLS 200-1510] Running: set_part xczu48dr-fsvg1517-2-e 
+INFO: [HLS 200-1611] Setting target device to 'xczu48dr-fsvg1517-2-e'
+INFO: [HLS 200-1510] Running: create_clock -period 10 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1510] Running: set_clock_uncertainty 1.25 default 
+INFO: [SYN 201-201] Setting up clock 'default' with an uncertainty of 1.25ns.
+INFO: [HLS 200-1510] Running: csim_design -O -clean 
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch GCC as the compiler.
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-111] Finished Command csim_design CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 10.797 seconds; current allocated memory: 0.656 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.006 seconds; current allocated memory: 688.422 MB.
+INFO: [HLS 200-10] Analyzing design file 'C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp' ... 
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:9:8)
+INFO: [HLS 207-4436] 'wint_t' declared here (C:/Xilinx/Vitis_HLS/2022.2/tps/mingw/8.3.0/win64.o/nt\x86_64-w64-mingw32\include\crtdefs.h:106:24)
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:9:28)
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:12:2)
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:33:8)
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:33:28)
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:36:2)
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:57:8)
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:57:28)
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:60:2)
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:81:8)
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:81:28)
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:84:2)
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:105:8)
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:105:28)
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:108:2)
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:129:8)
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:129:28)
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:132:2)
+ERROR: [HLS 207-3802] unknown type name 'uint8_t'; did you mean 'wint_t'? (C:/VitisProject/Vitis/OFDM/TX/RS/rs_encoder_tx.cpp:153:8)
+ERROR: [HLS 207-59] too many errors emitted, stopping now
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.514 seconds; current allocated memory: 2.156 MB.
+INFO: [HLS 200-112] Total CPU user time: 3 seconds. Total CPU system time: 1 seconds. Total elapsed time: 29.25 seconds; peak allocated memory: 690.402 MB.
+INFO: [Common 17-206] Exiting vitis_hls at Wed Apr  8 22:01:42 2026...

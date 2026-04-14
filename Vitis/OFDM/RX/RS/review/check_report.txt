@@ -1,0 +1,13 @@
+HLS Code Check Report
+Project : rs_decoder_rx  (top: rs_decoder_rx)
+Date    : 2026-04-08 20:52
+======================================================================
+
+--- WARNINGS (2) ---
+[WARNING] [TYPE  ] rs_decoder_rx.cpp               hls::stream used but no ap_axiu/ap_axis type found — verify AXI-Stream data type
+[WARNING] [TB    ] tb_rs_decoder.cpp               Testbench does not write golden output file — needed for analyze_vcd.py comparison
+
+--- INFO (1) ---
+[INFO   ] [RISK  ] rs_decoder_rx.cpp:108           'static' variable → persistent register in RTL: 'static uint8_t data_buf[MAX_BUF_SIZE];'
+
+Summary: 0 error(s), 2 warning(s), 1 info(s)  →  [PASS with warnings]

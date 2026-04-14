@@ -1,0 +1,554 @@
+{
+  "Top": "rs_decoder_rx",
+  "RtlTop": "rs_decoder_rx",
+  "RtlPrefix": "",
+  "RtlSubPrefix": "rs_decoder_rx_",
+  "SourceLanguage": "cpp",
+  "HostMachineBits": "64",
+  "FunctionProtocol": "ap_ctrl_none",
+  "ResetStyle": "control",
+  "Target": {
+    "Family": "zynquplus",
+    "Device": "xczu48dr",
+    "Package": "-fsvg1517",
+    "Speed": "-2-e",
+    "Triple": "fpga64-xilinx-none"
+  },
+  "Args": {
+    "input_stream": {
+      "index": "0",
+      "direction": "in",
+      "srcType": "stream<hls::axis<ap_uint<8>, 0, 0, 0>, 0>&",
+      "srcSize": "56",
+      "hwRefs": [{
+          "type": "interface",
+          "interface": "input_stream",
+          "name": "",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "output_stream": {
+      "index": "1",
+      "direction": "out",
+      "srcType": "stream<hls::axis<ap_uint<8>, 0, 0, 0>, 0>&",
+      "srcSize": "56",
+      "hwRefs": [{
+          "type": "interface",
+          "interface": "output_stream",
+          "name": "",
+          "usage": "data",
+          "direction": "out"
+        }]
+    }
+  },
+  "HlsSolution": {
+    "FlowTarget": "vivado",
+    "ConfigTcl": [
+      "config_interface -m_axi_latency=0",
+      "config_export -description {RS Decoder RX IP}",
+      "config_export -format=ip_catalog",
+      "config_export -output=C:\/VitisProject\/Vitis\/OFDM\/RX\/RS\/output",
+      "config_export -version=1.0"
+    ],
+    "DirectiveTcl": ["set_directive_top rs_decoder_rx -name rs_decoder_rx"],
+    "ProfileOption": "0",
+    "ProfileType": "none",
+    "KernelName": "rs_decoder_rx"
+  },
+  "ClockInfo": {
+    "ClockName": "ap_clk",
+    "ClockPeriod": "10",
+    "Uncertainty": "1.25",
+    "IsCombinational": "0",
+    "II": "undef",
+    "Latency": "undef"
+  },
+  "Xdc": {"OocClocks": ["create_clock -name ap_clk -period 10.000 [get_ports ap_clk]"]},
+  "Ipx": {
+    "Vendor": "xilinx.com",
+    "Library": "hls",
+    "Name": "rs_decoder_rx",
+    "Version": "1.0",
+    "DisplayName": "Rs_decoder_rx",
+    "Revision": "2114557212",
+    "Description": "RS Decoder RX IP",
+    "Taxonomy": "\/VITIS_HLS_IP",
+    "AutoFamilySupport": "",
+    "ZipFile": "xilinx_com_hls_rs_decoder_rx_1_0.zip"
+  },
+  "Files": {
+    "CSource": ["C:\/VitisProject\/Vitis\/OFDM\/RX\/RS\/rs_decoder_rx.cpp"],
+    "Vhdl": [
+      "impl\/vhdl\/rs_decoder_rx_flow_control_loop_pipe_sequential_init.vhd",
+      "impl\/vhdl\/rs_decoder_rx_GF_EXP_ROM_1P_LUTRAM_1R.vhd",
+      "impl\/vhdl\/rs_decoder_rx_GF_LOG_ROM_1P_LUTRAM_1R.vhd",
+      "impl\/vhdl\/rs_decoder_rx_mac_muladd_2ns_8ns_8ns_9_4_1.vhd",
+      "impl\/vhdl\/rs_decoder_rx_mul_2ns_8ns_9_1_1.vhd",
+      "impl\/vhdl\/rs_decoder_rx_mux_42_8_1_1.vhd",
+      "impl\/vhdl\/rs_decoder_rx_mux_94_8_1_1.vhd",
+      "impl\/vhdl\/rs_decoder_rx_mux_164_8_1_1.vhd",
+      "impl\/vhdl\/rs_decoder_rx_mux_175_8_1_1.vhd",
+      "impl\/vhdl\/rs_decoder_rx_regslice_both.vhd",
+      "impl\/vhdl\/rs_decoder_rx_rs_decoder_rx_Pipeline_COLLECT_LOOP.vhd",
+      "impl\/vhdl\/rs_decoder_rx_rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18.vhd",
+      "impl\/vhdl\/rs_decoder_rx_rs_decoder_rx_Pipeline_SYNDROME_LOOP.vhd",
+      "impl\/vhdl\/rs_decoder_rx_rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_3_RAM_AUTO_bkb.vhd",
+      "impl\/vhdl\/rs_decoder_rx_urem_9ns_9ns_9_13_1.vhd",
+      "impl\/vhdl\/rs_decoder_rx.vhd"
+    ],
+    "Verilog": [
+      "impl\/verilog\/rs_decoder_rx_flow_control_loop_pipe_sequential_init.v",
+      "impl\/verilog\/rs_decoder_rx_GF_EXP_ROM_1P_LUTRAM_1R.dat",
+      "impl\/verilog\/rs_decoder_rx_GF_EXP_ROM_1P_LUTRAM_1R.v",
+      "impl\/verilog\/rs_decoder_rx_GF_LOG_ROM_1P_LUTRAM_1R.dat",
+      "impl\/verilog\/rs_decoder_rx_GF_LOG_ROM_1P_LUTRAM_1R.v",
+      "impl\/verilog\/rs_decoder_rx_hls_deadlock_idx0_monitor.v",
+      "impl\/verilog\/rs_decoder_rx_hls_deadlock_kernel_monitor_top.vh",
+      "impl\/verilog\/rs_decoder_rx_mac_muladd_2ns_8ns_8ns_9_4_1.v",
+      "impl\/verilog\/rs_decoder_rx_mul_2ns_8ns_9_1_1.v",
+      "impl\/verilog\/rs_decoder_rx_mux_42_8_1_1.v",
+      "impl\/verilog\/rs_decoder_rx_mux_94_8_1_1.v",
+      "impl\/verilog\/rs_decoder_rx_mux_164_8_1_1.v",
+      "impl\/verilog\/rs_decoder_rx_mux_175_8_1_1.v",
+      "impl\/verilog\/rs_decoder_rx_regslice_both.v",
+      "impl\/verilog\/rs_decoder_rx_rs_decoder_rx_Pipeline_COLLECT_LOOP.v",
+      "impl\/verilog\/rs_decoder_rx_rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18.v",
+      "impl\/verilog\/rs_decoder_rx_rs_decoder_rx_Pipeline_SYNDROME_LOOP.v",
+      "impl\/verilog\/rs_decoder_rx_rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_3_RAM_AUTO_bkb.dat",
+      "impl\/verilog\/rs_decoder_rx_rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_3_RAM_AUTO_bkb.v",
+      "impl\/verilog\/rs_decoder_rx_urem_9ns_9ns_9_13_1.v",
+      "impl\/verilog\/rs_decoder_rx.v"
+    ],
+    "IpMisc": ["impl\/misc\/logo.png"],
+    "CsynthXml": "syn\/report\/csynth.xml",
+    "DebugDir": ".debug",
+    "KernelXml": ".autopilot\/db\/kernel.internal.xml",
+    "Xo": "",
+    "XoHlsDir": "",
+    "ProtoInst": [".debug\/rs_decoder_rx.protoinst"]
+  },
+  "SubcoreInfo": {
+    "HasXpmMemory": false,
+    "HasClockedDsp": false,
+    "Ip": []
+  },
+  "Interfaces": {
+    "ap_clk": {
+      "type": "clock",
+      "busTypeName": "clock",
+      "mode": "slave",
+      "busParams": {
+        "ASSOCIATED_BUSIF": "input_stream:output_stream",
+        "ASSOCIATED_RESET": "ap_rst_n"
+      },
+      "portMap": {"ap_clk": "CLK"},
+      "ports": ["ap_clk"]
+    },
+    "ap_rst_n": {
+      "type": "reset",
+      "busTypeName": "reset",
+      "mode": "slave",
+      "busParams": {"POLARITY": "ACTIVE_LOW"},
+      "portMap": {"ap_rst_n": "RST"},
+      "ports": ["ap_rst_n"]
+    },
+    "input_stream": {
+      "type": "axi4stream",
+      "busTypeName": "axis",
+      "mode": "slave",
+      "dataWidth": "8",
+      "portPrefix": "input_stream_",
+      "ports": [
+        "input_stream_TDATA",
+        "input_stream_TKEEP",
+        "input_stream_TLAST",
+        "input_stream_TREADY",
+        "input_stream_TSTRB",
+        "input_stream_TVALID"
+      ],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "axis",
+          "register_option": "0",
+          "register_mode": "both",
+          "argName": "input_stream"
+        }]
+    },
+    "output_stream": {
+      "type": "axi4stream",
+      "busTypeName": "axis",
+      "mode": "master",
+      "dataWidth": "8",
+      "portPrefix": "output_stream_",
+      "ports": [
+        "output_stream_TDATA",
+        "output_stream_TKEEP",
+        "output_stream_TLAST",
+        "output_stream_TREADY",
+        "output_stream_TSTRB",
+        "output_stream_TVALID"
+      ],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "axis",
+          "register_option": "0",
+          "register_mode": "both",
+          "argName": "output_stream"
+        }]
+    }
+  },
+  "RtlPorts": {
+    "ap_clk": {
+      "dir": "in",
+      "width": "1"
+    },
+    "ap_rst_n": {
+      "dir": "in",
+      "width": "1"
+    },
+    "input_stream_TDATA": {
+      "dir": "in",
+      "width": "8"
+    },
+    "input_stream_TVALID": {
+      "dir": "in",
+      "width": "1"
+    },
+    "input_stream_TREADY": {
+      "dir": "out",
+      "width": "1"
+    },
+    "input_stream_TLAST": {
+      "dir": "in",
+      "width": "1",
+      "isVector": "true"
+    },
+    "input_stream_TKEEP": {
+      "dir": "in",
+      "width": "1",
+      "isVector": "true"
+    },
+    "input_stream_TSTRB": {
+      "dir": "in",
+      "width": "1",
+      "isVector": "true"
+    },
+    "output_stream_TDATA": {
+      "dir": "out",
+      "width": "8"
+    },
+    "output_stream_TVALID": {
+      "dir": "out",
+      "width": "1"
+    },
+    "output_stream_TREADY": {
+      "dir": "in",
+      "width": "1"
+    },
+    "output_stream_TLAST": {
+      "dir": "out",
+      "width": "1",
+      "isVector": "true"
+    },
+    "output_stream_TKEEP": {
+      "dir": "out",
+      "width": "1",
+      "isVector": "true"
+    },
+    "output_stream_TSTRB": {
+      "dir": "out",
+      "width": "1",
+      "isVector": "true"
+    }
+  },
+  "ModuleInfo": {
+    "Hierarchy": {
+      "ModuleName": "rs_decoder_rx",
+      "Instances": [
+        {
+          "ModuleName": "rs_decoder_rx_Pipeline_COLLECT_LOOP",
+          "InstanceName": "grp_rs_decoder_rx_Pipeline_COLLECT_LOOP_fu_3516"
+        },
+        {
+          "ModuleName": "rs_decoder_rx_Pipeline_SYNDROME_LOOP",
+          "InstanceName": "grp_rs_decoder_rx_Pipeline_SYNDROME_LOOP_fu_3537"
+        },
+        {
+          "ModuleName": "rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18",
+          "InstanceName": "grp_rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18_fu_3572"
+        }
+      ]
+    },
+    "Info": {
+      "rs_decoder_rx_Pipeline_COLLECT_LOOP": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "rs_decoder_rx_Pipeline_SYNDROME_LOOP": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "rs_decoder_rx": {
+        "FunctionProtocol": "ap_ctrl_none",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      }
+    },
+    "Metrics": {
+      "rs_decoder_rx_Pipeline_COLLECT_LOOP": {
+        "Latency": {
+          "LatencyBest": "",
+          "LatencyAvg": "",
+          "LatencyWorst": "",
+          "PipelineII": "",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "2.290"
+        },
+        "Loops": [{
+            "Name": "COLLECT_LOOP",
+            "TripCount": "",
+            "Latency": "",
+            "PipelineII": "1",
+            "PipelineDepth": "1"
+          }],
+        "Area": {
+          "FF": "35",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "140",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "rs_decoder_rx_Pipeline_SYNDROME_LOOP": {
+        "Latency": {
+          "LatencyBest": "2451",
+          "LatencyAvg": "",
+          "LatencyWorst": "3267",
+          "PipelineIIMin": "2451",
+          "PipelineIIMax": "3267",
+          "PipelineII": "2451 ~ 3267",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "3.393"
+        },
+        "Loops": [{
+            "Name": "SYNDROME_LOOP",
+            "TripCount": "",
+            "LatencyMin": "2449",
+            "LatencyMax": "3265",
+            "Latency": "2449 ~ 3265",
+            "PipelineII": "16",
+            "PipelineDepth": "18"
+          }],
+        "Area": {
+          "FF": "182",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "1730",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18": {
+        "Latency": {
+          "LatencyBest": "142",
+          "LatencyAvg": "",
+          "LatencyWorst": "381",
+          "PipelineIIMin": "142",
+          "PipelineIIMax": "381",
+          "PipelineII": "142 ~ 381",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "2.434"
+        },
+        "Loops": [{
+            "Name": "OUTPUT_LOOP_VITIS_LOOP_405_18",
+            "TripCount": "",
+            "LatencyMin": "140",
+            "LatencyMax": "379",
+            "Latency": "140 ~ 379",
+            "PipelineII": "1",
+            "PipelineDepth": "5"
+          }],
+        "Area": {
+          "DSP": "1",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "111",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "240",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "rs_decoder_rx": {
+        "Latency": {
+          "LatencyBest": "",
+          "LatencyAvg": "",
+          "LatencyWorst": "",
+          "PipelineII": "",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "7.851"
+        },
+        "Loops": [{
+            "Name": "VITIS_LOOP_166_1",
+            "TripCount": "",
+            "Latency": "",
+            "PipelineII": "",
+            "PipelineDepth": "",
+            "Loops": [
+              {
+                "Name": "BM_LOOP",
+                "TripCount": "16",
+                "LatencyMin": "608",
+                "LatencyMax": "1504",
+                "Latency": "608 ~ 1504",
+                "PipelineII": "",
+                "PipelineDepthMin": "38",
+                "PipelineDepthMax": "94",
+                "PipelineDepth": "38 ~ 94",
+                "Loops": [{
+                    "Name": "VITIS_LOOP_236_6",
+                    "TripCount": "",
+                    "LatencyMin": "3",
+                    "LatencyMax": "59",
+                    "Latency": "3 ~ 59",
+                    "PipelineII": "",
+                    "PipelineDepth": "4"
+                  }]
+              },
+              {
+                "Name": "OMEGA_LOOP",
+                "TripCount": "16",
+                "LatencyMin": "112",
+                "LatencyMax": "624",
+                "Latency": "112 ~ 624",
+                "PipelineII": "",
+                "PipelineDepthMin": "7",
+                "PipelineDepthMax": "39",
+                "PipelineDepth": "7 ~ 39",
+                "Loops": [{
+                    "Name": "VITIS_LOOP_311_13",
+                    "TripCount": "",
+                    "LatencyMin": "4",
+                    "LatencyMax": "36",
+                    "Latency": "4 ~ 36",
+                    "PipelineII": "",
+                    "PipelineDepth": "4"
+                  }]
+              },
+              {
+                "Name": "CHIEN_LOOP",
+                "TripCount": "255",
+                "Latency": "",
+                "PipelineII": "",
+                "PipelineDepth": "",
+                "Loops": [
+                  {
+                    "Name": "VITIS_LOOP_337_15",
+                    "TripCount": "",
+                    "LatencyMin": "15",
+                    "LatencyMax": "120",
+                    "Latency": "15 ~ 120",
+                    "PipelineII": "",
+                    "PipelineDepth": "15"
+                  },
+                  {
+                    "Name": "VITIS_LOOP_369_17",
+                    "TripCount": "",
+                    "Latency": "",
+                    "PipelineII": "",
+                    "PipelineDepth": "5"
+                  }
+                ]
+              }
+            ]
+          }],
+        "Area": {
+          "BRAM_18K": "4",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "~0",
+          "DSP": "1",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "2878",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "11891",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "2",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      }
+    }
+  },
+  "GenerateBdFiles": "0",
+  "GenData": {
+    "DataVersion": "0.2",
+    "Time": "2026-04-08 22:12:58 +0800",
+    "ToolName": "vitis_hls",
+    "ToolVersion": "2022.2"
+  }
+}

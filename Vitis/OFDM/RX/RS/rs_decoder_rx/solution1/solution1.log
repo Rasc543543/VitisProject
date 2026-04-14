@@ -1,0 +1,1005 @@
+==============================================================
+Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2022.2 (64-bit)
+Tool Version Limit: 2019.12
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+==============================================================
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+INFO: [HLS 200-435] Setting 'open_solution -flow_target vivado' configuration: config_interface -m_axi_latency=0
+INFO: [HLS 200-1510] Running: set_part xczu48dr-fsvg1517-2-e 
+INFO: [HLS 200-1611] Setting target device to 'xczu48dr-fsvg1517-2-e'
+INFO: [HLS 200-1510] Running: create_clock -period 10 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1510] Running: set_clock_uncertainty 1.25 default 
+INFO: [SYN 201-201] Setting up clock 'default' with an uncertainty of 1.25ns.
+INFO: [HLS 200-1510] Running: csim_design -O -clean 
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch GCC as the compiler.
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-111] Finished Command csim_design CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 3.675 seconds; current allocated memory: 0.402 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.006 seconds; current allocated memory: 675.023 MB.
+INFO: [HLS 200-10] Analyzing design file 'C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 3.289 seconds; current allocated memory: 678.977 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:247:50)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:250:25)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:249:67)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:249:36)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:248:39)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:248:23)
+INFO: [HLS 214-131] Inlining function 'ssdm_int<32, true>::ssdm_int(int)' into 'ap_int_base<32, true>::ap_int_base(int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:214:67)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<32, true>::ap_int_base(int)' into 'bool operator==<1, false>(ap_int_base<1, false> const&, int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:1788:1853)
+INFO: [HLS 214-131] Inlining function 'bool ap_int_base<1, false>::operator==<32, true>(ap_int_base<32, true> const&) const' into 'bool operator==<1, false>(ap_int_base<1, false> const&, int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:1788:1850)
+INFO: [HLS 214-131] Inlining function 'ssdm_int<8, false>::ssdm_int(unsigned char)' into 'ap_int_base<8, false>::ap_int_base(unsigned char)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:211:77)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<8, false>::ap_int_base(unsigned char)' into 'ap_uint<8>::ap_uint(unsigned char)'
+INFO: [HLS 214-131] Inlining function '_ZN8ssdm_intILi1ELb0EEC2EDq1_j' into 'ap_int_base<1, false>::ap_int_base(int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:214:67)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<1, false>::ap_int_base(int)' into 'ap_uint<1>::ap_uint(int)'
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:258:51)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:261:26)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:260:68)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:260:37)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:259:40)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:259:24)
+INFO: [HLS 214-131] Inlining function 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:121:34)
+INFO: [HLS 214-131] Inlining function 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:416:27)
+INFO: [HLS 214-131] Inlining function 'gf_div_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:379:43)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:380:29)
+INFO: [HLS 214-131] Inlining function 'gf_pow(int, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:378:37)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:373:34)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:372:17)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:367:36)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:363:33)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:362:15)
+INFO: [HLS 214-131] Inlining function 'gf_pow(int, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:356:37)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:314:9)
+INFO: [HLS 214-131] Inlining function 'gf_div_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:266:9)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:257:33)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:239:11)
+INFO: [HLS 214-131] Inlining function 'bool operator==<1, false>(ap_int_base<1, false> const&, int)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:129:25)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<8, false>::operator unsigned long long() const' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:125:35)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_188_3' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:188:31)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_236_6' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:236:31)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_254_8' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:254:35)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_271_10' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:271:40)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_263_9' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:263:39)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_279_11' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:279:36)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_244_7' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:244:35)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_311_13' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:311:32)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_337_15' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:337:32)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_359_16' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:359:40)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_369_17' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:369:40)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_177_2' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:177:20) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_188_3' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:188:31) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_204_4' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:204:27) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_222_5' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:222:20) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_254_8' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:254:35) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_271_10' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:271:40) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_263_9' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:263:39) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_279_11' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:279:36) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_244_7' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:244:35) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_288_12' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:288:28) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_324_14' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:324:21) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_359_16' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:359:40) in function 'rs_decoder_rx' completely with a factor of 15 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-248] Applying array_partition to '_ZZ13rs_decoder_rxRN3hls6streamINS_4axisI7ap_uintILi8EELm0ELm0ELm0EEELi0EEES6_E8data_buf': Cyclic partitioning with factor 4 on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:108:0)
+INFO: [HLS 214-248] Applying array_partition to 'syndrome': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:174:17)
+INFO: [HLS 214-248] Applying array_partition to 'sigma': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:215:17)
+INFO: [HLS 214-248] Applying array_partition to 'T_poly': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:217:17)
+INFO: [HLS 214-248] Applying array_partition to 'omega': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:302:17)
+INFO: [HLS 214-248] Applying array_partition to 'reg': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321:17)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 4.931 seconds; current allocated memory: 680.203 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.001 seconds; current allocated memory: 680.328 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.158 seconds; current allocated memory: 698.785 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.175 seconds; current allocated memory: 708.430 MB.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'BM_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:215) in function 'rs_decoder_rx' for pipelining.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'OMEGA_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:302) in function 'rs_decoder_rx' for pipelining.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'CHIEN_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321) in function 'rs_decoder_rx' for pipelining.
+WARNING: [HLS 200-932] Cannot unroll loop 'VITIS_LOOP_236_6' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:236) in function 'rs_decoder_rx' completely: variable loop bound.
+WARNING: [HLS 200-936] Cannot unroll loop 'VITIS_LOOP_311_13' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:311) in function 'rs_decoder_rx': cannot completely unroll a loop with a variable trip count.
+WARNING: [HLS 200-936] Cannot unroll loop 'VITIS_LOOP_337_15' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321) in function 'rs_decoder_rx': cannot completely unroll a loop with a variable trip count.
+WARNING: [HLS 200-932] Cannot unroll loop 'VITIS_LOOP_369_17' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:366) in function 'rs_decoder_rx' completely: variable loop bound.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:186:9) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:184:9) in function 'rs_decoder_rx'... converting 33 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:236:40) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:236:31) in function 'rs_decoder_rx'... converting 3 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:242:23) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:232:9) in function 'rs_decoder_rx'... converting 65 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:311:41) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:311:32) in function 'rs_decoder_rx'... converting 3 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321:17) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:337:32) in function 'rs_decoder_rx'... converting 10 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:366:29) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:369:40) in function 'rs_decoder_rx'... converting 5 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:353:51) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:369:40) in function 'rs_decoder_rx'... converting 61 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:44:27) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:383:52) in function 'rs_decoder_rx'... converting 5 basic blocks.
+INFO: [XFORM 203-11] Balancing expressions in function 'rs_decoder_rx' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:21:21)...49 expression(s) balanced.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.848 seconds; current allocated memory: 750.922 MB.
+WARNING: [HLS 200-960] Cannot flatten loop 'BM_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:215:17) in function 'rs_decoder_rx' either the parent loop or sub loop is do-while loop.
+WARNING: [HLS 200-960] Cannot flatten loop 'OMEGA_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:302:17) in function 'rs_decoder_rx' the outer loop is not a perfect loop because there is nontrivial logic before entering the inner loop.
+WARNING: [HLS 200-960] Cannot flatten loop 'CHIEN_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321:17) in function 'rs_decoder_rx' more than one sub loop.
+WARNING: [HLS 200-960] Cannot flatten loop 'VITIS_LOOP_166_1' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:166:32) in function 'rs_decoder_rx' more than one sub loop.
+INFO: [XFORM 203-541] Flattening a loop nest 'OUTPUT_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:401:14) in function 'rs_decoder_rx'.
+INFO: [HLS 200-472] Inferring partial write operation for 'rs_decoder_rx(stream&,stream<axis<ap_uint<8>,0ul,0ul,0ul>,0>&)data_buf.3' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:125:33)
+INFO: [HLS 200-472] Inferring partial write operation for 'rs_decoder_rx(stream&,stream<axis<ap_uint<8>,0ul,0ul,0ul>,0>&)data_buf.3' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:383:52)
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.4 seconds; current allocated memory: 774.777 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'rs_decoder_rx' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rs_decoder_rx_Pipeline_COLLECT_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'COLLECT_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'COLLECT_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.313 seconds; current allocated memory: 779.906 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.087 seconds; current allocated memory: 781.105 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'SYNDROME_LOOP'.
+WARNING: [HLS 200-880] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to enforce a carried dependence constraint (II = 1, distance = 1, offset = 0) between 'store' operation ('empty_write_ln184', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:184) of variable 'xor_ln191', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:191 on local variable 'empty' and 'load' operation ('p_load63', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on local variable 'empty'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_1', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 2). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_2', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 3). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_3', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 4). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_10', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 11). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_14', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 15). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 16, Depth = 18, loop 'SYNDROME_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.394 seconds; current allocated memory: 783.977 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.228 seconds; current allocated memory: 784.812 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=mul_ln401) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'OUTPUT_LOOP_VITIS_LOOP_405_18'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 5, loop 'OUTPUT_LOOP_VITIS_LOOP_405_18'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.348 seconds; current allocated memory: 785.410 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.089 seconds; current allocated memory: 785.449 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rs_decoder_rx' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+WARNING: [SCHED 204-65] Unable to satisfy pipeline directive for loop 'BM_LOOP': contains subloop(s) that are not unrolled or flattened.
+WARNING: [SCHED 204-65] Unable to satisfy pipeline directive for loop 'OMEGA_LOOP': contains subloop(s) that are not unrolled or flattened.
+WARNING: [SCHED 204-65] Unable to satisfy pipeline directive for loop 'CHIEN_LOOP': contains subloop(s) that are not unrolled or flattened.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.987 seconds; current allocated memory: 801.031 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.19 seconds; current allocated memory: 801.105 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rs_decoder_rx_Pipeline_COLLECT_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rs_decoder_rx_Pipeline_COLLECT_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.54 seconds; current allocated memory: 802.590 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' pipeline 'SYNDROME_LOOP' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mux_42_8_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rs_decoder_rx_Pipeline_SYNDROME_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.205 seconds; current allocated memory: 804.324 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18' pipeline 'OUTPUT_LOOP_VITIS_LOOP_405_18' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_2ns_8ns_8ns_9_4_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_42_8_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.842 seconds; current allocated memory: 809.781 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rs_decoder_rx' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] Design contains AXI ports. Reset is fixed to synchronous and active low.
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/input_stream_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/input_stream_V_keep_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/input_stream_V_strb_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/input_stream_V_last_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/output_stream_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/output_stream_V_keep_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/output_stream_V_strb_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/output_stream_V_last_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on function 'rs_decoder_rx' to 'ap_ctrl_none'.
+INFO: [SYN 201-210] Renamed object name 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_3_RAM_AUTO_1R1W' to 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_3_RAM_AUTO_bkb' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_2_RAM_AUTO_1R1W' to 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_2_RAM_AUTO_cud' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_1_RAM_AUTO_1R1W' to 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_1_RAM_AUTO_dEe' due to the length limit 80
+INFO: [RTGEN 206-100] Generating core module 'mul_2ns_8ns_9_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_164_8_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_175_8_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_42_8_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_94_8_1_1': 3 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'urem_9ns_9ns_9_13_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rs_decoder_rx'.
+INFO: [RTMG 210-278] Implementing memory 'rs_decoder_rx_rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_3_RAM_AUTO_bkb' using auto RAMs.
+INFO: [RTMG 210-279] Implementing memory 'rs_decoder_rx_GF_LOG_ROM_1P_LUTRAM_1R' using distributed ROMs.
+INFO: [RTMG 210-279] Implementing memory 'rs_decoder_rx_GF_EXP_ROM_1P_LUTRAM_1R' using distributed ROMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.816 seconds; current allocated memory: 823.734 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 5 seconds. CPU system time: 1 seconds. Elapsed time: 6.529 seconds; current allocated memory: 853.656 MB.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.672 seconds; current allocated memory: 857.125 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for rs_decoder_rx.
+INFO: [VLOG 209-307] Generating Verilog RTL for rs_decoder_rx.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were NOT satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 127.37 MHz
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 13 seconds. CPU system time: 1 seconds. Elapsed time: 24.33 seconds; current allocated memory: 182.820 MB.
+INFO: [HLS 200-1510] Running: cosim_design -O -rtl verilog 
+INFO: [COSIM 212-47] Using XSIM for RTL simulation.
+INFO: [COSIM 212-14] Instrumenting C test bench ...
+INFO: [COSIM 212-302] Starting C TB testing ... 
+INFO: [COSIM 212-333] Generating C post check test bench ...
+INFO: [COSIM 212-12] Generating RTL test bench ...
+INFO: [COSIM 212-1] *** C/RTL co-simulation file generation completed. ***
+INFO: [COSIM 212-323] Starting verilog simulation. 
+INFO: [COSIM 212-15] Starting XSIM ...
+INFO: [COSIM 212-316] Starting C post checking ...
+INFO: [COSIM 212-1000] *** C/RTL co-simulation finished: PASS ***
+INFO: [HLS 200-111] Finishe==============================================================
+Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2022.2 (64-bit)
+Tool Version Limit: 2019.12
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+==============================================================
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+INFO: [HLS 200-435] Setting 'open_solution -flow_target vivado' configuration: config_interface -m_axi_latency=0
+INFO: [HLS 200-1510] Running: set_part xczu48dr-fsvg1517-2-e 
+INFO: [HLS 200-1611] Setting target device to 'xczu48dr-fsvg1517-2-e'
+INFO: [HLS 200-1510] Running: create_clock -period 10 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1510] Running: set_clock_uncertainty 1.25 default 
+INFO: [SYN 201-201] Setting up clock 'default' with an uncertainty of 1.25ns.
+INFO: [HLS 200-1510] Running: csim_design -O -clean 
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch GCC as the compiler.
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-111] Finished Command csim_design CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 3.318 seconds; current allocated memory: 0.496 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.019 seconds; current allocated memory: 675.184 MB.
+INFO: [HLS 200-10] Analyzing design file 'C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 2.945 seconds; current allocated memory: 679.168 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:247:50)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:250:25)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:249:67)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:249:36)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:248:39)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:248:23)
+INFO: [HLS 214-131] Inlining function 'ssdm_int<32, true>::ssdm_int(int)' into 'ap_int_base<32, true>::ap_int_base(int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:214:67)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<32, true>::ap_int_base(int)' into 'bool operator==<1, false>(ap_int_base<1, false> const&, int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:1788:1853)
+INFO: [HLS 214-131] Inlining function 'bool ap_int_base<1, false>::operator==<32, true>(ap_int_base<32, true> const&) const' into 'bool operator==<1, false>(ap_int_base<1, false> const&, int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:1788:1850)
+INFO: [HLS 214-131] Inlining function 'ssdm_int<8, false>::ssdm_int(unsigned char)' into 'ap_int_base<8, false>::ap_int_base(unsigned char)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:211:77)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<8, false>::ap_int_base(unsigned char)' into 'ap_uint<8>::ap_uint(unsigned char)'
+INFO: [HLS 214-131] Inlining function '_ZN8ssdm_intILi1ELb0EEC2EDq1_j' into 'ap_int_base<1, false>::ap_int_base(int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:214:67)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<1, false>::ap_int_base(int)' into 'ap_uint<1>::ap_uint(int)'
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:258:51)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:261:26)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:260:68)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:260:37)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:259:40)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:259:24)
+INFO: [HLS 214-131] Inlining function 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:121:34)
+INFO: [HLS 214-131] Inlining function 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:416:27)
+INFO: [HLS 214-131] Inlining function 'gf_div_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:379:43)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:380:29)
+INFO: [HLS 214-131] Inlining function 'gf_pow(int, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:378:37)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:373:34)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:372:17)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:367:36)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:363:33)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:362:15)
+INFO: [HLS 214-131] Inlining function 'gf_pow(int, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:356:37)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:314:9)
+INFO: [HLS 214-131] Inlining function 'gf_div_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:266:9)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:257:33)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:239:11)
+INFO: [HLS 214-131] Inlining function 'bool operator==<1, false>(ap_int_base<1, false> const&, int)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:129:25)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<8, false>::operator unsigned long long() const' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:125:35)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_188_3' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:188:31)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_236_6' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:236:31)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_254_8' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:254:35)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_271_10' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:271:40)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_263_9' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:263:39)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_279_11' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:279:36)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_244_7' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:244:35)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_311_13' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:311:32)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_337_15' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:337:32)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_359_16' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:359:40)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_369_17' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:369:40)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_177_2' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:177:20) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_188_3' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:188:31) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_204_4' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:204:27) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_222_5' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:222:20) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_254_8' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:254:35) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_271_10' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:271:40) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_263_9' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:263:39) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_279_11' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:279:36) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_244_7' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:244:35) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_288_12' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:288:28) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_324_14' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:324:21) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_359_16' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:359:40) in function 'rs_decoder_rx' completely with a factor of 15 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-248] Applying array_partition to '_ZZ13rs_decoder_rxRN3hls6streamINS_4axisI7ap_uintILi8EELm0ELm0ELm0EEELi0EEES6_E8data_buf': Cyclic partitioning with factor 4 on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:108:0)
+INFO: [HLS 214-248] Applying array_partition to 'syndrome': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:174:17)
+INFO: [HLS 214-248] Applying array_partition to 'sigma': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:215:17)
+INFO: [HLS 214-248] Applying array_partition to 'T_poly': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:217:17)
+INFO: [HLS 214-248] Applying array_partition to 'omega': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:302:17)
+INFO: [HLS 214-248] Applying array_partition to 'reg': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321:17)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 4.558 seconds; current allocated memory: 680.309 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.001 seconds; current allocated memory: 680.309 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.163 seconds; current allocated memory: 698.695 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.168 seconds; current allocated memory: 708.930 MB.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'BM_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:215) in function 'rs_decoder_rx' for pipelining.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'OMEGA_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:302) in function 'rs_decoder_rx' for pipelining.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'CHIEN_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321) in function 'rs_decoder_rx' for pipelining.
+WARNING: [HLS 200-932] Cannot unroll loop 'VITIS_LOOP_236_6' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:236) in function 'rs_decoder_rx' completely: variable loop bound.
+WARNING: [HLS 200-936] Cannot unroll loop 'VITIS_LOOP_311_13' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:311) in function 'rs_decoder_rx': cannot completely unroll a loop with a variable trip count.
+WARNING: [HLS 200-936] Cannot unroll loop 'VITIS_LOOP_337_15' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321) in function 'rs_decoder_rx': cannot completely unroll a loop with a variable trip count.
+WARNING: [HLS 200-932] Cannot unroll loop 'VITIS_LOOP_369_17' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:366) in function 'rs_decoder_rx' completely: variable loop bound.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:186:9) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:184:9) in function 'rs_decoder_rx'... converting 33 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:236:40) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:236:31) in function 'rs_decoder_rx'... converting 3 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:242:23) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:232:9) in function 'rs_decoder_rx'... converting 65 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:311:41) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:311:32) in function 'rs_decoder_rx'... converting 3 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321:17) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:337:32) in function 'rs_decoder_rx'... converting 10 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:366:29) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:369:40) in function 'rs_decoder_rx'... converting 5 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:353:51) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:369:40) in function 'rs_decoder_rx'... converting 61 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:44:27) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:383:52) in function 'rs_decoder_rx'... converting 5 basic blocks.
+INFO: [XFORM 203-11] Balancing expressions in function 'rs_decoder_rx' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:21:21)...49 expression(s) balanced.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.82 seconds; current allocated memory: 750.766 MB.
+WARNING: [HLS 200-960] Cannot flatten loop 'BM_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:215:17) in function 'rs_decoder_rx' either the parent loop or sub loop is do-while loop.
+WARNING: [HLS 200-960] Cannot flatten loop 'OMEGA_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:302:17) in function 'rs_decoder_rx' the outer loop is not a perfect loop because there is nontrivial logic before entering the inner loop.
+WARNING: [HLS 200-960] Cannot flatten loop 'CHIEN_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321:17) in function 'rs_decoder_rx' more than one sub loop.
+WARNING: [HLS 200-960] Cannot flatten loop 'VITIS_LOOP_166_1' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:166:32) in function 'rs_decoder_rx' more than one sub loop.
+INFO: [XFORM 203-541] Flattening a loop nest 'OUTPUT_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:401:14) in function 'rs_decoder_rx'.
+INFO: [HLS 200-472] Inferring partial write operation for 'rs_decoder_rx(stream&,stream<axis<ap_uint<8>,0ul,0ul,0ul>,0>&)data_buf.3' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:125:33)
+INFO: [HLS 200-472] Inferring partial write operation for 'rs_decoder_rx(stream&,stream<axis<ap_uint<8>,0ul,0ul,0ul>,0>&)data_buf.3' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:383:52)
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.425 seconds; current allocated memory: 775.305 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'rs_decoder_rx' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rs_decoder_rx_Pipeline_COLLECT_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'COLLECT_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'COLLECT_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.262 seconds; current allocated memory: 780.250 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.089 seconds; current allocated memory: 781.449 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'SYNDROME_LOOP'.
+WARNING: [HLS 200-880] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to enforce a carried dependence constraint (II = 1, distance = 1, offset = 0) between 'store' operation ('empty_write_ln184', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:184) of variable 'xor_ln191', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:191 on local variable 'empty' and 'load' operation ('p_load63', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on local variable 'empty'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_1', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 2). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_2', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 3). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_3', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 4). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_10', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 11). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_14', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 15). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 16, Depth = 18, loop 'SYNDROME_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.377 seconds; current allocated memory: 784.543 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.23 seconds; current allocated memory: 784.871 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=mul_ln401) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'OUTPUT_LOOP_VITIS_LOOP_405_18'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 5, loop 'OUTPUT_LOOP_VITIS_LOOP_405_18'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.346 seconds; current allocated memory: 785.234 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.085 seconds; current allocated memory: 785.281 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rs_decoder_rx' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+WARNING: [SCHED 204-65] Unable to satisfy pipeline directive for loop 'BM_LOOP': contains subloop(s) that are not unrolled or flattened.
+WARNING: [SCHED 204-65] Unable to satisfy pipeline directive for loop 'OMEGA_LOOP': contains subloop(s) that are not unrolled or flattened.
+WARNING: [SCHED 204-65] Unable to satisfy pipeline directive for loop 'CHIEN_LOOP': contains subloop(s) that are not unrolled or flattened.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.984 seconds; current allocated memory: 801.059 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.163 seconds; current allocated memory: 801.301 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rs_decoder_rx_Pipeline_COLLECT_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rs_decoder_rx_Pipeline_COLLECT_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.5 seconds; current allocated memory: 802.910 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' pipeline 'SYNDROME_LOOP' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mux_42_8_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rs_decoder_rx_Pipeline_SYNDROME_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.206 seconds; current allocated memory: 803.852 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18' pipeline 'OUTPUT_LOOP_VITIS_LOOP_405_18' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_2ns_8ns_8ns_9_4_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_42_8_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.849 seconds; current allocated memory: 810.148 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rs_decoder_rx' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] Design contains AXI ports. Reset is fixed to synchronous and active low.
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/input_stream_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/input_stream_V_keep_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/input_stream_V_strb_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/input_stream_V_last_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/output_stream_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/output_stream_V_keep_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/output_stream_V_strb_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/output_stream_V_last_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on function 'rs_decoder_rx' to 'ap_ctrl_none'.
+INFO: [SYN 201-210] Renamed object name 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_3_RAM_AUTO_1R1W' to 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_3_RAM_AUTO_bkb' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_2_RAM_AUTO_1R1W' to 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_2_RAM_AUTO_cud' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_1_RAM_AUTO_1R1W' to 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_1_RAM_AUTO_dEe' due to the length limit 80
+INFO: [RTGEN 206-100] Generating core module 'mul_2ns_8ns_9_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_164_8_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_175_8_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_42_8_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_94_8_1_1': 3 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'urem_9ns_9ns_9_13_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rs_decoder_rx'.
+INFO: [RTMG 210-278] Implementing memory 'rs_decoder_rx_rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_3_RAM_AUTO_bkb' using auto RAMs.
+INFO: [RTMG 210-279] Implementing memory 'rs_decoder_rx_GF_LOG_ROM_1P_LUTRAM_1R' using distributed ROMs.
+INFO: [RTMG 210-279] Implementing memory 'rs_decoder_rx_GF_EXP_ROM_1P_LUTRAM_1R' using distributed ROMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.755 seconds; current allocated memory: 824.273 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 5 seconds. CPU system time: 1 seconds. Elapsed time: 5.88 seconds; current allocated memory: 854.297 MB.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.634 seconds; current allocated memory: 857.605 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for rs_decoder_rx.
+INFO: [VLOG 209-307] Generating Verilog RTL for rs_decoder_rx.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were NOT satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 127.37 MHz
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 13 seconds. CPU system time: 1 seconds. Elapsed time: 22.68 seconds; current allocated memory: 182.867 MB.
+INFO: [HLS 200-1510] Running: cosim_design -O -rtl verilog 
+INFO: [COSIM 212-47] Using XSIM for RTL simulation.
+INFO: [COSIM 212-14] Instrumenting C test bench ...
+INFO: [COSIM 212-302] Starting C TB testing ... 
+INFO: [COSIM 212-333] Generating C post check test bench ...
+INFO: [COSIM 212-12] Generating RTL test bench ...
+INFO: [COSIM 212-1] *** C/RTL co-simulation file generation completed. ***
+INFO: [COSIM 212-323] Starting verilog simulation. 
+INFO: [COSIM 212-15] Starting XSIM ...
+INFO: [COSIM 212-316] Starting C post checking ...
+INFO: [COSIM 212-1000] *** C/RTL co-simulation finished: PASS ***
+INFO: [HLS 200-111] Finished==============================================================
+Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2022.2 (64-bit)
+Tool Version Limit: 2019.12
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+==============================================================
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+INFO: [HLS 200-435] Setting 'open_solution -flow_target vivado' configuration: config_interface -m_axi_latency=0
+INFO: [HLS 200-1510] Running: set_part xczu48dr-fsvg1517-2-e 
+INFO: [HLS 200-1611] Setting target device to 'xczu48dr-fsvg1517-2-e'
+INFO: [HLS 200-1510] Running: create_clock -period 10 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1510] Running: set_clock_uncertainty 1.25 default 
+INFO: [SYN 201-201] Setting up clock 'default' with an uncertainty of 1.25ns.
+INFO: [HLS 200-1510] Running: csim_design -O -clean 
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch GCC as the compiler.
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-111] Finished Command csim_design CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 3.272 seconds; current allocated memory: 0.438 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.022 seconds; current allocated memory: 674.652 MB.
+INFO: [HLS 200-10] Analyzing design file 'C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 2.938 seconds; current allocated memory: 678.570 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:247:50)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:250:25)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:249:67)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:249:36)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:248:39)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:248:23)
+INFO: [HLS 214-131] Inlining function 'ssdm_int<32, true>::ssdm_int(int)' into 'ap_int_base<32, true>::ap_int_base(int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:214:67)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<32, true>::ap_int_base(int)' into 'bool operator==<1, false>(ap_int_base<1, false> const&, int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:1788:1853)
+INFO: [HLS 214-131] Inlining function 'bool ap_int_base<1, false>::operator==<32, true>(ap_int_base<32, true> const&) const' into 'bool operator==<1, false>(ap_int_base<1, false> const&, int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:1788:1850)
+INFO: [HLS 214-131] Inlining function 'ssdm_int<8, false>::ssdm_int(unsigned char)' into 'ap_int_base<8, false>::ap_int_base(unsigned char)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:211:77)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<8, false>::ap_int_base(unsigned char)' into 'ap_uint<8>::ap_uint(unsigned char)'
+INFO: [HLS 214-131] Inlining function '_ZN8ssdm_intILi1ELb0EEC2EDq1_j' into 'ap_int_base<1, false>::ap_int_base(int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:214:67)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<1, false>::ap_int_base(int)' into 'ap_uint<1>::ap_uint(int)'
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:258:51)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:261:26)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:260:68)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:260:37)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:259:40)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:259:24)
+INFO: [HLS 214-131] Inlining function 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:121:34)
+INFO: [HLS 214-131] Inlining function 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:416:27)
+INFO: [HLS 214-131] Inlining function 'gf_div_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:379:43)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:380:29)
+INFO: [HLS 214-131] Inlining function 'gf_pow(int, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:378:37)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:373:34)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:372:17)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:367:36)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:363:33)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:362:15)
+INFO: [HLS 214-131] Inlining function 'gf_pow(int, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:356:37)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:314:9)
+INFO: [HLS 214-131] Inlining function 'gf_div_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:266:9)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:257:33)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:239:11)
+INFO: [HLS 214-131] Inlining function 'bool operator==<1, false>(ap_int_base<1, false> const&, int)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:129:25)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<8, false>::operator unsigned long long() const' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:125:35)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_188_3' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:188:31)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_236_6' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:236:31)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_254_8' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:254:35)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_271_10' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:271:40)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_263_9' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:263:39)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_279_11' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:279:36)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_244_7' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:244:35)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_311_13' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:311:32)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_337_15' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:337:32)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_359_16' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:359:40)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_369_17' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:369:40)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_177_2' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:177:20) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_188_3' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:188:31) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_204_4' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:204:27) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_222_5' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:222:20) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_254_8' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:254:35) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_271_10' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:271:40) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_263_9' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:263:39) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_279_11' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:279:36) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_244_7' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:244:35) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_288_12' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:288:28) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_324_14' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:324:21) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_359_16' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:359:40) in function 'rs_decoder_rx' completely with a factor of 15 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-248] Applying array_partition to '_ZZ13rs_decoder_rxRN3hls6streamINS_4axisI7ap_uintILi8EELm0ELm0ELm0EEELi0EEES6_E8data_buf': Cyclic partitioning with factor 4 on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:108:0)
+INFO: [HLS 214-248] Applying array_partition to 'syndrome': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:174:17)
+INFO: [HLS 214-248] Applying array_partition to 'sigma': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:215:17)
+INFO: [HLS 214-248] Applying array_partition to 'T_poly': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:217:17)
+INFO: [HLS 214-248] Applying array_partition to 'omega': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:302:17)
+INFO: [HLS 214-248] Applying array_partition to 'reg': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321:17)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 4.524 seconds; current allocated memory: 679.617 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.001 seconds; current allocated memory: 679.762 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.176 seconds; current allocated memory: 699.020 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.166 seconds; current allocated memory: 708.930 MB.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'BM_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:215) in function 'rs_decoder_rx' for pipelining.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'OMEGA_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:302) in function 'rs_decoder_rx' for pipelining.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'CHIEN_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321) in function 'rs_decoder_rx' for pipelining.
+WARNING: [HLS 200-932] Cannot unroll loop 'VITIS_LOOP_236_6' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:236) in function 'rs_decoder_rx' completely: variable loop bound.
+WARNING: [HLS 200-936] Cannot unroll loop 'VITIS_LOOP_311_13' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:311) in function 'rs_decoder_rx': cannot completely unroll a loop with a variable trip count.
+WARNING: [HLS 200-936] Cannot unroll loop 'VITIS_LOOP_337_15' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321) in function 'rs_decoder_rx': cannot completely unroll a loop with a variable trip count.
+WARNING: [HLS 200-932] Cannot unroll loop 'VITIS_LOOP_369_17' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:366) in function 'rs_decoder_rx' completely: variable loop bound.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:186:9) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:184:9) in function 'rs_decoder_rx'... converting 33 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:236:40) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:236:31) in function 'rs_decoder_rx'... converting 3 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:242:23) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:232:9) in function 'rs_decoder_rx'... converting 65 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:311:41) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:311:32) in function 'rs_decoder_rx'... converting 3 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321:17) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:337:32) in function 'rs_decoder_rx'... converting 10 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:366:29) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:369:40) in function 'rs_decoder_rx'... converting 5 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:353:51) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:369:40) in function 'rs_decoder_rx'... converting 61 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:44:27) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:383:52) in function 'rs_decoder_rx'... converting 5 basic blocks.
+INFO: [XFORM 203-11] Balancing expressions in function 'rs_decoder_rx' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:21:21)...49 expression(s) balanced.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.818 seconds; current allocated memory: 750.703 MB.
+WARNING: [HLS 200-960] Cannot flatten loop 'BM_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:215:17) in function 'rs_decoder_rx' either the parent loop or sub loop is do-while loop.
+WARNING: [HLS 200-960] Cannot flatten loop 'OMEGA_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:302:17) in function 'rs_decoder_rx' the outer loop is not a perfect loop because there is nontrivial logic before entering the inner loop.
+WARNING: [HLS 200-960] Cannot flatten loop 'CHIEN_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321:17) in function 'rs_decoder_rx' more than one sub loop.
+WARNING: [HLS 200-960] Cannot flatten loop 'VITIS_LOOP_166_1' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:166:32) in function 'rs_decoder_rx' more than one sub loop.
+INFO: [XFORM 203-541] Flattening a loop nest 'OUTPUT_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:401:14) in function 'rs_decoder_rx'.
+INFO: [HLS 200-472] Inferring partial write operation for 'rs_decoder_rx(stream&,stream<axis<ap_uint<8>,0ul,0ul,0ul>,0>&)data_buf.3' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:125:33)
+INFO: [HLS 200-472] Inferring partial write operation for 'rs_decoder_rx(stream&,stream<axis<ap_uint<8>,0ul,0ul,0ul>,0>&)data_buf.3' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:383:52)
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.415 seconds; current allocated memory: 774.816 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'rs_decoder_rx' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rs_decoder_rx_Pipeline_COLLECT_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'COLLECT_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'COLLECT_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.243 seconds; current allocated memory: 780.297 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.076 seconds; current allocated memory: 781.496 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'SYNDROME_LOOP'.
+WARNING: [HLS 200-880] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to enforce a carried dependence constraint (II = 1, distance = 1, offset = 0) between 'store' operation ('empty_write_ln184', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:184) of variable 'xor_ln191', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:191 on local variable 'empty' and 'load' operation ('p_load63', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on local variable 'empty'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_1', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 2). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_2', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 3). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_3', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 4). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_10', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 11). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_14', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 15). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 16, Depth = 18, loop 'SYNDROME_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.407 seconds; current allocated memory: 784.344 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.223 seconds; current allocated memory: 784.914 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=mul_ln401) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'OUTPUT_LOOP_VITIS_LOOP_405_18'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 5, loop 'OUTPUT_LOOP_VITIS_LOOP_405_18'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.351 seconds; current allocated memory: 785.598 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.093 seconds; current allocated memory: 785.938 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rs_decoder_rx' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+WARNING: [SCHED 204-65] Unable to satisfy pipeline directive for loop 'BM_LOOP': contains subloop(s) that are not unrolled or flattened.
+WARNING: [SCHED 204-65] Unable to satisfy pipeline directive for loop 'OMEGA_LOOP': contains subloop(s) that are not unrolled or flattened.
+WARNING: [SCHED 204-65] Unable to satisfy pipeline directive for loop 'CHIEN_LOOP': contains subloop(s) that are not unrolled or flattened.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.978 seconds; current allocated memory: 800.988 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.172 seconds; current allocated memory: 801.172 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rs_decoder_rx_Pipeline_COLLECT_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rs_decoder_rx_Pipeline_COLLECT_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.509 seconds; current allocated memory: 802.715 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' pipeline 'SYNDROME_LOOP' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mux_42_8_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rs_decoder_rx_Pipeline_SYNDROME_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.2 seconds; current allocated memory: 804.469 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18' pipeline 'OUTPUT_LOOP_VITIS_LOOP_405_18' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_2ns_8ns_8ns_9_4_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_42_8_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.857 seconds; current allocated memory: 810.277 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rs_decoder_rx' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] Design contains AXI ports. Reset is fixed to synchronous and active low.
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/input_stream_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/input_stream_V_keep_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/input_stream_V_strb_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/input_stream_V_last_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/output_stream_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/output_stream_V_keep_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/output_stream_V_strb_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/output_stream_V_last_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on function 'rs_decoder_rx' to 'ap_ctrl_none'.
+INFO: [SYN 201-210] Renamed object name 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_3_RAM_AUTO_1R1W' to 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_3_RAM_AUTO_bkb' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_2_RAM_AUTO_1R1W' to 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_2_RAM_AUTO_cud' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_1_RAM_AUTO_1R1W' to 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_1_RAM_AUTO_dEe' due to the length limit 80
+INFO: [RTGEN 206-100] Generating core module 'mul_2ns_8ns_9_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_164_8_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_175_8_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_42_8_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_94_8_1_1': 3 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'urem_9ns_9ns_9_13_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rs_decoder_rx'.
+INFO: [RTMG 210-278] Implementing memory 'rs_decoder_rx_rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_3_RAM_AUTO_bkb' using auto RAMs.
+INFO: [RTMG 210-279] Implementing memory 'rs_decoder_rx_GF_LOG_ROM_1P_LUTRAM_1R' using distributed ROMs.
+INFO: [RTMG 210-279] Implementing memory 'rs_decoder_rx_GF_EXP_ROM_1P_LUTRAM_1R' using distributed ROMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.779 seconds; current allocated memory: 823.852 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 4 seconds. CPU system time: 1 seconds. Elapsed time: 5.874 seconds; current allocated memory: 854.227 MB.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.606 seconds; current allocated memory: 857.379 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for rs_decoder_rx.
+INFO: [VLOG 209-307] Generating Verilog RTL for rs_decoder_rx.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were NOT satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 127.37 MHz
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 13 seconds. CPU system time: 1 seconds. Elapsed time: 22.667 seconds; current allocated memory: 183.211 MB.
+INFO: [HLS 200-1510] Running: cosim_design -O -rtl verilog 
+INFO: [COSIM 212-47] Using XSIM for RTL simulation.
+INFO: [COSIM 212-14] Instrumenting C test bench ...
+INFO: [COSIM 212-302] Starting C TB testing ... 
+INFO: [COSIM 212-333] Generating C post check test bench ...
+INFO: [COSIM 212-12] Generating RTL test bench ...
+INFO: [COSIM 212-1] *** C/RTL co-simulation file generation completed. ***
+INFO: [COSIM 212-323] Starting verilog simulation. 
+INFO: [COSIM 212-15] Starting XSIM ...
+INFO: [COSIM 212-316] Starting C post checking ...
+INFO: [COSIM 212-1000] *** C/RTL co-simulation finished: PASS ***
+INFO: [HLS 200-111] Fini==============================================================
+Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2022.2 (64-bit)
+Tool Version Limit: 2019.12
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+==============================================================
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+INFO: [HLS 200-435] Setting 'open_solution -flow_target vivado' configuration: config_interface -m_axi_latency=0
+INFO: [HLS 200-1510] Running: set_part xczu48dr-fsvg1517-2-e 
+INFO: [HLS 200-1611] Setting target device to 'xczu48dr-fsvg1517-2-e'
+INFO: [HLS 200-1510] Running: create_clock -period 10 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1510] Running: set_clock_uncertainty 1.25 default 
+INFO: [SYN 201-201] Setting up clock 'default' with an uncertainty of 1.25ns.
+INFO: [HLS 200-1510] Running: csim_design -O -clean 
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch GCC as the compiler.
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-111] Finished Command csim_design CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 3.506 seconds; current allocated memory: 0.383 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.021 seconds; current allocated memory: 675.055 MB.
+INFO: [HLS 200-10] Analyzing design file 'C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 2.931 seconds; current allocated memory: 679.078 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:247:50)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:250:25)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:249:67)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:249:36)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:248:39)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:248:23)
+INFO: [HLS 214-131] Inlining function 'ssdm_int<32, true>::ssdm_int(int)' into 'ap_int_base<32, true>::ap_int_base(int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:214:67)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<32, true>::ap_int_base(int)' into 'bool operator==<1, false>(ap_int_base<1, false> const&, int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:1788:1853)
+INFO: [HLS 214-131] Inlining function 'bool ap_int_base<1, false>::operator==<32, true>(ap_int_base<32, true> const&) const' into 'bool operator==<1, false>(ap_int_base<1, false> const&, int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:1788:1850)
+INFO: [HLS 214-131] Inlining function 'ssdm_int<8, false>::ssdm_int(unsigned char)' into 'ap_int_base<8, false>::ap_int_base(unsigned char)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:211:77)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<8, false>::ap_int_base(unsigned char)' into 'ap_uint<8>::ap_uint(unsigned char)'
+INFO: [HLS 214-131] Inlining function '_ZN8ssdm_intILi1ELb0EEC2EDq1_j' into 'ap_int_base<1, false>::ap_int_base(int)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_int_base.h:214:67)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<1, false>::ap_int_base(int)' into 'ap_uint<1>::ap_uint(int)'
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:258:51)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:261:26)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:260:68)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_user_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:260:37)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_dest_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:259:40)
+INFO: [HLS 214-131] Inlining function 'hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>::get_id_ptr()' into 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' (C:/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot\ap_axi_sdata.h:259:24)
+INFO: [HLS 214-131] Inlining function 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::read()' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:121:34)
+INFO: [HLS 214-131] Inlining function 'hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>::write(hls::axis<ap_uint<8>, 0ul, 0ul, 0ul> const&)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:416:27)
+INFO: [HLS 214-131] Inlining function 'gf_div_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:379:43)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:380:29)
+INFO: [HLS 214-131] Inlining function 'gf_pow(int, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:378:37)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:373:34)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:372:17)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:367:36)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:363:33)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:362:15)
+INFO: [HLS 214-131] Inlining function 'gf_pow(int, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:356:37)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:314:9)
+INFO: [HLS 214-131] Inlining function 'gf_div_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:266:9)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:257:33)
+INFO: [HLS 214-131] Inlining function 'gf_mul_local(unsigned char, unsigned char, unsigned char const*, unsigned char const*)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:239:11)
+INFO: [HLS 214-131] Inlining function 'bool operator==<1, false>(ap_int_base<1, false> const&, int)' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:129:25)
+INFO: [HLS 214-131] Inlining function 'ap_int_base<8, false>::operator unsigned long long() const' into 'rs_decoder_rx(hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&, hls::stream<hls::axis<ap_uint<8>, 0ul, 0ul, 0ul>, 0>&)' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:125:35)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_188_3' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:188:31)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_236_6' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:236:31)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_254_8' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:254:35)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_271_10' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:271:40)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_263_9' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:263:39)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_279_11' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:279:36)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_244_7' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:244:35)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_311_13' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:311:32)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_337_15' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:337:32)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_359_16' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:359:40)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_369_17' is marked as complete unroll implied by the pipeline pragma (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:369:40)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_177_2' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:177:20) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_188_3' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:188:31) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_204_4' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:204:27) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_222_5' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:222:20) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_254_8' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:254:35) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_271_10' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:271:40) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_263_9' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:263:39) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_279_11' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:279:36) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_244_7' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:244:35) in function 'rs_decoder_rx' completely with a factor of 16 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_288_12' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:288:28) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_324_14' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:324:21) in function 'rs_decoder_rx' completely with a factor of 17 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_359_16' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:359:40) in function 'rs_decoder_rx' completely with a factor of 15 (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:59:0)
+INFO: [HLS 214-248] Applying array_partition to '_ZZ13rs_decoder_rxRN3hls6streamINS_4axisI7ap_uintILi8EELm0ELm0ELm0EEELi0EEES6_E8data_buf': Cyclic partitioning with factor 4 on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:108:0)
+INFO: [HLS 214-248] Applying array_partition to 'syndrome': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:174:17)
+INFO: [HLS 214-248] Applying array_partition to 'sigma': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:215:17)
+INFO: [HLS 214-248] Applying array_partition to 'T_poly': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:217:17)
+INFO: [HLS 214-248] Applying array_partition to 'omega': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:302:17)
+INFO: [HLS 214-248] Applying array_partition to 'reg': Complete partitioning on dimension 1. (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321:17)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 4.526 seconds; current allocated memory: 680.070 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0 seconds; current allocated memory: 680.070 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.162 seconds; current allocated memory: 698.875 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.166 seconds; current allocated memory: 708.465 MB.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'BM_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:215) in function 'rs_decoder_rx' for pipelining.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'OMEGA_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:302) in function 'rs_decoder_rx' for pipelining.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'CHIEN_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321) in function 'rs_decoder_rx' for pipelining.
+WARNING: [HLS 200-932] Cannot unroll loop 'VITIS_LOOP_236_6' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:236) in function 'rs_decoder_rx' completely: variable loop bound.
+WARNING: [HLS 200-936] Cannot unroll loop 'VITIS_LOOP_311_13' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:311) in function 'rs_decoder_rx': cannot completely unroll a loop with a variable trip count.
+WARNING: [HLS 200-936] Cannot unroll loop 'VITIS_LOOP_337_15' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321) in function 'rs_decoder_rx': cannot completely unroll a loop with a variable trip count.
+WARNING: [HLS 200-932] Cannot unroll loop 'VITIS_LOOP_369_17' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:366) in function 'rs_decoder_rx' completely: variable loop bound.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:186:9) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:184:9) in function 'rs_decoder_rx'... converting 33 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:236:40) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:236:31) in function 'rs_decoder_rx'... converting 3 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:242:23) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:232:9) in function 'rs_decoder_rx'... converting 65 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:311:41) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:311:32) in function 'rs_decoder_rx'... converting 3 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321:17) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:337:32) in function 'rs_decoder_rx'... converting 10 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:366:29) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:369:40) in function 'rs_decoder_rx'... converting 5 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:353:51) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:369:40) in function 'rs_decoder_rx'... converting 61 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:44:27) to (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:383:52) in function 'rs_decoder_rx'... converting 5 basic blocks.
+INFO: [XFORM 203-11] Balancing expressions in function 'rs_decoder_rx' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:21:21)...49 expression(s) balanced.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.826 seconds; current allocated memory: 750.051 MB.
+WARNING: [HLS 200-960] Cannot flatten loop 'BM_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:215:17) in function 'rs_decoder_rx' either the parent loop or sub loop is do-while loop.
+WARNING: [HLS 200-960] Cannot flatten loop 'OMEGA_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:302:17) in function 'rs_decoder_rx' the outer loop is not a perfect loop because there is nontrivial logic before entering the inner loop.
+WARNING: [HLS 200-960] Cannot flatten loop 'CHIEN_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:321:17) in function 'rs_decoder_rx' more than one sub loop.
+WARNING: [HLS 200-960] Cannot flatten loop 'VITIS_LOOP_166_1' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:166:32) in function 'rs_decoder_rx' more than one sub loop.
+INFO: [XFORM 203-541] Flattening a loop nest 'OUTPUT_LOOP' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:401:14) in function 'rs_decoder_rx'.
+INFO: [HLS 200-472] Inferring partial write operation for 'rs_decoder_rx(stream&,stream<axis<ap_uint<8>,0ul,0ul,0ul>,0>&)data_buf.3' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:125:33)
+INFO: [HLS 200-472] Inferring partial write operation for 'rs_decoder_rx(stream&,stream<axis<ap_uint<8>,0ul,0ul,0ul>,0>&)data_buf.3' (C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:383:52)
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.384 seconds; current allocated memory: 774.742 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'rs_decoder_rx' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rs_decoder_rx_Pipeline_COLLECT_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'COLLECT_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'COLLECT_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.241 seconds; current allocated memory: 779.488 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.079 seconds; current allocated memory: 780.809 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'SYNDROME_LOOP'.
+WARNING: [HLS 200-880] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to enforce a carried dependence constraint (II = 1, distance = 1, offset = 0) between 'store' operation ('empty_write_ln184', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:184) of variable 'xor_ln191', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:191 on local variable 'empty' and 'load' operation ('p_load63', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on local variable 'empty'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_1', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 2). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_2', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 3). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_3', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 4). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_10', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 11). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+WARNING: [HLS 200-885] The II Violation in module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' (loop 'SYNDROME_LOOP'): Unable to schedule 'load' operation ('GF_LOG_load_14', C:/VitisProject/Vitis/OFDM/RX/RS/rs_decoder_rx.cpp:197) on array 'GF_LOG' due to limited memory ports (II = 15). Please consider using a memory core with more ports or partitioning the array 'GF_LOG'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 16, Depth = 18, loop 'SYNDROME_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.385 seconds; current allocated memory: 783.996 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.22 seconds; current allocated memory: 784.137 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=mul_ln401) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'OUTPUT_LOOP_VITIS_LOOP_405_18'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 5, loop 'OUTPUT_LOOP_VITIS_LOOP_405_18'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.351 seconds; current allocated memory: 784.828 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.083 seconds; current allocated memory: 785.246 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'rs_decoder_rx' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+WARNING: [SCHED 204-65] Unable to satisfy pipeline directive for loop 'BM_LOOP': contains subloop(s) that are not unrolled or flattened.
+WARNING: [SCHED 204-65] Unable to satisfy pipeline directive for loop 'OMEGA_LOOP': contains subloop(s) that are not unrolled or flattened.
+WARNING: [SCHED 204-65] Unable to satisfy pipeline directive for loop 'CHIEN_LOOP': contains subloop(s) that are not unrolled or flattened.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.983 seconds; current allocated memory: 800.609 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.18 seconds; current allocated memory: 800.945 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rs_decoder_rx_Pipeline_COLLECT_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rs_decoder_rx_Pipeline_COLLECT_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.52 seconds; current allocated memory: 802.496 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'rs_decoder_rx_Pipeline_SYNDROME_LOOP' pipeline 'SYNDROME_LOOP' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mux_42_8_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rs_decoder_rx_Pipeline_SYNDROME_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.21 seconds; current allocated memory: 803.891 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18' pipeline 'OUTPUT_LOOP_VITIS_LOOP_405_18' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_2ns_8ns_8ns_9_4_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_42_8_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rs_decoder_rx_Pipeline_OUTPUT_LOOP_VITIS_LOOP_405_18'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.857 seconds; current allocated memory: 809.023 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'rs_decoder_rx' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] Design contains AXI ports. Reset is fixed to synchronous and active low.
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/input_stream_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/input_stream_V_keep_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/input_stream_V_strb_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/input_stream_V_last_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/output_stream_V_data_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/output_stream_V_keep_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/output_stream_V_strb_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'rs_decoder_rx/output_stream_V_last_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on function 'rs_decoder_rx' to 'ap_ctrl_none'.
+INFO: [SYN 201-210] Renamed object name 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_3_RAM_AUTO_1R1W' to 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_3_RAM_AUTO_bkb' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_2_RAM_AUTO_1R1W' to 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_2_RAM_AUTO_cud' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_1_RAM_AUTO_1R1W' to 'rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_1_RAM_AUTO_dEe' due to the length limit 80
+INFO: [RTGEN 206-100] Generating core module 'mul_2ns_8ns_9_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_164_8_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_175_8_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_42_8_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_94_8_1_1': 3 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'urem_9ns_9ns_9_13_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'rs_decoder_rx'.
+INFO: [RTMG 210-278] Implementing memory 'rs_decoder_rx_rs_decoder_rx_stream_stream_axis_ap_uint_8_0ul_0ul_0ul_0_data_buf_3_RAM_AUTO_bkb' using auto RAMs.
+INFO: [RTMG 210-279] Implementing memory 'rs_decoder_rx_GF_LOG_ROM_1P_LUTRAM_1R' using distributed ROMs.
+INFO: [RTMG 210-279] Implementing memory 'rs_decoder_rx_GF_EXP_ROM_1P_LUTRAM_1R' using distributed ROMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.765 seconds; current allocated memory: 823.184 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 5 seconds. CPU system time: 1 seconds. Elapsed time: 5.958 seconds; current allocated memory: 853.855 MB.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.636 seconds; current allocated memory: 856.496 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for rs_decoder_rx.
+INFO: [VLOG 209-307] Generating Verilog RTL for rs_decoder_rx.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were NOT satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 127.37 MHz
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 13 seconds. CPU system time: 1 seconds. Elapsed time: 22.721 seconds; current allocated memory: 181.809 MB.
+INFO: [HLS 200-1510] Running: cosim_design -O -rtl verilog 
+INFO: [COSIM 212-47] Using XSIM for RTL simulation.
+INFO: [COSIM 212-14] Instrumenting C test bench ...
+INFO: [COSIM 212-302] Starting C TB testing ... 
+INFO: [COSIM 212-333] Generating C post check test bench ...
+INFO: [COSIM 212-12] Generating RTL test bench ...
+INFO: [COSIM 212-1] *** C/RTL co-simulation file generation completed. ***
+INFO: [COSIM 212-323] Starting verilog simulation. 
+INFO: [COSIM 212-15] Starting XSIM ...
+INFO: [COSIM 212-316] Starting C post checking ...
+INFO: [COSIM 212-1000] *** C/RTL co-simulation finished: PASS ***
+INFO: [HLS 200-111] Finished C

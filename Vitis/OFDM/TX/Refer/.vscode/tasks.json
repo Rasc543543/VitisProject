@@ -1,0 +1,73 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "HLS: Create Project",
+            "type": "shell",
+            "command": "C:/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls.bat",
+            "args": ["-f", "scripts/create_project.tcl"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "group": "build",
+            "presentation": { "reveal": "always", "panel": "shared" },
+            "problemMatcher": []
+        },
+        {
+            "label": "HLS: Run All (csim + syn + cosim + export)",
+            "type": "shell",
+            "command": "C:/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls.bat",
+            "args": ["-f", "scripts/run_all.tcl"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "group": { "kind": "build", "isDefault": true },
+            "presentation": { "reveal": "always", "panel": "shared" },
+            "problemMatcher": []
+        },
+        {
+            "label": "HLS: C Simulation only",
+            "type": "shell",
+            "command": "C:/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls.bat",
+            "args": ["-f", "scripts/run_all.tcl", "-tclargs", "csim_only"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "group": "test",
+            "presentation": { "reveal": "always", "panel": "shared" },
+            "problemMatcher": []
+        },
+        {
+            "label": "HLS: Parse Report",
+            "type": "shell",
+            "command": "python",
+            "args": ["scripts/parse_report.py", "hls_project"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "group": "none",
+            "presentation": { "reveal": "always", "panel": "shared" },
+            "problemMatcher": []
+        },
+        {
+            "label": "Vivado: Sim (Batch) → VCD",
+            "type": "shell",
+            "command": "C:/Xilinx/Vivado/2022.2/bin/vivado.bat",
+            "args": [
+                "-mode", "batch",
+                "-source", "scripts/run_vivado_sim.tcl",
+                "-tclargs", "batch"
+            ],
+            "options": { "cwd": "${workspaceFolder}" },
+            "group": "test",
+            "presentation": { "reveal": "always", "panel": "shared" },
+            "problemMatcher": []
+        },
+        {
+            "label": "Vivado: Sim (GUI)",
+            "type": "shell",
+            "command": "C:/Xilinx/Vivado/2022.2/bin/vivado.bat",
+            "args": [
+                "-mode", "gui",
+                "-source", "scripts/run_vivado_sim.tcl",
+                "-tclargs", "gui"
+            ],
+            "options": { "cwd": "${workspaceFolder}" },
+            "group": "test",
+            "presentation": { "reveal": "always", "panel": "shared" },
+            "problemMatcher": []
+        }
+    ]
+}
