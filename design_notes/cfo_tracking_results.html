@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CFO Tracking Mode — 設計與驗證結果</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f1117; color: #e0e0e0; line-height: 1.6; }
+
+  .header {
+    background: linear-gradient(135deg, #1a1f35 0%, #0d1b2a 100%);
+    border-bottom: 2px solid #00d4ff;
+    padding: 32px 48px;
+  }
+  .header h1 { font-size: 1.8rem; color: #00d4ff; margin-bottom: 6px; }
+  .header .subtitle { color: #8a9bb0; font-size: 0.95rem; }
+  .badge {
+    display: inline-block; background: #00c853; color: #000;
+    font-size: 0.75rem; font-weight: bold; padding: 2px 10px;
+    border-radius: 12px; margin-left: 12px; vertical-align: middle;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+
+  h2 { font-size: 1.2rem; color: #00d4ff; border-left: 3px solid #00d4ff;
+       padding-left: 12px; margin: 36px 0 16px; }
+  h3 { font-size: 1rem; color: #90caf9; margin: 24px 0 10px; }
+
+  .card {
+    background: #1a1f2e; border: 1px solid #2a3045;
+    border-radius: 8px; padding: 20px 24px; margin-bottom: 20px;
+  }
+
+  /* ── Tables ── */
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th {
+    background: #1e2740; color: #90caf9;
+    padding: 10px 14px; text-align: left;
+    border-bottom: 2px solid #2a3a5c;
+  }
+  td { padding: 9px 14px; border-bottom: 1px solid #22283a; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #1e2535; }
+
+  .pass { color: #00e676; font-weight: bold; }
+  .highlight { background: #162030 !important; }
+  .highlight td { color: #fff; }
+  .num { font-family: 'Courier New', monospace; }
+  .key-val { color: #ffcc02; font-weight: bold; }
+  .tag-unlocked { color: #ff9800; }
+  .tag-locked   { color: #00e676; }
+
+  /* ── State machine diagram ── */
+  .fsm {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0; margin: 20px 0;
+  }
+  .state {
+    background: #1e2740; border: 2px solid #4a6fa5;
+    border-radius: 50px; padding: 14px 28px; text-align: center;
+    min-width: 180px;
+  }
+  .state.unlocked { border-color: #ff9800; }
+  .state.locked   { border-color: #00e676; }
+  .state .title { font-size: 0.8rem; color: #8a9bb0; }
+  .state .detail { font-size: 0.85rem; font-weight: bold; margin-top: 4px; }
+  .state.unlocked .detail { color: #ff9800; }
+  .state.locked   .detail { color: #00e676; }
+  .arrow {
+    display: flex; flex-direction: column; align-items: center;
+    margin: 0 8px; color: #8a9bb0; font-size: 0.75rem; gap: 2px;
+  }
+  .arrow .line { width: 60px; height: 2px; background: #4a6fa5; position: relative; }
+  .arrow .line::after {
+    content: ''; position: absolute; right: -6px; top: -4px;
+    border: 5px solid transparent; border-left-color: #4a6fa5;
+  }
+  .arrow.back { flex-direction: column-reverse; }
+  .arrow .label { font-size: 0.72rem; color: #607080; white-space: nowrap; }
+
+  /* ── Timeline / comparison ── */
+  .timeline { display: flex; gap: 16px; margin: 16px 0; }
+  .tl-item {
+    flex: 1; background: #1a1f2e; border: 1px solid #2a3045;
+    border-radius: 8px; padding: 16px;
+  }
+  .tl-item .label { font-size: 0.78rem; color: #8a9bb0; margin-bottom: 8px; }
+  .tl-item .big { font-size: 1.6rem; font-weight: bold; font-family: monospace; }
+  .tl-item .sub { font-size: 0.82rem; color: #8a9bb0; margin-top: 4px; }
+  .tl-item.green  .big { color: #00e676; }
+  .tl-item.yellow .big { color: #ffcc02; }
+  .tl-item.blue   .big { color: #64b5f6; }
+  .tl-item.orange .big { color: #ff9800; }
+
+  /* ── Doppler verification ── */
+  .doppler-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .doppler-card {
+    background: #1a1f2e; border: 1px solid #2a3045; border-radius: 8px; padding: 18px;
+  }
+  .doppler-card .num-badge {
+    display: inline-block; width: 28px; height: 28px; border-radius: 50%;
+    background: #1e2740; border: 2px solid #4a6fa5; text-align: center;
+    line-height: 24px; font-weight: bold; font-size: 0.85rem; color: #90caf9;
+    margin-bottom: 10px;
+  }
+  .doppler-card h4 { color: #e0e0e0; font-size: 0.95rem; margin-bottom: 6px; }
+  .doppler-card .method { font-size: 0.82rem; color: #8a9bb0; margin-bottom: 8px; }
+  .doppler-card .status-known {
+    font-size: 0.8rem; background: #0a2a1a; color: #00e676;
+    border: 1px solid #00c853; border-radius: 4px; padding: 4px 10px; display: inline-block;
+  }
+  .doppler-card .status-pending {
+    font-size: 0.8rem; background: #2a1a0a; color: #ff9800;
+    border: 1px solid #ff6d00; border-radius: 4px; padding: 4px 10px; display: inline-block;
+  }
+
+  /* ── Formula box ── */
+  .formula {
+    background: #0d1117; border: 1px solid #2a3a5c; border-radius: 6px;
+    padding: 16px 20px; font-family: 'Courier New', monospace;
+    font-size: 0.88rem; color: #90caf9; margin: 12px 0; white-space: pre;
+  }
+
+  /* ── Code ── */
+  pre {
+    background: #0d1117; border: 1px solid #2a3045; border-radius: 6px;
+    padding: 16px; font-size: 0.82rem; color: #a8d8a8; overflow-x: auto; margin: 10px 0;
+  }
+  .kw  { color: #c792ea; }
+  .cm  { color: #546e7a; font-style: italic; }
+  .num-lit { color: #f78c6c; }
+  .str { color: #c3e88d; }
+
+  footer { text-align: center; padding: 24px; color: #3a4a5a; font-size: 0.8rem; border-top: 1px solid #1e2535; margin-top: 32px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>CFO Tracking Mode — 設計與驗證結果
+    <span class="badge">VERIFIED ✓</span>
+  </h1>
+  <div class="subtitle">
+    ref_rx_packed IP &nbsp;|&nbsp; Vitis HLS 2022.2 &nbsp;|&nbsp;
+    路徑：C:\VitisProject\Vitis\OFDM\RX\Refer\ref_rx_packed.cpp &nbsp;|&nbsp;
+    更新：2026-05-13
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ===== Section 1: 背景 ===== -->
+  <h2>1 &nbsp;問題背景</h2>
+  <div class="card">
+    <p>原版 <code>ref_rx_packed</code> 每幀執行 <strong>141 次 CFO offset 掃描</strong>，佔整個 IP 執行時間的 94%（428 µs / 幀）。</p>
+    <br>
+    <p>CFO（載波頻率偏移）本質是振盪器頻率差，幀間幾乎不變，每幀重掃是純冗餘計算。</p>
+    <br>
+    <table>
+      <tr><th>掃描方式</th><th>每幀計算量</th><th>時間 @100 MHz</th><th>佔比</th></tr>
+      <tr><td>原版（全掃）</td><td class="num">141 offset × 139 pilot</td><td class="num">~428 µs</td><td>94%</td></tr>
+      <tr class="highlight"><td>新版 Locked（±5）</td><td class="num">11 offset × 139 pilot</td><td class="num">~33 µs</td><td>7%</td></tr>
+    </table>
+  </div>
+
+  <!-- ===== Section 2: 狀態機 ===== -->
+  <h2>2 &nbsp;狀態機設計</h2>
+  <div class="card">
+    <div class="fsm">
+      <div class="state unlocked">
+        <div class="title">UNLOCKED</div>
+        <div class="detail">全掃 141 點</div>
+        <div style="font-size:0.78rem;color:#8a9bb0;margin-top:4px;">~42,864 cycles</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin:0 8px;">
+        <div class="arrow">
+          <div class="label">鎖定：cfo_locked=true</div>
+          <div style="display:flex;align-items:center;">
+            <div class="line"></div>
+          </div>
+        </div>
+        <div class="arrow" style="flex-direction:row-reverse;">
+          <div class="label">boundary_hit</div>
+          <div style="display:flex;align-items:center;transform:scaleX(-1);">
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+      <div class="state locked">
+        <div class="title">LOCKED</div>
+        <div class="detail">只掃 ±5（11 點）</div>
+        <div style="font-size:0.78rem;color:#8a9bb0;margin-top:4px;">22 ~ 3,344 cycles</div>
+      </div>
+    </div>
+
+    <h3>Static 變數（跨幀保存於 FPGA fabric）</h3>
+    <pre><span class="kw">static</span> <span class="kw">int</span>  cfo_state  = <span class="num-lit">0</span>;     <span class="cm">// 上一幀最佳 offset</span>
+<span class="kw">static</span> <span class="kw">bool</span> cfo_locked = <span class="kw">false</span>;  <span class="cm">// false=Unlocked, true=Locked</span></pre>
+
+    <h3>Locked 模式核心邏輯</h3>
+    <pre><span class="kw">for</span> (<span class="kw">int</span> d = -CFO_TRACK_W; d <= CFO_TRACK_W; d++) {  <span class="cm">// CFO_TRACK_W = 5</span>
+    <span class="kw">int</span> offset = cfo_state + d;
+    <span class="kw">if</span> (offset < -CFO_RANGE || offset > CFO_RANGE) <span class="kw">continue</span>;
+    <span class="cm">// 計算 139 個 pilot 的能量和...</span>
+}
+<span class="cm">// boundary_hit：新 best 跑到視窗邊界 → 下一幀重掃</span>
+<span class="kw">if</span> (drift >= CFO_TRACK_W || drift <= -CFO_TRACK_W)
+    cfo_locked = <span class="kw">false</span>;</pre>
+
+    <p style="font-size:0.85rem;color:#8a9bb0;margin-top:12px;">
+      <strong style="color:#e0e0e0;">只用 boundary_hit，不用 energy_drop 的原因：</strong>
+      Pilot/Data 能量比僅 1.78×，channel fading 會讓 energy_drop 誤觸發；
+      boundary_hit 直接偵測漂移速度，不依賴能量門檻，更可靠。
+    </p>
+  </div>
+
+  <!-- ===== Section 3: Synthesis ===== -->
+  <h2>3 &nbsp;Synthesis 結果</h2>
+  <div class="card">
+    <table>
+      <tr><th>Loop</th><th>Cycles</th><th>時間 @100 MHz</th><th>加速比</th></tr>
+      <tr><td>Loop_CFO_Scan（Unlocked）</td><td class="num">42,864</td><td class="num">428.6 µs</td><td>—</td></tr>
+      <tr class="highlight">
+        <td>Loop_CFO_Track（Locked）</td>
+        <td class="num key-val">22 ~ 3,344</td>
+        <td class="num key-val">0.22 ~ 33.4 µs</td>
+        <td class="key-val">12.8×</td>
+      </tr>
+    </table>
+    <br>
+    <table>
+      <tr><th>指標</th><th>數值</th><th>目標</th><th>結果</th></tr>
+      <tr><td>Timing</td><td class="num">8.419 ns</td><td class="num">10 ns</td><td class="pass">PASS ✓</td></tr>
+      <tr><td>DSP48</td><td class="num">24</td><td>—</td><td>不變</td></tr>
+      <tr><td>LUT</td><td class="num">5,093 (1%)</td><td>—</td><td>—</td></tr>
+    </table>
+  </div>
+
+  <!-- ===== Section 4: Data Rate 完整對比 ===== -->
+  <h2>4 &nbsp;Data Rate 完整驗證結果</h2>
+
+  <h3>QPSK（188B/frame，179B payload）</h3>
+  <div class="timeline">
+    <div class="tl-item orange">
+      <div class="label">pkt[0] Unlocked — Hardware</div>
+      <div class="big">1009 µs</div>
+      <div class="sub">1.41 Mbps（全掃 141 點）</div>
+    </div>
+    <div class="tl-item green">
+      <div class="label">pkt[1+] Locked — Hardware ✅</div>
+      <div class="big">620 µs</div>
+      <div class="sub">2.30 Mbps（穩態）</div>
+    </div>
+    <div class="tl-item blue">
+      <div class="label">pkt[1+] Locked — Simulation</div>
+      <div class="big">611 µs</div>
+      <div class="sub">2.34 Mbps（誤差 1.5%）</div>
+    </div>
+    <div class="tl-item yellow">
+      <div class="label">原版 — Hardware</div>
+      <div class="big">~1001 µs</div>
+      <div class="sub">1.50 Mbps（每幀全掃）</div>
+    </div>
+  </div>
+
+  <h3>8PSK（274B/frame，265B payload）</h3>
+  <div class="timeline">
+    <div class="tl-item orange">
+      <div class="label">pkt[0] Unlocked — Hardware</div>
+      <div class="big">1107 µs</div>
+      <div class="sub">1.91 Mbps（全掃 141 點）</div>
+    </div>
+    <div class="tl-item green">
+      <div class="label">pkt[1+] Locked — Hardware ✅</div>
+      <div class="big">717 µs</div>
+      <div class="sub">2.95 Mbps（穩態）</div>
+    </div>
+    <div class="tl-item blue">
+      <div class="label">pkt[1+] Locked — Simulation</div>
+      <div class="big">706.55 µs</div>
+      <div class="sub">3.00 Mbps（誤差 1.5%）</div>
+    </div>
+    <div class="tl-item yellow">
+      <div class="label">原版（推算）</div>
+      <div class="big">~1001 µs</div>
+      <div class="sub">—</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <table>
+      <tr>
+        <th>模式</th><th>版本</th><th>來源</th>
+        <th>Frame Time（Locked）</th><th>Data Rate（Locked）</th><th>BER</th>
+      </tr>
+      <tr>
+        <td>QPSK</td><td>原版</td><td>Hardware</td>
+        <td class="num">~1001 µs</td><td class="num">1.50 Mbps</td><td class="pass">0</td>
+      </tr>
+      <tr>
+        <td>QPSK</td><td>新版</td><td>Simulation</td>
+        <td class="num">~611 µs</td><td class="num">~2.34 Mbps</td><td class="pass">0</td>
+      </tr>
+      <tr class="highlight">
+        <td>QPSK</td><td><strong>新版</strong></td><td><strong>Hardware</strong></td>
+        <td class="num key-val">620 µs</td><td class="num key-val">2.30 Mbps</td><td class="pass">0 ✅</td>
+      </tr>
+      <tr>
+        <td>8PSK</td><td>新版</td><td>Simulation</td>
+        <td class="num">~706.55 µs</td><td class="num">~3.00 Mbps</td><td class="pass">0</td>
+      </tr>
+      <tr class="highlight">
+        <td>8PSK</td><td><strong>新版</strong></td><td><strong>Hardware</strong></td>
+        <td class="num key-val">717 µs</td><td class="num key-val">2.95 Mbps</td><td class="pass">0 ✅</td>
+      </tr>
+    </table>
+    <p style="margin-top:12px;font-size:0.85rem;color:#8a9bb0;">
+      計時方式：<code>XTime_GetTime()</code> 從 start_tx_frag → RX DMA 完成（不含 UART printf）。
+      Simulation 與 Hardware 誤差均 &lt;1.5%。
+    </p>
+  </div>
+
+  <!-- ===== Section 5: Doppler 驗證 ===== -->
+  <h2>5 &nbsp;Doppler 追蹤能力驗證（待確認參數）</h2>
+  <div class="card">
+    <p style="margin-bottom:16px;font-size:0.9rem;color:#c0c8d8;">
+      設計假設「LEO 每幀最多漂移 1 subcarrier」，<code>CFO_TRACK_W = 5</code> 理論上有 5× 安全餘量。
+      需以下 4 個參數驗證此假設是否成立。
+    </p>
+
+    <div class="doppler-grid">
+
+      <div class="doppler-card">
+        <div class="num-badge">1</div>
+        <h4>載波頻率（GHz）</h4>
+        <div class="method">取得方式：RF 前端規格文件，或 Vivado BD → RF Data Converter IP → ADC/DAC 中心頻率設定</div>
+        <span class="status-pending">待確認</span>
+      </div>
+
+      <div class="doppler-card">
+        <div class="num-badge">2</div>
+        <h4>LEO 最大徑向速度 → 最大 Doppler Shift（Hz）</h4>
+        <div class="method">
+          LEO 軌道速度 ≈ 7.5 km/s（物理常數）。<br>
+          最大 Doppler shift = f_carrier × v_max / c<br>
+          <em>（需載波頻率才能算出 Hz 數值）</em>
+        </div>
+        <span class="status-pending">部分已知（需載波頻率）</span>
+      </div>
+
+      <div class="doppler-card">
+        <div class="num-badge">3</div>
+        <h4>OFDM Subcarrier Spacing（Hz）</h4>
+        <div class="method">
+          subcarrier_spacing = fs / FFT_size<br>
+          取得方式：Vivado BD → FFT IP → Transform Length + Clock/Sampling Rate 設定
+        </div>
+        <span class="status-pending">待確認</span>
+      </div>
+
+      <div class="doppler-card">
+        <div class="num-badge">4</div>
+        <h4>每幀最多漂移幾個 Subcarrier</h4>
+        <div class="method">
+          每幀 Doppler 漂移量 / subcarrier_spacing<br>
+          Frame duration 已知：QPSK ~620 µs，8PSK ~717 µs（Locked）
+        </div>
+        <span class="status-known">Frame time 已知 ✓</span>
+      </div>
+
+    </div>
+
+    <h3 style="margin-top:24px;">驗證公式</h3>
+    <div class="formula">最大 Doppler shift (Hz) = f_carrier × v_radial_max / c
+                        = f_carrier × 7500 / 3×10⁸
+
+Doppler 變化率 (Hz/s)  ≈ 依軌道幾何，最差情況下：
+                         Δf/Δt ≈ 2 × f_carrier × v² / (c × h)
+                         （h = 衛星高度）
+
+每幀漂移 (subcarrier) = Doppler 變化率 × frame_duration / subcarrier_spacing
+
+若每幀漂移 ≤ 5 subcarrier → CFO_TRACK_W = 5 安全
+若每幀漂移 > 5 subcarrier → 需加大 CFO_TRACK_W（代價：Locked 時間增加）</div>
+
+    <h3>已知值</h3>
+    <table>
+      <tr><th>參數</th><th>數值</th><th>來源</th></tr>
+      <tr><td>v_radial_max（LEO）</td><td class="num">~7,500 m/s</td><td>物理常數</td></tr>
+      <tr><td>Frame duration（QPSK Locked）</td><td class="num">620 µs</td><td>Hardware 實測</td></tr>
+      <tr><td>Frame duration（8PSK Locked）</td><td class="num">717 µs</td><td>Hardware 實測</td></tr>
+      <tr><td>CFO_TRACK_W（目前設定）</td><td class="num">5</td><td>ref_rx_packed.cpp</td></tr>
+      <tr><td>CFO_RANGE（掃描範圍）</td><td class="num">±70 subcarrier</td><td>ref_rx_packed.cpp</td></tr>
+    </table>
+  </div>
+
+  <!-- ===== Section 6: 驗證流程 ===== -->
+  <h2>6 &nbsp;完整驗證流程 checklist</h2>
+  <div class="card">
+    <table>
+      <tr><th>階段</th><th>項目</th><th>結果</th></tr>
+      <tr><td>csim</td><td>SNR sweep 14 cases（含 0 dB）</td><td class="pass">PASS ✅</td></tr>
+      <tr><td>Synthesis</td><td>Timing 8.419 ns &lt; 10 ns</td><td class="pass">PASS ✅</td></tr>
+      <tr><td>cosim</td><td>2 幀 QPSK BER = 0</td><td class="pass">PASS ✅</td></tr>
+      <tr><td>IP Export</td><td>output/export.zip</td><td class="pass">DONE ✅</td></tr>
+      <tr><td>Vivado Sim（QPSK）</td><td>5 pkts，BER=0，Locked 611 µs</td><td class="pass">PASS ✅</td></tr>
+      <tr><td>Vivado Sim（8PSK）</td><td>5 pkts，BER=0，Locked 706.55 µs</td><td class="pass">PASS ✅</td></tr>
+      <tr><td>Hardware（QPSK）</td><td>3 pkts，BER=0，Locked 620 µs = 2.30 Mbps</td><td class="pass">PASS ✅</td></tr>
+      <tr><td>Hardware（8PSK）</td><td>3 pkts，BER=0，Locked 717 µs = 2.95 Mbps</td><td class="pass">PASS ✅</td></tr>
+      <tr><td>Doppler 參數驗證</td><td>需載波頻率 + FFT subcarrier spacing</td><td style="color:#ff9800;">待確認 ⏳</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<footer>
+  C:\VitisProject\design_notes\cfo_tracking_results.html &nbsp;|&nbsp; 2026-05-13
+</footer>
+
+</body>
+</html>

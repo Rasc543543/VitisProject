@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Rate 優化討論記錄 — CFO Cache 設計</title>
+<style>
+  body { font-family: "Segoe UI", "Microsoft JhengHei", sans-serif; max-width: 960px; margin: 40px auto; padding: 0 24px; color: #222; line-height: 1.7; }
+  h1 { border-bottom: 3px solid #1a6faf; padding-bottom: 10px; color: #1a3a5c; }
+  h2 { border-left: 5px solid #1a6faf; padding-left: 12px; color: #1a3a5c; margin-top: 40px; }
+  h3 { color: #2a5a8a; margin-top: 24px; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+  th { background: #1a6faf; color: #fff; padding: 8px 12px; text-align: left; }
+  td { border: 1px solid #ccc; padding: 8px 12px; }
+  tr:nth-child(even) { background: #f4f8fc; }
+  tr.highlight td { background: #fff3cd; font-weight: bold; }
+  tr.good td { background: #d4edda; }
+  code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; font-size: 0.92em; }
+  pre { background: #1e1e2e; color: #cdd6f4; padding: 20px; border-radius: 8px; overflow-x: auto; line-height: 1.5; font-size: 0.9em; }
+  pre .comment { color: #6c7086; }
+  pre .keyword { color: #cba6f7; }
+  pre .type { color: #89dceb; }
+  pre .string { color: #a6e3a1; }
+  pre .number { color: #fab387; }
+  .box { border: 1px solid #bee3f8; background: #ebf8ff; border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+  .warn { border: 1px solid #fbd38d; background: #fffaf0; border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+  .good-box { border: 1px solid #9ae6b4; background: #f0fff4; border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+  .tag { display: inline-block; background: #1a6faf; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 0.82em; margin-right: 4px; }
+  .tag.red { background: #e53e3e; }
+  .tag.green { background: #276749; }
+  .tag.orange { background: #c05621; }
+  .meta { color: #666; font-size: 0.88em; margin-bottom: 32px; }
+  hr { border: none; border-top: 1px solid #ddd; margin: 36px 0; }
+  .flow { background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px 20px; font-family: Consolas, monospace; white-space: pre; overflow-x: auto; }
+</style>
+</head>
+<body>
+
+<h1>Data Rate 優化討論記錄</h1>
+<p class="meta">
+  日期：2026-05-10 ／ 系統：ZCU208 OFDM QPSK/8PSK ／ 主題：ref_rx_packed CFO_Scan 優化設計
+</p>
+
+<!-- ============================================================ -->
+<h2>1. 系統現況</h2>
+
+<h3>1.1 Data Rate 目標</h3>
+<table>
+  <tr><th>模式</th><th>目前</th><th>目標</th><th>Frame Time 上限</th><th>狀態</th></tr>
+  <tr class="good"><td>8PSK</td><td>2.000 Mbps</td><td>≥ 2 Mbps</td><td>—</td><td>✅ 已達標</td></tr>
+  <tr class="highlight"><td>QPSK</td><td>1.502 Mbps</td><td>≥ 2 Mbps</td><td>≤ 752 µs</td><td>❌ 差 ~249 µs</td></tr>
+</table>
+
+<h3>1.2 全 IP 時間表（QPSK，100 MHz，一幀 = 188 bytes）</h3>
+<table>
+  <tr><th>IP</th><th>時鐘</th><th>時間</th><th>說明</th></tr>
+  <tr class="highlight"><td>ref_rx_packed_0</td><td>100 MHz</td><td>455~667 µs</td><td>Loop_CFO_Scan 佔 428 µs，每幀都跑 ← 優化目標</td></tr>
+  <tr class="highlight"><td>Viterbi_decode_0</td><td>100 MHz</td><td>~657 µs</td><td>主瓶頸，原始碼不在本機</td></tr>
+  <tr><td>qpsk_demap_packed_0</td><td>100 MHz</td><td>~98 µs</td><td>calc_snr 佔 49 µs</td></tr>
+  <tr><td>tx_interleaver64_dyn_1</td><td>100 MHz</td><td>~65 µs</td><td>QPSK 模式</td></tr>
+  <tr><td>rx_deinterleaver64_d_0</td><td>100 MHz</td><td>~65 µs</td><td>QPSK 模式</td></tr>
+  <tr><td>rs_decoder_rx_0</td><td>100 MHz</td><td>~73 µs</td><td>無錯誤情境</td></tr>
+  <tr><td>rx_deinterleaver_dyn_0</td><td>100 MHz</td><td>~6.2 µs</td><td></td></tr>
+  <tr><td>rs_encoder_tx_0</td><td>100 MHz</td><td>~2.1 µs</td><td></td></tr>
+  <tr><td>reference_signal_tx_0</td><td>250 MHz</td><td>~8.2 µs</td><td></td></tr>
+  <tr><td>symbol_mapper_hls_0</td><td>250 MHz</td><td>~6.7 µs</td><td></td></tr>
+  <tr><td>energy_dispersal / descramble</td><td>250 MHz</td><td>&lt;2 µs</td><td></td></tr>
+  <tr><td>FFT / IFFT / viterbi_enc</td><td>RTL</td><td>—</td><td>無 HLS report</td></tr>
+</table>
+
+<p><strong>實測總計：1001 µs，目標 ≤ 752 µs（差 249 µs）</strong></p>
+
+<!-- ============================================================ -->
+<h2>2. ref_rx_packed — Loop_CFO_Scan 問題分析</h2>
+
+<h3>2.1 程式碼結構</h3>
+<pre><span class="type">void</span> ref_rx_packed(...)
+{
+    <span class="comment">// ① Load：讀入 2048 點 FFT 資料（20 µs）</span>
+Load_Packed:
+    <span class="keyword">for</span> (<span class="type">int</span> i = 0; i &lt; FFT_LENGTH; i++) { ... }
+
+    <span class="type">half</span> max_metric = (<span class="type">half</span>)-1.0f;
+    <span class="type">int</span>  best_cfo = 0;           <span class="comment">// ← local variable，每次呼叫重置</span>
+
+    <span class="comment">// ② CFO Scan：141 × 273 = 38,493 次計算（428 µs）</span>
+Loop_CFO_Scan:
+    <span class="keyword">for</span> (<span class="type">int</span> offset = -CFO_RANGE; offset &lt;= CFO_RANGE; offset++)
+    {
+        ...
+        <span class="keyword">if</span> (metric &gt; max_metric) { best_cfo = offset; }
+    }
+
+    <span class="type">int</span> base = LEFT_GUARD + best_cfo;
+
+    <span class="comment">// ③ Process：通道估測 + 插值 + ZF 等化（~29~241 µs）</span>
+Loop_Process_Packed:
+    <span class="keyword">for</span> (<span class="type">int</span> i = 0; i &lt; PILOT_TONES - 1; i++) { ... }
+}</pre>
+
+<h3>2.2 CFO_Scan 邏輯說明</h3>
+<div class="box">
+  <strong>外層迴圈（141 次）：</strong>枚舉所有可能的頻率偏移量 -70 ~ +70<br><br>
+  <strong>內層迴圈（273 次）：</strong>對每個 offset 假設，計算所有 Pilot tone 位置的能量總和<br>
+  <code>idx = LEFT_GUARD + offset + p * 7</code>（pilot 間距 7 個 subcarrier）<br><br>
+  <strong>判斷：</strong>哪個 offset 下 pilot 能量最大 → 那就是正確的 CFO<br><br>
+  <strong>核心假設：</strong>正確位置的 pilot 能量高，錯誤位置讀到的是 data tone 或 guard，能量相對低。
+</div>
+
+<h3>2.3 問題所在</h3>
+<div class="warn">
+  <code>best_cfo</code> 是 <strong>local variable</strong>，每幀函數被呼叫時重新初始化為 0，導致：<br><br>
+  <div class="flow">第 1 幀：初始化 → 掃 141 次 → 找到 best_cfo = +3
+第 2 幀：初始化 → 掃 141 次 → 找到 best_cfo = +3  ← 相同答案，浪費
+第 3 幀：初始化 → 掃 141 次 → 找到 best_cfo = +3  ← 相同答案，浪費
+...</div>
+  <br>
+  <strong>CFO 是硬體振盪器的頻率差，幀間不變 → 每幀重算是純冗餘。</strong><br>
+  (Loop_Process_Packed 每幀需要重做，因為通道 H 用當幀實際收到的 pilot 估算，會隨訊號變化。)
+</div>
+
+<h3>2.4 CFO vs 通道估測的差異</h3>
+<table>
+  <tr><th></th><th>CFO（best_cfo）</th><th>通道估測（H_est）</th></tr>
+  <tr><td>來源</td><td>硬體振盪器頻率差</td><td>實際接收到的 pilot 訊號</td></tr>
+  <tr><td>幀間是否改變</td><td>不會（硬體屬性）</td><td>會（訊號每幀不同）</td></tr>
+  <tr><td>需要每幀重算？</td><td>❌ 不需要</td><td>✅ 必須</td></tr>
+  <tr><td>作用</td><td>找 pilot 在哪個 bin（定位）</td><td>估算通道增益與相位（補償）</td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2>3. 優化方案設計</h2>
+
+<h3>3.1 為什麼不用固定閾值（如 70%）</h3>
+<div class="warn">
+  <strong>問題：</strong>能量下降有兩種原因<br>
+  <ul>
+    <li>① CFO 漂移 → pilot 跑到錯誤 bin → 需要重掃</li>
+    <li>② 通道衰減 → 整體訊號變弱 → 不需要重掃，CFO 仍然正確</li>
+  </ul>
+  固定比例無法區分這兩種情況，容易誤觸重掃。
+</div>
+
+<h3>3.2 採用方案：鄰居能量比較（自適應，不需要知道對方硬體規格）</h3>
+<div class="good-box">
+  <strong>物理直覺：</strong>CFO 漂移時，能量從 best_cfo 這個 offset 流向旁邊的 offset。<br><br>
+  <div class="flow">CFO 正確時：energy(best_cfo-1) &lt; energy(best_cfo) &gt; energy(best_cfo+1)
+CFO 漂移時：energy(best_cfo+1) &gt; energy(best_cfo)  ← 鄰居能量超過自己</div>
+  <br>
+  通道衰減時：三個 offset 同比例下降，best_cfo 依然最大 → <strong>不誤觸發</strong>
+</div>
+
+<h3>3.3 實作程式碼</h3>
+<pre><span class="keyword">static</span> <span class="type">int</span>  best_cfo   = 0;
+<span class="keyword">static</span> <span class="type">bool</span> cfo_locked = <span class="keyword">false</span>;
+
+<span class="comment">// Step 1：量測三個 offset 的 pilot 能量（~8 µs，819 次計算）</span>
+<span class="keyword">auto</span> measure_energy = [&](<span class="type">int</span> cfo_offset) {
+    <span class="type">half</span> energy = 0;
+    <span class="keyword">for</span> (<span class="type">int</span> p = 0; p &lt; PILOT_TONES; p++) {
+        <span class="keyword">if</span> (p == 136) <span class="keyword">continue</span>;
+        <span class="type">int</span> idx = LEFT_GUARD + cfo_offset + p * 7;
+        <span class="type">half</span> vi = fixed16_to_half(buf_i[idx]);
+        <span class="type">half</span> vq = fixed16_to_half(buf_q[idx]);
+        energy += vi*vi + vq*vq;
+    }
+    <span class="keyword">return</span> energy;
+};
+
+<span class="type">half</span> e_cur   = measure_energy(best_cfo);
+<span class="type">half</span> e_left  = measure_energy(best_cfo - 1);
+<span class="type">half</span> e_right = measure_energy(best_cfo + 1);
+
+<span class="comment">// Step 2：判斷是否需要重掃</span>
+<span class="type">bool</span> need_relock = !cfo_locked || (e_left &gt; e_cur) || (e_right &gt; e_cur);
+
+<span class="keyword">if</span> (need_relock) {
+    <span class="comment">// Step 3：完整 141 次掃描（428 µs，只在必要時觸發）</span>
+    <span class="type">half</span> max_metric = (<span class="type">half</span>)-1.0f;
+Loop_CFO_Scan:
+    <span class="keyword">for</span> (<span class="type">int</span> offset = -CFO_RANGE; offset &lt;= CFO_RANGE; offset++) {
+        ...
+        <span class="keyword">if</span> (metric &gt; max_metric) { max_metric = metric; best_cfo = offset; }
+    }
+    cfo_locked = <span class="keyword">true</span>;
+}
+
+<span class="type">int</span> base = LEFT_GUARD + best_cfo;
+<span class="comment">// 後續 Loop_Process_Packed 照常執行（每幀用當幀訊號做通道估測）</span></pre>
+
+<h3>3.4 具體情境範例</h3>
+<table>
+  <tr><th>幀</th><th>情境</th><th>行為</th><th>耗時</th></tr>
+  <tr><td>第 1 幀</td><td>系統剛啟動</td><td>cfo_locked=false → 完整掃描 → 找到 best_cfo=+3，鎖定</td><td>428 µs</td></tr>
+  <tr class="good"><td>第 2~5000 幀</td><td>穩定運作</td><td>量測三個 offset → e_cur 最大 → 跳過掃描</td><td>~8 µs</td></tr>
+  <tr><td>第 5001 幀</td><td>USRP 溫度上升，振盪器漂移</td><td>e_right &gt; e_cur → 觸發完整重掃 → 找到新 best_cfo=+4</td><td>428 µs</td></tr>
+  <tr class="good"><td>第 5002 幀起</td><td>重新穩定</td><td>e_cur 最大 → 跳過掃描</td><td>~8 µs</td></tr>
+</table>
+
+<h3>3.5 效能比較</h3>
+<table>
+  <tr><th>方案</th><th>每幀 CFO 相關時間（穩定時）</th><th>預期 QPSK frame time</th><th>預期 Data Rate</th></tr>
+  <tr class="highlight"><td>目前（每幀完整掃）</td><td>428 µs</td><td>1001 µs</td><td>1.502 Mbps ❌</td></tr>
+  <tr class="good"><td>自適應鄰居比較</td><td>~8 µs</td><td>~581 µs</td><td>~2.59 Mbps ✅</td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2>4. 適用場景說明</h2>
+
+<table>
+  <tr><th>場景</th><th>CFO 穩定性</th><th>行為</th></tr>
+  <tr><td>ZCU208 loopback（TX/RX 同一 FPGA）</td><td>CFO = 0，永遠不變</td><td>第 1 幀掃描後永遠不重掃</td></tr>
+  <tr><td>ZCU208 對 USRP（不同硬體）</td><td>慢漂移（ppm 級）</td><td>溫度漂移時自動偵測並重掃</td></tr>
+  <tr><td>ZCU208 對 另一塊 FPGA</td><td>依振盪器品質</td><td>同上，品質差則重掃較頻繁</td></tr>
+</table>
+
+<div class="good-box">
+  <strong>設計優點：不需要知道對方硬體規格。</strong><br>
+  系統根據實際接收到的 pilot 能量自行判斷是否需要重掃，適用於任何振盪器品質的對端設備。
+</div>
+
+<!-- ============================================================ -->
+<h2>5. 後續優化項目</h2>
+
+<table>
+  <tr><th>項目</th><th>預計節省</th><th>狀態</th></tr>
+  <tr class="highlight"><td>ref_rx CFO cache（本次設計）</td><td>~420 µs/frame</td><td>🔧 待實作</td></tr>
+  <tr><td>Viterbi 原始碼優化</td><td>大（需 jameslin 提供源碼）</td><td>⏳ 待取得</td></tr>
+  <tr><td>qpsk_demap calc_snr 跳過</td><td>~49 µs</td><td>⏳ 次要</td></tr>
+</table>
+
+<!-- ============================================================ -->
+<h2>6. 相關學術資源</h2>
+
+<h3>IEEE Xplore 搜尋關鍵字</h3>
+<ul>
+  <li><code>"integer CFO estimation OFDM pilot"</code></li>
+  <li><code>"coarse frequency synchronization OFDM"</code></li>
+  <li><code>"pilot-based frequency offset estimation OFDM"</code></li>
+  <li><code>"CFO tracking OFDM"</code></li>
+  <li><code>"adaptive frequency synchronization OFDM"</code></li>
+</ul>
+
+<h3>必讀經典論文</h3>
+<table>
+  <tr><th>論文</th><th>內容</th></tr>
+  <tr><td>Schmidl &amp; Cox (1997)</td><td>Robust frequency and timing synchronization for OFDM — 最常被引用</td></tr>
+  <tr><td>Moose (1994)</td><td>A technique for OFDM frequency offset correction — 基礎</td></tr>
+  <tr><td>van de Beek et al. (1997)</td><td>ML estimation of time and frequency offset in OFDM</td></tr>
+  <tr><td>Morelli &amp; Mengali (1999)</td><td>改進版 CFO 估測，更精確</td></tr>
+</table>
+
+<p>目前 code 的做法學術名稱：<strong>"Exhaustive search / Maximum pilot energy CFO estimation"</strong></p>
+
+<!-- ============================================================ -->
+<hr>
+<p class="meta">
+  檔案路徑：<code>C:\VitisProject\design_notes\cfo_optimization_discussion.html</code><br>
+  主程式：<code>C:\VitisProject\Vitis\OFDM\RX\Refer\ref_rx_packed.cpp</code><br>
+  建立日期：2026-05-10
+</p>
+
+</body>
+</html>

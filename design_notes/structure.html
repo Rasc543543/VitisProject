@@ -1,0 +1,420 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-TW">
+  <head>
+  <meta charset="UTF-8">
+  <title>CFO Tracking Mode — 設計討論文件</title>
+  <style>
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { background:#fff; font-family:'Segoe UI',Arial,sans-serif; color:#263238; padding:28px 24px 60px; }
+    .center { display:flex; flex-direction:column; align-items:center; }
+
+    h1 { color:#1a237e; font-size:1.3rem; margin-bottom:4px; }
+    h2 { font-size:1.05rem; color:#1a237e; border-left:4px solid #1a237e; padding-left:12px; margin:36px 0 14px; }
+    h3 { font-size:0.95rem; color:#37474f; margin:20px 0 8px; }
+    .sub { color:#78909c; font-size:0.82rem; margin-bottom:18px; }
+
+    .legend { display:flex; gap:24px; margin-bottom:16px; font-size:0.82rem; flex-wrap:wrap; }
+    .leg { display:flex; align-items:center; gap:7px; color:#37474f; }
+    .dot { width:13px; height:13px; border-radius:3px; border:1px solid rgba(0,0,0,.15); }
+
+    /* Result callout */
+    .callout { max-width:1060px; width:100%; border-radius:8px; padding:12px 20px; font-size:.85rem;
+  line-height:1.85; margin-top:12px; }
+    .callout.yellow { background:#fff8e1; border:1px solid #ffcc02; color:#5d4037; }
+    .callout.blue   { background:#e3f2fd; border:1px solid #1565c0; color:#0d47a1; }
+
+    /* Wide content wrapper */
+    .wide { max-width:1060px; width:100%; }
+
+    /* Assumption table */
+    table { width:100%; border-collapse:collapse; font-size:0.875rem; margin-top:10px; }
+    th { background:#e8eaf6; color:#1a237e; padding:10px 14px; text-align:left; border-bottom:2px solid #c5cae9; }
+    td { padding:10px 14px; border-bottom:1px solid #eceff1; vertical-align:top; }
+    tr:hover td { background:#f5f5f5; }
+    .tag { display:inline-block; font-size:.75rem; padding:2px 8px; border-radius:10px; font-weight:bold;
+  margin-left:6px; }
+    .tag-ok  { background:#e8f5e9; color:#2e7d32; }
+    .tag-no  { background:#fbe9e7; color:#c62828; }
+    .tag-tbd { background:#fff3e0; color:#e65100; }
+
+    /* Concern cards */
+    .concern-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:12px; }
+    .concern-card { border-radius:8px; padding:16px; border:1px solid; }
+    .concern-card.high   { background:#fbe9e7; border-color:#ef9a9a; }
+    .concern-card.medium { background:#fff3e0; border-color:#ffcc80; }
+    .concern-card.low    { background:#f3f4f8; border-color:#c5cae9; }
+    .concern-card .level { font-size:.72rem; font-weight:bold; padding:1px 7px; border-radius:8px;
+  display:inline-block; margin-bottom:8px; }
+    .high   .level { background:#c62828; color:#fff; }
+    .medium .level { background:#e65100; color:#fff; }
+    .low    .level { background:#5c6bc0; color:#fff; }
+    .concern-card h4 { font-size:.9rem; color:#212121; margin-bottom:6px; }
+    .concern-card p  { font-size:.84rem; color:#37474f; line-height:1.65; }
+
+    /* Doppler params */
+    .param-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:12px; }
+    .param-card { background:#f9fbe7; border:1px solid #c5e1a5; border-radius:8px; padding:14px; }
+    .param-card.known { background:#e8f5e9; border-color:#a5d6a7; }
+    .param-card .num { display:inline-block; width:26px; height:26px; border-radius:50%; background:#558b2f;
+  color:#fff; text-align:center; line-height:26px; font-size:.82rem; font-weight:bold; margin-bottom:8px; }
+    .param-card.known .num { background:#2e7d32; }
+    .param-card h4 { font-size:.9rem; color:#33691e; margin-bottom:5px; }
+    .param-card p  { font-size:.83rem; color:#558b2f; line-height:1.6; }
+    .param-card .status { font-size:.78rem; font-weight:bold; margin-top:8px; }
+    .param-card.known .status { color:#2e7d32; }
+    .param-card .status { color:#e65100; }
+
+    /* Checklist */
+    .checklist { list-style:none; margin-top:10px; }
+    .checklist li { padding:8px 14px; border-bottom:1px solid #eceff1; font-size:.875rem; display:flex;
+  align-items:flex-start; gap:10px; }
+    .checklist li:last-child { border-bottom:none; }
+    .check { font-size:1rem; flex-shrink:0; margin-top:1px; }
+
+    /* Formula box */
+    .formula { background:#f5f5f5; border:1px solid #ddd; border-radius:6px; padding:14px 18px; font-family:'Courier
+   New',monospace; font-size:.84rem; color:#37474f; margin:10px 0; white-space:pre; line-height:1.7; }
+
+    hr { border:none; border-top:1px solid #e0e0e0; margin:32px 0; }
+  </style>
+  </head>
+  <body>
+  <div class="center">
+  <h1>ref_rx_packed — CFO 追蹤模式設計討論文件</h1>
+  <p class="sub">C:\VitisProject\Vitis\OFDM\RX\Refer\ref_rx_packed.cpp &nbsp;|&nbsp; 2026-05-13</p>
+
+  <div class="legend">
+    <div class="leg"><div class="dot" style="background:#FFF3E0;border-color:#E65100;"></div>Unlocked 路徑</div>
+    <div class="leg"><div class="dot" style="background:#E8F5E9;border-color:#2E7D32;"></div>Locked 正常追蹤</div>
+    <div class="leg"><div class="dot" style="background:#FBE9E7;border-color:#C62828;"></div>Boundary-hit 保護</div>
+    <div class="leg"><div class="dot" style="background:#E3F2FD;border-color:#1565C0;"></div>決策判斷</div>
+    <div class="leg"><div class="dot" style="background:#EDE7F6;border-color:#4527A0;"></div>共同處理</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       FLOWCHART SVG
+  ══════════════════════════════════════════════════════ -->
+  <svg width="1160" height="560" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr"  markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0,9
+  3.5,0 7" fill="#37474f"/></marker>
+    <marker id="arrO" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0,9
+  3.5,0 7" fill="#E65100"/></marker>
+    <marker id="arrG" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0,9
+  3.5,0 7" fill="#2E7D32"/></marker>
+    <marker id="arrR" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0,9
+  3.5,0 7" fill="#C62828"/></marker>
+  </defs>
+  <rect width="1160" height="560" fill="#ffffff"/>
+
+  <!-- START -->
+  <ellipse cx="62" cy="200" rx="52" ry="26" fill="#EDE7F6" stroke="#4527A0" stroke-width="2"/>
+  <text x="62" y="196" text-anchor="middle" font-size="11" fill="#4527A0">每一幀</text>
+  <text x="62" y="211" text-anchor="middle" font-size="12" font-weight="bold" fill="#1A237E">資料到達</text>
+  <line x1="114" y1="200" x2="136" y2="200" stroke="#37474f" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- D1 -->
+  <polygon points="200,154 308,200 200,246 92,200" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+  <text x="200" y="195" text-anchor="middle" font-size="12" font-weight="bold" fill="#0D47A1">系統</text>
+  <text x="200" y="211" text-anchor="middle" font-size="12" font-weight="bold" fill="#0D47A1">已鎖定？</text>
+  <text x="152" y="140" text-anchor="middle" font-size="11" font-weight="bold" fill="#E65100">否</text>
+  <text x="152" y="153" text-anchor="middle" font-size="10" fill="#BF360C">Unlocked</text>
+  <line x1="200" y1="154" x2="200" y2="93" stroke="#E65100" stroke-width="2" marker-end="url(#arrO)"/>
+  <text x="152" y="268" text-anchor="middle" font-size="11" font-weight="bold" fill="#2E7D32">是</text>
+  <text x="152" y="281" text-anchor="middle" font-size="10" fill="#1B5E20">Locked</text>
+  <line x1="200" y1="246" x2="200" y2="320" stroke="#2E7D32" stroke-width="2" marker-end="url(#arrG)"/>
+
+  <!-- UNLOCKED U1 -->
+  <rect x="212" y="63" width="246" height="58" rx="7" fill="#FFF3E0" stroke="#E65100" stroke-width="2"/>
+  <rect x="212" y="63" width="246" height="20" rx="7" fill="#E65100" fill-opacity="0.18"/>
+  <text x="335" y="78" text-anchor="middle" font-size="11" font-weight="bold" fill="#BF360C">全範圍掃描</text>
+  <text x="335" y="95" text-anchor="middle" font-size="11" fill="#5D4037">對 141 個頻率偏移量逐一計算</text>
+  <text x="335" y="110" text-anchor="middle" font-size="11" fill="#5D4037">pilot 子載波能量，選出最大值</text>
+  <line x1="458" y1="92" x2="482" y2="92" stroke="#E65100" stroke-width="2" marker-end="url(#arrO)"/>
+
+  <!-- UNLOCKED U2 -->
+  <rect x="482" y="63" width="212" height="58" rx="7" fill="#FFF3E0" stroke="#E65100" stroke-width="2"/>
+  <rect x="482" y="63" width="212" height="20" rx="7" fill="#E65100" fill-opacity="0.18"/>
+  <text x="588" y="78" text-anchor="middle" font-size="11" font-weight="bold" fill="#BF360C">記錄並切換至鎖定</text>
+  <text x="588" y="95" text-anchor="middle" font-size="11" fill="#5D4037">記下偏移量為最佳值</text>
+  <text x="588" y="110" text-anchor="middle" font-size="11" fill="#5D4037">標記系統進入「已鎖定」狀態</text>
+  <polyline points="694,92 792,92 792,198" fill="none" stroke="#E65100" stroke-width="2" marker-end="url(#arrO)"/>
+
+  <!-- LOCKED L1 -->
+  <rect x="212" y="292" width="248" height="58" rx="7" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+  <rect x="212" y="292" width="248" height="20" rx="7" fill="#2E7D32" fill-opacity="0.15"/>
+  <text x="336" y="307" text-anchor="middle" font-size="11" font-weight="bold" fill="#1B5E20">窄範圍快速追蹤</text>
+  <text x="336" y="324" text-anchor="middle" font-size="11" fill="#1B5E20">在上幀最佳偏移量 ±5 格內掃描</text>
+  <text x="336" y="339" text-anchor="middle" font-size="11" fill="#1B5E20">11 個候選點，找出能量最大者</text>
+  <line x1="460" y1="321" x2="484" y2="321" stroke="#2E7D32" stroke-width="2" marker-end="url(#arrG)"/>
+
+  <!-- D2 -->
+  <polygon points="578,281 668,321 578,361 488,321" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+  <text x="578" y="316" text-anchor="middle" font-size="11" font-weight="bold" fill="#0D47A1">偏移漂移</text>
+  <text x="578" y="330" text-anchor="middle" font-size="11" font-weight="bold" fill="#0D47A1">≥ 5 格？</text>
+  <text x="700" y="310" text-anchor="middle" font-size="11" font-weight="bold" fill="#2E7D32">否</text>
+  <text x="700" y="323" text-anchor="middle" font-size="10" fill="#407060">正常追蹤</text>
+  <polyline points="668,321 792,321 792,202" fill="none" stroke="#2E7D32" stroke-width="2" marker-end="url(#arrG)"/>
+  <text x="600" y="376" font-size="11" font-weight="bold" fill="#C62828">是</text>
+  <text x="600" y="389" font-size="10" fill="#8B0000">boundary-hit</text>
+  <line x1="578" y1="361" x2="578" y2="413" stroke="#C62828" stroke-width="2" marker-end="url(#arrR)"/>
+
+  <!-- BOUNDARY-HIT BOX -->
+  <rect x="446" y="413" width="376" height="118" rx="8" fill="#FBE9E7" stroke="#C62828" stroke-width="2"/>
+  <rect x="446" y="413" width="376" height="22" rx="8" fill="#C62828" fill-opacity="0.20"/>
+  <text x="634" y="429" text-anchor="middle" font-size="11" font-weight="bold" fill="#B71C1C">視窗外情境 —
+  boundary-hit 保護機制</text>
+  <text x="458" y="449" font-size="11" fill="#4E342E"><tspan font-weight="bold" fill="#C62828">①</tspan>
+  真正最佳偏移量已漂移到 ±5 視窗以外</text>
+  <text x="458" y="465" font-size="11" fill="#4E342E"><tspan font-weight="bold" fill="#C62828">②</tspan>  11
+  點能量皆偏低，最大能量點假設落在視窗邊緣 ⚠</text>
+  <text x="458" y="481" font-size="11" fill="#4E342E"><tspan font-weight="bold" fill="#C62828">③</tspan>  漂移量 ≥ 5
+   格，觸發 boundary-hit 保護</text>
+  <text x="458" y="497" font-size="11" fill="#4E342E"><tspan font-weight="bold" fill="#C62828">④</tspan>
+  本幀仍以邊緣偏移量繼續處理（可能輕微 BER 上升）</text>
+  <text x="458" y="513" font-size="11" fill="#4E342E"><tspan font-weight="bold" fill="#C62828">⑤</tspan>
+  標記解鎖，下一幀自動重新全掃並重新鎖定</text>
+  <text x="634" y="545" text-anchor="middle" font-size="10" fill="#8B0000">⚠ ② 為工程假設，尚未以 csim
+  驗證（見下方說明）</text>
+
+  <!-- MERGE -->
+  <circle cx="792" cy="200" r="5" fill="#37474f"/>
+  <line x1="797" y1="200" x2="822" y2="200" stroke="#37474f" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- COMMON BOX -->
+  <rect x="822" y="172" width="238" height="58" rx="7" fill="#EDE7F6" stroke="#4527A0" stroke-width="2"/>
+  <rect x="822" y="172" width="238" height="20" rx="7" fill="#4527A0" fill-opacity="0.15"/>
+  <text x="941" y="187" text-anchor="middle" font-size="11" font-weight="bold" fill="#311B92">更新記錄 &amp;
+  套用校正</text>
+  <text x="941" y="204" text-anchor="middle" font-size="11" fill="#1A237E">記錄本幀最佳偏移量</text>
+  <text x="941" y="220" text-anchor="middle" font-size="11" fill="#1A237E">套用 CFO 校正至 FFT 輸出</text>
+  <line x1="1060" y1="201" x2="1084" y2="201" stroke="#37474f" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- END -->
+  <ellipse cx="1118" cy="201" rx="36" ry="26" fill="#EDE7F6" stroke="#4527A0" stroke-width="2"/>
+  <text x="1118" y="197" text-anchor="middle" font-size="11" fill="#4527A0">本幀</text>
+  <text x="1118" y="212" text-anchor="middle" font-size="12" font-weight="bold" fill="#1A237E">完成</text>
+  </svg>
+
+  <!-- Data Rate callout -->
+  <div class="callout yellow wide">
+    <strong>硬體實測 Data Rate（ZCU208 Loopback，BER=0）：</strong><br>
+    QPSK — Unlocked 1009 µs（1.41 Mbps）；Locked <strong>620 µs → 2.30 Mbps ✓</strong>　|　
+    8PSK — Unlocked 1107 µs（1.91 Mbps）；Locked <strong>717 µs → 2.95 Mbps ✓</strong><br>
+    <span style="font-size:.8rem;color:#795548;">計時範圍：start_tx_frag → RX DMA 完成（不含 UART
+  printf）。Simulation 與 Hardware 誤差均 &lt;1.5%。</span>
+  </div>
+
+  <!-- ════════════════════════════════════
+       MAIN CONTENT
+  ════════════════════════════════════ -->
+  <div class="wide">
+
+  <hr>
+
+  <!-- ── Section 1: Design Assumptions ── -->
+  <h2>設計假設</h2>
+  <p style="font-size:.875rem;color:#546e7a;margin-bottom:8px;">以下三個假設是 Tracking Mode
+  能夠正確運作的前提條件。</p>
+
+  <table>
+    <thead>
+      <tr><th style="width:28%">假設</th><th style="width:26%">根據</th><th style="width:24%">若假設成立</th><th
+  style="width:22%">若假設不成立</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>① E(offset) 為單峰分布</strong><br><span
+  style="font-size:.8rem;color:#607d8b;">能量函數在真正最佳偏移附近呈鐘型，越偏離峰值越低</span></td>
+        <td>理想 AWGN 通道下的 OFDM pilot 能量特性<br><span style="font-size:.8rem;color:#e65100;">⚠
+  多路徑環境未驗證</span></td>
+        <td>視窗外情境時，argmax 確實落在邊緣，boundary-hit 能偵測到 CFO 跳變</td>
+        <td>多峰情況下 argmax 可能落在視窗中間，boundary-hit 不觸發，系統以錯誤偏移量持續運作 <span class="tag
+  tag-no">高風險</span></td>
+      </tr>
+      <tr>
+        <td><strong>② CFO 幀間漂移 ≤ 5 subcarrier</strong><br><span style="font-size:.8rem;color:#607d8b;">CFO
+  是緩慢漂移的物理量，相鄰幀間差距在視窗內</span></td>
+        <td>LEO 衛星 Doppler 為漸進式漂移的工程認知<br><span style="font-size:.8rem;color:#e65100;">⚠ 尚未以實際 RF
+  參數計算驗證</span></td>
+        <td>Locked 模式永遠追得上，系統穩定在 Locked 狀態</td>
+        <td>持續 boundary-hit → 持續 Unlock → 每幀重跑全掃，完全失去效益 <span class="tag
+  tag-no">中高風險</span></td>
+      </tr>
+      <tr>
+        <td><strong>③ Loopback 環境 CFO ≈ 0</strong><br><span style="font-size:.8rem;color:#607d8b;">ZCU208 TX/RX
+  同晶片，振盪器頻率完全一致</span></td>
+        <td>硬體架構確認：TX DAC 與 RX ADC 共用同一時脈源</td>
+        <td>best_cfo 每幀相同，drift=0，永遠維持 Locked，Data Rate 穩定</td>
+        <td>不適用（此場景下可視為已驗證）<span class="tag tag-ok">已確認</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <!-- ── Section 2: Concerns ── -->
+  <h2>已知限制與擔憂</h2>
+
+  <div class="concern-grid">
+
+    <div class="concern-card high">
+      <span class="level">高優先</span>
+      <h4>① 「argmax 落在視窗邊緣」尚未驗證</h4>
+      <p>
+        boundary-hit 保護機制的核心推論——當真正最佳偏移量在視窗外時，
+        能量最大的候選點會落在視窗邊緣——是基於 E(offset) 單峰假設推導出來的，
+        <strong>並未在 csim 中以受控實驗驗證</strong>。<br><br>
+        <strong>驗證方式：</strong>在 csim 中強制輸入 CFO 使真正最佳偏移量落在 ±6 或 ±8，
+        印出 11 個候選點的能量值，確認最大值是否確實在邊緣。
+      </p>
+    </div>
+
+    <div class="concern-card high">
+      <span class="level">高優先</span>
+      <h4>② 多路徑環境下 E(offset) 可能多峰</h4>
+      <p>
+        實際 RF 通道（特別是低仰角衛星、都市環境）存在多路徑反射，
+        會造成 pilot 能量函數出現多個局部峰值。
+        此時 Locked 模式的 argmax 可能收斂到錯誤的局部峰，
+        且不會觸發 boundary-hit（因為 drift 看起來很小）。<br><br>
+        <strong>影響：</strong>系統誤鎖定在錯誤偏移量，BER 上升但系統不自知。
+        目前 loopback 測試無法驗證此情境。
+      </p>
+    </div>
+
+    <div class="concern-card medium">
+      <span class="level">中優先</span>
+      <h4>③ 沒有絕對能量門檻</h4>
+      <p>
+        系統只做相對比較（11 點中哪個最大），
+        <strong>無法判斷「11 個候選點的能量是否都很低」</strong>。
+        即使所有候選點能量皆趨近於雜訊底噪，系統仍會選出一個「最大」值繼續運作。<br><br>
+        <strong>改善方向：</strong>加入能量門檻判斷——若 11 點最大能量低於某個絕對值，
+        主動觸發重新全掃。但門檻值難以設定（受 channel fading 影響大）。
+      </p>
+    </div>
+
+    <div class="concern-card medium">
+      <span class="level">中優先</span>
+      <h4>④ boundary-hit 那一幀的資料品質下降</h4>
+      <p>
+        觸發 boundary-hit 的那一幀，系統是以「視窗邊緣的錯誤偏移量」
+        進行 CFO 校正與通道等化，<strong>該幀的 BER 可能上升</strong>。
+        系統沒有辦法回溯或重傳這一幀。<br><br>
+        在衛星通訊場景（資料流不可重傳）中，這一幀損失需要由上層
+        RS 解碼的糾錯能力來吸收。若錯誤超過 RS 糾錯能力（8 個符號），
+        該幀資料將無法恢復。
+      </p>
+    </div>
+
+    <div class="concern-card medium">
+      <span class="level">中優先</span>
+      <h4>⑤ ±5 視窗大小未經 RF 物理驗證</h4>
+      <p>
+        目前 CFO_TRACK_W = 5 是依據「LEO 每幀最多漂移 1 subcarrier」的認知設定，
+        但此數值尚未以實際系統參數（載波頻率、subcarrier spacing、幀長度）計算確認。
+        <strong>在 RF 部署前必須驗證</strong>，否則可能低估或高估所需追蹤範圍。<br><br>
+        若實際每幀漂移 &gt; 5 subcarrier，系統將持續 boundary-hit，無法維持 Locked 狀態。
+      </p>
+    </div>
+
+    <div class="concern-card low">
+      <span class="level">低優先</span>
+      <h4>⑥ CFO 突然跳變（非漸進 Doppler）</h4>
+      <p>
+        設計針對 Doppler 的<strong>漸進漂移</strong>最佳化。
+        若系統發生 CFO 突然跳變（例如相位雜訊、RF 切換、頻率跳變），
+        一幀內可能跳超過視窗範圍，boundary-hit 機制仍能觸發並在下一幀恢復，
+        但恢復速度取決於全掃找到正確偏移的時間。<br><br>
+        在 loopback 環境此風險極低；實際 RF 部署時需評估。
+      </p>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <!-- ── Section 3: Doppler verification ── -->
+  <h2>Doppler 追蹤能力驗證（RF 部署前必須確認）</h2>
+  <p style="font-size:.875rem;color:#546e7a;margin-bottom:12px;">
+    需以下 4 個參數驗證 CFO_TRACK_W = 5 是否足夠。目前 loopback 場景 CFO=0，無法替代此驗證。
+  </p>
+
+  <div class="param-grid">
+    <div class="param-card">
+      <div class="num">1</div>
+      <h4>載波頻率（GHz）</h4>
+      <p>最大 Doppler shift = f_carrier × v_max / c<br>
+         取得方式：RF 前端規格 / Vivado RF Data Converter IP 設定</p>
+      <div class="status">⏳ 待確認</div>
+    </div>
+    <div class="param-card">
+      <div class="num">2</div>
+      <h4>LEO 最大徑向速度 → Doppler Shift</h4>
+      <p>LEO 軌道速度 ≈ 7,500 m/s（物理常數）<br>
+         最壞情況徑向速度 ≈ 7,500 m/s（衛星正面飛過）</p>
+      <div class="status">⏳ 需搭配載波頻率計算 Hz 數值</div>
+    </div>
+    <div class="param-card">
+      <div class="num">3</div>
+      <h4>OFDM Subcarrier Spacing（Hz）</h4>
+      <p>subcarrier_spacing = 採樣率 fs / FFT_size<br>
+         取得方式：Vivado BD → FFT IP → Transform Length + Sampling Rate</p>
+      <div class="status">⏳ 待確認</div>
+    </div>
+    <div class="param-card known">
+      <div class="num">4</div>
+      <h4>Frame Duration（ms）</h4>
+      <p>QPSK Locked：620 µs<br>
+         8PSK Locked：717 µs<br>
+         來源：ZCU208 硬體實測</p>
+      <div class="status">✅ 已知</div>
+    </div>
+  </div>
+
+  <div class="formula" style="margin-top:14px;">最大 Doppler shift (Hz)  = f_carrier × 7500 / 3×10⁸
+
+  每幀 Doppler 漂移 (Hz)  ≈ Doppler 變化率 × frame_duration
+                            （變化率與衛星仰角及軌道幾何有關）
+
+  幀間漂移 (subcarrier)    = 每幀漂移 (Hz) / subcarrier_spacing (Hz)
+
+  若幀間漂移 ≤ 5 subcarrier → CFO_TRACK_W = 5 安全 ✓
+  若幀間漂移 > 5 subcarrier → 需加大 CFO_TRACK_W（代價：Locked 運算增加）</div>
+
+  <hr>
+
+  <!-- ── Section 4: Verification Checklist ── -->
+  <h2>驗證狀態 Checklist</h2>
+  <ul class="checklist">
+    <tr></tr>
+    <li><span class="check" style="color:#2e7d32;">✅</span><span><strong>csim SNR sweep（14 cases，含 0
+  dB）</strong>：AvgErr 與原版一致，0 dB 表現反而更好（PASS）</span></li>
+    <li><span class="check" style="color:#2e7d32;">✅</span><span><strong>Synthesis Timing</strong>：8.419 ns &lt;
+  10 ns 目標（PASS）</span></li>
+    <li><span class="check" style="color:#2e7d32;">✅</span><span><strong>cosim（2 幀 QPSK）</strong>：BER =
+  0（PASS）</span></li>
+    <li><span class="check" style="color:#2e7d32;">✅</span><span><strong>Vivado Simulation QPSK 5 幀</strong>：BER
+  = 0，Locked 611 µs = 2.34 Mbps（PASS）</span></li>
+    <li><span class="check" style="color:#2e7d32;">✅</span><span><strong>Vivado Simulation 8PSK 5 幀</strong>：BER
+  = 0，Locked 706 µs = 3.00 Mbps（PASS）</span></li>
+    <li><span class="check" style="color:#2e7d32;">✅</span><span><strong>硬體實測 QPSK（ZCU208
+  Loopback）</strong>：BER = 0，Locked 620 µs = 2.30 Mbps（PASS）</span></li>
+    <li><span class="check" style="color:#2e7d32;">✅</span><span><strong>硬體實測 8PSK（ZCU208
+  Loopback）</strong>：BER = 0，Locked 717 µs = 2.95 Mbps（PASS）</span></li>
+    <li><span class="check" style="color:#e65100;">⚠</span><span><strong>Boundary-hit 機制驗證</strong>：「argmax
+  落在邊緣」的推論尚未在 csim 中以受控實驗確認</span></li>
+    <li><span class="check" style="color:#e65100;">⚠</span><span><strong>多路徑環境測試</strong>：目前僅在 AWGN /
+  Loopback 下驗證，多峰情境未測</span></li>
+    <li><span class="check" style="color:#e65100;">⚠</span><span><strong>Doppler 物理參數計算</strong>：需載波頻率 +
+   FFT subcarrier spacing 才能驗證 ±5 視窗是否足夠</span></li>
+    <li><span class="check" style="color:#c62828;">❌</span><span><strong>實際 RF 通道測試</strong>：ZCU208
+  尚未接上天線與衛星進行真實 Doppler 測試</span></li>
+  </ul>
+
+  </div><!-- end .wide -->
+  </div><!-- end .center -->
+  </body>
+  </html>

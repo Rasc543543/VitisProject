@@ -6,8 +6,8 @@
 
 set RUN_CSIM    1
 set RUN_SYN     1
-set RUN_COSIM   0
-set RUN_EXPORT  0
+set RUN_COSIM   1
+set RUN_EXPORT  1
 set CLEAN_BUILD 1
 
 # ---- 處理 -tclargs 參數 ----
@@ -19,6 +19,7 @@ if { [llength $argv] > 0 } {
         set RUN_EXPORT 0
         puts ">>> Mode: csim_only"
     } elseif { $mode eq "syn_only" } {
+        set RUN_SYN    1
         set RUN_CSIM   0
         set RUN_COSIM  0
         set RUN_EXPORT 0
@@ -63,7 +64,7 @@ if { $RUN_EXPORT } {
     file mkdir $output_dir
     export_design -format ip_catalog \
                   -output  $output_dir \
-                  -description "RS Encoder TX IP" \
+                  -description "HLS IP Export" \
                   -version "1.0"
     puts "<<< IP exported to: $output_dir"
 }

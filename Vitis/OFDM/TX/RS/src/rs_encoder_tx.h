@@ -1,6 +1,7 @@
 #ifndef RS_ENCODER_TX_H
 #define RS_ENCODER_TX_H
 
+#include <stdint.h>
 #include "ap_int.h"
 #include "hls_stream.h"
 #include "ap_axi_sdata.h"

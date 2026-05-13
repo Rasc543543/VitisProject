@@ -24,8 +24,9 @@
 # output IP zip
 **/output/
 
-# 根目錄 HLS log
-/vitis_hls.log
+# HLS / Vivado log（所有層級）
+**/vitis_hls.log
+**/vivado.log
 
 # 備份 log
 **/*.backup.log
@@ -43,3 +44,10 @@
 # Windows
 Thumbs.db
 desktop.ini
+
+# 大型二進位檔 / 可重新產生的產物（不追蹤）
+IPbackup/
+xsa_bitstream_8PSK/
+xsa_bitstream_QPSK/
+*.bit
+*.xsa

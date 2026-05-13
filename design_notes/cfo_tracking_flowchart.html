@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>CFO Tracking Mode — 流程圖</title>
+<style>
+  body { margin: 0; background: #fff; display: flex; flex-direction: column; align-items: center; padding: 28px 16px 40px; font-family: 'Segoe UI', Arial, sans-serif; }
+  h1   { color: #1a237e; font-size: 1.25rem; margin-bottom: 4px; }
+  .sub { color: #78909c; font-size: 0.82rem; margin-bottom: 20px; }
+  .legend { display: flex; gap: 28px; margin-bottom: 18px; font-size: 0.82rem; }
+  .legend-item { display: flex; align-items: center; gap: 7px; color: #37474f; }
+  .dot { width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.15); }
+  svg { max-width: 100%; }
+</style>
+</head>
+<body>
+
+<h1>ref_rx_packed — CFO 追蹤模式運作流程</h1>
+<p class="sub">每一幀資料到達時執行一次；static 狀態在 FPGA 中跨幀保存</p>
+
+<div class="legend">
+  <div class="legend-item"><div class="dot" style="background:#FFF3E0;border-color:#E65100;"></div>Unlocked 路徑（第一幀 / 重新鎖定）</div>
+  <div class="legend-item"><div class="dot" style="background:#E8F5E9;border-color:#2E7D32;"></div>Locked 路徑（追蹤模式）</div>
+  <div class="legend-item"><div class="dot" style="background:#E3F2FD;border-color:#1565C0;"></div>決策判斷</div>
+  <div class="legend-item"><div class="dot" style="background:#EDE7F6;border-color:#4527A0;"></div>共同處理</div>
+</div>
+
+<svg width="1150" height="450" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arr"  markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#37474f"/></marker>
+  <marker id="arrO" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#E65100"/></marker>
+  <marker id="arrG" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0,9 3.5,0 7" fill="#2E7D32"/></marker>
+</defs>
+
+<rect width="1150" height="450" fill="#ffffff"/>
+
+<!-- ═══════════════════════════════════════════
+     START
+═══════════════════════════════════════════ -->
+<ellipse cx="62" cy="240" rx="52" ry="26" fill="#EDE7F6" stroke="#4527A0" stroke-width="2"/>
+<text x="62" y="236" text-anchor="middle" font-size="11" fill="#4527A0">每一幀</text>
+<text x="62" y="251" text-anchor="middle" font-size="12" font-weight="bold" fill="#1A237E">資料到達</text>
+
+<line x1="114" y1="240" x2="134" y2="240" stroke="#37474f" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- ═══════════════════════════════════════════
+     DECISION 1: 系統是否已鎖定？
+     Diamond center (195,240)  halfW=105  halfH=50
+═══════════════════════════════════════════ -->
+<polygon points="195,190 300,240 195,290 90,240" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+<text x="195" y="233" text-anchor="middle" font-size="12" font-weight="bold" fill="#0D47A1">系統</text>
+<text x="195" y="249" text-anchor="middle" font-size="12" font-weight="bold" fill="#0D47A1">已鎖定？</text>
+
+<!-- Label NO (up)  →  Unlocked path -->
+<text x="148" y="174" text-anchor="middle" font-size="11" font-weight="bold" fill="#E65100">否</text>
+<text x="148" y="187" text-anchor="middle" font-size="10" fill="#BF360C">Unlocked</text>
+<polyline points="195,190 195,122" fill="none" stroke="#E65100" stroke-width="2" marker-end="url(#arrO)"/>
+
+<!-- Label YES (down)  →  Locked path -->
+<text x="148" y="309" text-anchor="middle" font-size="11" font-weight="bold" fill="#2E7D32">是</text>
+<text x="148" y="322" text-anchor="middle" font-size="10" fill="#1B5E20">Locked</text>
+<polyline points="195,290 195,358" fill="none" stroke="#2E7D32" stroke-width="2" marker-end="url(#arrG)"/>
+
+
+<!-- ═══════════════════════════════════════════
+     UNLOCKED PATH  (y ≈ 122)
+═══════════════════════════════════════════ -->
+
+<!-- U1: 全掃 -->
+<rect x="205" y="93" width="250" height="58" rx="7" fill="#FFF3E0" stroke="#E65100" stroke-width="2"/>
+<rect x="205" y="93" width="250" height="20" rx="7" fill="#E65100" fill-opacity="0.18"/>
+<text x="330" y="108" text-anchor="middle" font-size="11" font-weight="bold" fill="#BF360C">全範圍掃描</text>
+<text x="330" y="126" text-anchor="middle" font-size="11" fill="#5D4037">對所有 141 個頻率偏移量逐一</text>
+<text x="330" y="141" text-anchor="middle" font-size="11" fill="#5D4037">計算 pilot 子載波能量，找最大值</text>
+<text x="330" y="158" text-anchor="middle" font-size="10" fill="#E65100">⏱ ~428 µs（每次 Unlocked 都需執行）</text>
+
+<line x1="455" y1="122" x2="482" y2="122" stroke="#E65100" stroke-width="2" marker-end="url(#arrO)"/>
+
+<!-- U2: 鎖定 -->
+<rect x="482" y="93" width="222" height="58" rx="7" fill="#FFF3E0" stroke="#E65100" stroke-width="2"/>
+<rect x="482" y="93" width="222" height="20" rx="7" fill="#E65100" fill-opacity="0.18"/>
+<text x="593" y="108" text-anchor="middle" font-size="11" font-weight="bold" fill="#BF360C">記錄並切換至鎖定</text>
+<text x="593" y="126" text-anchor="middle" font-size="11" fill="#5D4037">將找到的偏移量記為最佳值</text>
+<text x="593" y="141" text-anchor="middle" font-size="11" fill="#5D4037">標記系統進入「已鎖定」狀態</text>
+<text x="593" y="158" text-anchor="middle" font-size="10" fill="#E65100">下一幀起改走 Locked 路徑</text>
+
+<!-- U2 → merge: right then down -->
+<polyline points="704,122 755,122 755,238" fill="none" stroke="#E65100" stroke-width="2" marker-end="url(#arrO)"/>
+
+
+<!-- ═══════════════════════════════════════════
+     LOCKED PATH  (y ≈ 362)
+═══════════════════════════════════════════ -->
+
+<!-- L1: 窄範圍追蹤 -->
+<rect x="205" y="333" width="265" height="58" rx="7" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+<rect x="205" y="333" width="265" height="20" rx="7" fill="#2E7D32" fill-opacity="0.15"/>
+<text x="337" y="348" text-anchor="middle" font-size="11" font-weight="bold" fill="#1B5E20">窄範圍快速追蹤</text>
+<text x="337" y="366" text-anchor="middle" font-size="11" fill="#1B5E20">僅在上幀最佳偏移量 ±5 格內掃描</text>
+<text x="337" y="381" text-anchor="middle" font-size="11" fill="#1B5E20">共 11 個候選位置（全掃的 8%）</text>
+<text x="337" y="398" text-anchor="middle" font-size="10" fill="#2E7D32">⚡ ~0.2–33 µs（節省 93% 運算時間）</text>
+
+<line x1="470" y1="362" x2="498" y2="362" stroke="#2E7D32" stroke-width="2" marker-end="url(#arrG)"/>
+
+<!-- L2: 漂移檢查 -->
+<rect x="498" y="333" width="248" height="58" rx="7" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+<rect x="498" y="333" width="248" height="20" rx="7" fill="#2E7D32" fill-opacity="0.15"/>
+<text x="622" y="348" text-anchor="middle" font-size="11" font-weight="bold" fill="#1B5E20">漂移量檢查</text>
+<text x="622" y="366" text-anchor="middle" font-size="11" fill="#1B5E20">若新最佳偏移偏離上幀超過 5 格</text>
+<text x="622" y="381" text-anchor="middle" font-size="11" fill="#1B5E20">代表 CFO 快速跳變（boundary-hit）</text>
+<text x="622" y="398" text-anchor="middle" font-size="10" fill="#BF360C">→ 解除鎖定，下一幀自動重新全掃</text>
+
+<!-- L2 → merge: right then up -->
+<polyline points="746,362 755,362 755,242" fill="none" stroke="#2E7D32" stroke-width="2" marker-end="url(#arrG)"/>
+
+
+<!-- ═══════════════════════════════════════════
+     MERGE  (755, 240)
+═══════════════════════════════════════════ -->
+<circle cx="755" cy="240" r="5" fill="#37474f"/>
+<line x1="760" y1="240" x2="790" y2="240" stroke="#37474f" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- ═══════════════════════════════════════════
+     COMMON: 更新記錄 + 套用校正
+═══════════════════════════════════════════ -->
+<rect x="790" y="205" width="255" height="70" rx="7" fill="#EDE7F6" stroke="#4527A0" stroke-width="2"/>
+<rect x="790" y="205" width="255" height="22" rx="7" fill="#4527A0" fill-opacity="0.15"/>
+<text x="917" y="221" text-anchor="middle" font-size="11" font-weight="bold" fill="#311B92">更新記錄 &amp; 套用校正</text>
+<text x="917" y="240" text-anchor="middle" font-size="11" fill="#1A237E">將本幀最佳偏移量存入記憶</text>
+<text x="917" y="257" text-anchor="middle" font-size="11" fill="#1A237E">以此偏移量校正 FFT 輸出的相位</text>
+<text x="917" y="272" text-anchor="middle" font-size="10" fill="#5C35C0">後續進行通道等化與解調...</text>
+
+<line x1="1045" y1="240" x2="1070" y2="240" stroke="#37474f" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- ═══════════════════════════════════════════
+     END
+═══════════════════════════════════════════ -->
+<ellipse cx="1105" cy="240" rx="42" ry="26" fill="#EDE7F6" stroke="#4527A0" stroke-width="2"/>
+<text x="1105" y="236" text-anchor="middle" font-size="11" fill="#4527A0">本幀</text>
+<text x="1105" y="251" text-anchor="middle" font-size="12" font-weight="bold" fill="#1A237E">處理完成</text>
+
+
+<!-- ═══════════════════════════════════════════
+     TIMING CALLOUT BOXES
+═══════════════════════════════════════════ -->
+
+<!-- Unlocked timing note (above) -->
+<rect x="206" y="20" width="498" height="38" rx="5" fill="#FFF8E1" stroke="#FFB300" stroke-width="1.2"/>
+<text x="455" y="35" text-anchor="middle" font-size="11" fill="#E65100">
+  <tspan font-weight="bold">Unlocked（第一幀）：</tspan>
+  <tspan>全掃耗時 ~1009 µs → DataRate 1.41 Mbps</tspan>
+</text>
+<text x="455" y="51" text-anchor="middle" font-size="11" fill="#F57F17">
+  <tspan font-weight="bold">Locked（第二幀起）：</tspan>
+  <tspan>追蹤耗時 ~620 µs → DataRate </tspan>
+  <tspan font-weight="bold" fill="#2E7D32">2.30 Mbps ✓</tspan>
+  <tspan fill="#5D4037">（QPSK 硬體實測）</tspan>
+</text>
+
+<!-- Vertical separator -->
+<line x1="575" y1="70" x2="575" y2="420" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="5,4"/>
+<text x="578" y="84" font-size="9" fill="#bdbdbd">合流</text>
+
+<!-- Static state note (bottom) -->
+<rect x="90" y="408" width="580" height="32" rx="5" fill="#F5F5F5" stroke="#90A4AE" stroke-width="1"/>
+<text x="380" y="425" text-anchor="middle" font-size="10.5" fill="#546E7A">
+  <tspan font-weight="bold">★ 狀態持久性：</tspan>
+  <tspan>「已鎖定」標記與最佳偏移量存於 FPGA 暫存器，在兩次 DMA 傳輸之間不會被清除</tspan>
+</text>
+
+</svg>
+
+<div style="margin-top:20px;max-width:1050px;background:#f9f9fc;border:1px solid #c5cae9;border-radius:8px;padding:14px 22px;font-size:0.84rem;color:#37474f;line-height:1.9;">
+  <strong style="color:#1a237e;">流程摘要：</strong>
+  每幀資料到達時，先判斷系統是否已鎖定。
+  <strong style="color:#E65100;">未鎖定</strong>時對 141 個頻率偏移量全部掃描（~428 µs），找出 pilot 子載波能量最大的位置，記下後標記為鎖定。
+  <strong style="color:#2E7D32;">已鎖定</strong>時僅在上幀最佳位置 ±5 格內掃描 11 個候選點（~33 µs），若偏移漂移超出範圍（boundary-hit）則下幀自動重新全掃。
+  兩條路徑最終都將本幀最佳偏移量更新至記憶，並套用相位校正後交由後續模組處理。
+</div>
+
+</body>
+</html>

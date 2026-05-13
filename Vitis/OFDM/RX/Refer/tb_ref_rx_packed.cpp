@@ -2,140 +2,122 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-#include <iomanip>
-#include <cstdio> // 引入文件操作
+#include <cstdio>
 #include <stdint.h>
+#include <cstdlib>
 
 void ref_rx_packed(hls::stream<axis_t> &input_stream, hls::stream<axis_t> &output_stream);
 
-// 診斷函式：執行特定測試並輸出報告與模擬向量
-void run_diagnostic_test(int cfo_offset, float phase_deg, const std::string &label)
+// Set by ref_rx_packed (via extern) to report best_cfo back to TB
+int g_debug_best_cfo = -1;
+
+// Box-Muller Gaussian noise (sigma = std dev per I or Q component)
+static float gaussian_noise(float sigma) {
+    float u1 = ((float)rand() + 1.0f) / ((float)RAND_MAX + 1.0f);
+    float u2 = (float)rand() / (float)RAND_MAX;
+    return sigma * sqrtf(-2.0f * logf(u1)) * cosf(2.0f * (float)M_PI * u2);
+}
+
+// 8PSK unit-circle constellation (k=0..7, 45deg steps)
+static const float PSK8_I[8] = {  1.0f,  0.707f,  0.0f, -0.707f, -1.0f, -0.707f,  0.0f,  0.707f };
+static const float PSK8_Q[8] = {  0.0f,  0.707f,  1.0f,  0.707f,  0.0f, -0.707f, -1.0f, -0.707f };
+
+// modulation: 0=QPSK, 1=8PSK
+// snr_db >= 90 means no noise
+void run_snr_test(int cfo_offset, float phase_deg, float snr_db, int modulation)
 {
     hls::stream<axis_t> in_stream("in_stream");
     hls::stream<axis_t> out_stream("out_stream");
 
-    // 準備輸出文件 (供 Vivado 模擬使用)
-    FILE *fp_in = fopen("input_stimulus.dat", "w");
-    FILE *fp_gold = fopen("golden_output.dat", "w");
+    float ch_gain   = 0.5f;
+    float phase_rad = phase_deg * (float)M_PI / 180.0f;
+    float ch_r      = cosf(phase_rad) * ch_gain;
+    float ch_i      = sinf(phase_rad) * ch_gain;
 
-    float ch_gain = 0.5f; 
-    
-    float phase_rad = phase_deg * M_PI / 180.0f;
-    float ch_r = cos(phase_rad) * ch_gain; // 乘上衰減係數
-    float ch_i = sin(phase_rad) * ch_gain; // 乘上衰減係數
+    // SNR = signal_power / (2*sigma^2), signal_power = ch_gain^2 = 0.25
+    float sig_power   = ch_gain * ch_gain;
+    float noise_sigma = (snr_db < 90.0f)
+                        ? sqrtf(sig_power / (2.0f * powf(10.0f, snr_db / 10.0f)))
+                        : 0.0f;
+
+    // Build signal in float domain first, then add noise
+    float frame_i[FFT_LENGTH] = {};
+    float frame_q[FFT_LENGTH] = {};
 
     std::vector<float> gold_i(DATA_TONES), gold_q(DATA_TONES);
-    std::vector<axis_t> frame(FFT_LENGTH); // 2048 點
 
-    // 初始化 Frame
-    for (int i = 0; i < FFT_LENGTH; i++)
-    {
-        frame[i].data = 0;
-        frame[i].keep = 0xF;
-        frame[i].strb = 0xF;
-        frame[i].last = (i == FFT_LENGTH - 1) ? 1 : 0;
-    }
-
-    // 1. 產生測資與寫入輸入向量檔
+    // Phase 1: generate signal + channel + CFO shift
     int d_idx = 0, p_idx = 0;
-    for (int i = 0; i < FFT_LENGTH; i++)
-    {
-        float ti = 0, tq = 0;
+    for (int i = 0; i < FFT_LENGTH; i++) {
+        float ti = 0.0f, tq = 0.0f;
         int active_idx = i - LEFT_GUARD;
-
-        // 填入 Active Tones (Data & Pilot)
-        if (i >= LEFT_GUARD && i < FFT_LENGTH - RIGHT_GUARD)
-        {
-            if (active_idx % 7 == 0)
-            {
-                // Pilot Tone
-                ti = (float)(1.0f / (float)PILOT_ROM_INV[p_idx++]);
-            }
-            else
-            {
-                // Data Tone (QPSK)
-                gold_i[d_idx] = (d_idx % 2 == 0) ? 0.707f : -0.707f;
-                gold_q[d_idx] = 0.707f;
+        if (i >= LEFT_GUARD && i < FFT_LENGTH - RIGHT_GUARD) {
+            if (active_idx % 7 == 0) {
+                ti = 1.0f / (float)PILOT_ROM_INV[p_idx++];
+            } else {
+                if (modulation == 0) {
+                    gold_i[d_idx] = (d_idx % 2 == 0) ? 0.707f : -0.707f;
+                    gold_q[d_idx] = 0.707f;
+                } else {
+                    gold_i[d_idx] = PSK8_I[d_idx % 8];
+                    gold_q[d_idx] = PSK8_Q[d_idx % 8];
+                }
                 ti = gold_i[d_idx];
                 tq = gold_q[d_idx];
                 d_idx++;
             }
         }
-
-        // 加上 CFO 偏移
         int s_idx = i + cfo_offset;
-        if (s_idx >= 0 && s_idx < FFT_LENGTH)
-        {
-            // 加上相位旋轉 (模擬 Channel)
-            float final_i = ti * ch_r - tq * ch_i;
-            float final_q = ti * ch_i + tq * ch_r;
-
-            // ✅ 【關鍵修改】：模擬 FFT 硬體的定點數輸出 (* 2048 倍)
-            int16_t sim_hw_i = (int16_t)(final_i * 2048.0f);
-            int16_t sim_hw_q = (int16_t)(final_q * 2048.0f);
-
-            // 打包成 32-bit 定點數
-            frame[s_idx].data = pack_int16(sim_hw_i, sim_hw_q);
+        if (s_idx >= 0 && s_idx < FFT_LENGTH) {
+            frame_i[s_idx] = ti * ch_r - tq * ch_i;
+            frame_q[s_idx] = ti * ch_i + tq * ch_r;
         }
     }
 
-    // 將輸入資料寫入文件，同時灌入 AXI-Stream
-    for (int i = 0; i < FFT_LENGTH; i++)
-    {
-        fprintf(fp_in, "%08x\n", (unsigned int)frame[i].data);
-        in_stream.write(frame[i]);
+    // Phase 2: add AWGN to all bins, pack into AXI-Stream
+    for (int i = 0; i < FFT_LENGTH; i++) {
+        float fi = frame_i[i] + (noise_sigma > 0.0f ? gaussian_noise(noise_sigma) : 0.0f);
+        float fq = frame_q[i] + (noise_sigma > 0.0f ? gaussian_noise(noise_sigma) : 0.0f);
+        int16_t hw_i = (int16_t)(fi * 2048.0f);
+        int16_t hw_q = (int16_t)(fq * 2048.0f);
+        axis_t pkt;
+        pkt.data = pack_int16(hw_i, hw_q);
+        pkt.keep = 0xF;
+        pkt.strb = 0xF;
+        pkt.last = (i == FFT_LENGTH - 1) ? 1 : 0;
+        in_stream.write(pkt);
     }
 
-    // 2. 執行硬體模擬 (DUT)
+    // Phase 3: run DUT (sets g_debug_best_cfo internally)
     ref_rx_packed(in_stream, out_stream);
 
-    // 3. 診斷分析與寫入黃金參考檔
-    std::cout << "\n==== TEST CASE: " << label << " (CFO=" << cfo_offset << ", Phase=" << phase_deg << "deg) ====" << std::endl;
-
-    float total_error = 0;
-    float max_error = 0;
-    float k_errors[6] = {0, 0, 0, 0, 0, 0};
-
-    // 讀出 RX 處理完的 1632 點 Data
-    for (int i = 0; i < DATA_TONES; i++)
-    {
+    // Phase 4: measure reconstruction error
+    float total_error = 0.0f, max_error = 0.0f;
+    for (int i = 0; i < DATA_TONES; i++) {
         axis_t out = out_stream.read();
-
-        // 寫入 Golden 輸出
-        fprintf(fp_gold, "%08x\n", (unsigned int)out.data);
-
-        // ✅ 這裡維持 u16_to_half，因為 RX IP 輸出前已經用 pack_iq 封裝回 half 浮點數了
         float ri = (float)u16_to_half(out.data(15, 0));
         float rq = (float)u16_to_half(out.data(31, 16));
-
-        // 計算與理想 QPSK 星座點的誤差
-        float err = sqrt(pow(ri - gold_i[i], 2) + pow(rq - gold_q[i], 2));
+        float err = sqrtf(powf(ri - gold_i[i], 2.0f) + powf(rq - gold_q[i], 2.0f));
         total_error += err;
-
-        if (err > max_error)
-            max_error = err;
-        k_errors[i % 6] += err;
+        if (err > max_error) max_error = err;
     }
 
-    fclose(fp_in);
-    fclose(fp_gold);
-
-    // 輸出分析報告
-    std::cout << "1. Restoration Check: Average Error = " << (total_error / DATA_TONES) << std::endl;
-    std::cout << "2. Peak Precision: Max Error = " << max_error << std::endl;
-    std::cout << "3. Interpolation Trend (Error at k=1 to k=6):" << std::endl;
-    for (int k = 0; k < 6; k++)
-    {
-        std::cout << "   - Data Pos k=" << (k + 1) << ": Avg Error = " << (k_errors[k] / (DATA_TONES / 6)) << std::endl;
-    }
-    std::cout << ">>> Verification files 'input_stimulus.dat' and 'golden_output.dat' generated." << std::endl;
+    printf("  SNR=%5.1fdB | best_cfo=%3d | AvgErr=%.6f | MaxErr=%.6f\n",
+           snr_db, g_debug_best_cfo, total_error / DATA_TONES, max_error);
 }
 
 int main()
 {
-    // 執行診斷測試 (CFO = 70, Phase = 45度)
-    run_diagnostic_test(70, 45.0f, "VIVADO_SIM_VECTOR_GEN");
+    srand(42);
 
-    std::cout << "\n>>> C-SIM SUCCESS!" << std::endl;
+    // Frame 1: unlocked → full scan
+    printf("=== Frame 1 (Unlocked, QPSK, no noise) ===\n");
+    run_snr_test(70, 45.0f, 99.0f, 0);
+
+    // Frame 2: locked → ±5 scan
+    printf("=== Frame 2 (Locked, QPSK, no noise) ===\n");
+    run_snr_test(70, 45.0f, 99.0f, 0);
+
+    printf("\n>>> C-SIM DONE!\n");
     return 0;
 }

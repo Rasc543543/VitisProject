@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "Vitis HLS",
+            "includePath": [
+                "${workspaceFolder}/src",
+                "${workspaceFolder}/tb",
+                "C:/Xilinx/Vitis_HLS/2022.2/include"
+            ],
+            "defines": [],
+            "compilerPath": "C:/Xilinx/Vitis_HLS/2022.2/tps/win64/msys64/mingw64/bin/gcc.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "windows-gcc-x64"
+        }
+    ],
+    "version": 4
+}

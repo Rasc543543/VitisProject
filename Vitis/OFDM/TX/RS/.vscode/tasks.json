@@ -41,59 +41,12 @@
             "problemMatcher": []
         },
         {
-            "label": "HLS: Synthesis only",
-            "type": "shell",
-            "command": "C:/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls.bat",
-            "args": ["-f", "scripts/run_all.tcl", "-tclargs", "syn_only"],
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": { "executable": "cmd.exe", "args": ["/c"] }
-            },
-            "group": "build",
-            "presentation": { "reveal": "always", "panel": "shared" },
-            "problemMatcher": []
-        },
-        {
             "label": "HLS: Parse Report",
             "type": "shell",
             "command": "python",
-            "args": ["scripts/parse_report.py", "hls_project"],
+            "args": ["scripts/parse_report.py", "rs_encoder_tx"],
             "options": { "cwd": "${workspaceFolder}" },
             "group": "none",
-            "presentation": { "reveal": "always", "panel": "shared" },
-            "problemMatcher": []
-        },
-        {
-            "label": "Vivado: Sim (Batch) → VCD",
-            "type": "shell",
-            "command": "C:/Xilinx/Vivado/2022.2/bin/vivado.bat",
-            "args": [
-                "-mode", "batch",
-                "-source", "scripts/run_vivado_sim.tcl",
-                "-tclargs", "batch"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": { "executable": "cmd.exe", "args": ["/c"] }
-            },
-            "group": "test",
-            "presentation": { "reveal": "always", "panel": "shared" },
-            "problemMatcher": []
-        },
-        {
-            "label": "Vivado: Sim (GUI)",
-            "type": "shell",
-            "command": "C:/Xilinx/Vivado/2022.2/bin/vivado.bat",
-            "args": [
-                "-mode", "gui",
-                "-source", "scripts/run_vivado_sim.tcl",
-                "-tclargs", "gui"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "shell": { "executable": "cmd.exe", "args": ["/c"] }
-            },
-            "group": "test",
             "presentation": { "reveal": "always", "panel": "shared" },
             "problemMatcher": []
         }

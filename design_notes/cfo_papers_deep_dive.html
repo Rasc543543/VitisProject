@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CFO 同步論文深度分析｜五篇精選比較</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; color: #1a1a2e; line-height: 1.7; }
+
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: white; padding: 48px 40px; text-align: center;
+  }
+  .hero h1 { font-size: 2rem; margin-bottom: 10px; letter-spacing: 1px; }
+  .hero p { opacity: 0.8; font-size: 1.05rem; }
+  .hero .meta { margin-top: 16px; font-size: 0.85rem; opacity: 0.6; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 20px; }
+
+  /* Section headers */
+  .section-title {
+    font-size: 1.3rem; font-weight: 700; color: #0f3460;
+    border-left: 5px solid #e94560; padding-left: 14px;
+    margin: 40px 0 20px;
+  }
+
+  /* Overview comparison table */
+  .overview-table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 32px; }
+  .overview-table th { background: #0f3460; color: white; padding: 12px 14px; text-align: left; font-size: 0.88rem; }
+  .overview-table td { padding: 11px 14px; border-bottom: 1px solid #eef0f4; font-size: 0.88rem; vertical-align: top; }
+  .overview-table tr:last-child td { border-bottom: none; }
+  .overview-table tr:nth-child(even) td { background: #f8f9fc; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; margin: 1px; }
+  .tag-red { background: #fde8ec; color: #c0392b; }
+  .tag-blue { background: #e8f4fd; color: #1a6fa8; }
+  .tag-green { background: #e8fdf0; color: #1a8a4a; }
+  .tag-orange { background: #fef3e8; color: #c07a20; }
+  .tag-purple { background: #f0e8fd; color: #7a20c0; }
+
+  /* Paper cards */
+  .paper-card {
+    background: white; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    margin-bottom: 28px; overflow: hidden;
+  }
+  .paper-header {
+    padding: 18px 24px; display: flex; align-items: center; gap: 16px;
+  }
+  .paper-num {
+    width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; font-weight: 800; color: white; flex-shrink: 0;
+  }
+  .p1 .paper-num { background: #e94560; }
+  .p2 .paper-num { background: #0f3460; }
+  .p3 .paper-num { background: #533483; }
+  .p4 .paper-num { background: #e67e22; }
+  .p5 .paper-num { background: #27ae60; }
+  .paper-title { font-size: 1.05rem; font-weight: 700; }
+  .paper-subtitle { font-size: 0.82rem; color: #888; margin-top: 3px; }
+
+  .paper-body { padding: 0 24px 24px; }
+
+  .subsection { margin-top: 18px; }
+  .subsection h4 { font-size: 0.92rem; font-weight: 700; color: #444; margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px solid #eee; }
+
+  .formula-box {
+    background: #1a1a2e; color: #a8d8ea; border-radius: 8px; padding: 14px 18px;
+    font-family: 'Courier New', monospace; font-size: 0.85rem; margin: 10px 0;
+    overflow-x: auto;
+  }
+
+  .metric-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 10px 0; }
+  .metric-box {
+    background: #f8f9fc; border-radius: 8px; padding: 10px 16px; text-align: center; flex: 1; min-width: 100px;
+    border: 1px solid #e8eaf0;
+  }
+  .metric-box .val { font-size: 1.4rem; font-weight: 800; color: #0f3460; }
+  .metric-box .lbl { font-size: 0.72rem; color: #888; margin-top: 2px; }
+  .metric-box.highlight .val { color: #e94560; }
+
+  .speed-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+  .speed-table th { background: #f0f2f5; padding: 8px 12px; text-align: left; font-size: 0.82rem; }
+  .speed-table td { padding: 7px 12px; border-bottom: 1px solid #eef0f4; font-size: 0.82rem; }
+  .speed-table .best { color: #1a8a4a; font-weight: 700; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 10px 0; }
+  .info-block { background: #f8f9fc; border-radius: 8px; padding: 12px 16px; border-left: 3px solid #0f3460; }
+  .info-block h5 { font-size: 0.82rem; font-weight: 700; color: #0f3460; margin-bottom: 6px; }
+  .info-block p, .info-block li { font-size: 0.83rem; color: #555; }
+  .info-block ul { padding-left: 16px; }
+
+  .alert { padding: 10px 16px; border-radius: 8px; font-size: 0.85rem; margin: 10px 0; }
+  .alert-warn { background: #fef9e7; border-left: 3px solid #f39c12; color: #856404; }
+  .alert-good { background: #e8fdf0; border-left: 3px solid #27ae60; color: #155724; }
+  .alert-info { background: #e8f4fd; border-left: 3px solid #1a6fa8; color: #0c5460; }
+
+  /* Architecture diagram */
+  .arch-flow {
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    background: #f8f9fc; padding: 12px 16px; border-radius: 8px; margin: 10px 0;
+    font-size: 0.82rem;
+  }
+  .arch-box {
+    background: #0f3460; color: white; padding: 6px 12px;
+    border-radius: 6px; text-align: center; font-weight: 600;
+  }
+  .arch-arrow { color: #0f3460; font-size: 1.1rem; font-weight: 700; }
+
+  /* Comparison section */
+  .compare-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 16px 0; }
+  .cg-header { background: #0f3460; color: white; padding: 10px; border-radius: 8px 8px 0 0; text-align: center; font-size: 0.8rem; font-weight: 700; }
+  .cg-cell { background: white; padding: 9px 10px; border: 1px solid #eef0f4; font-size: 0.78rem; }
+  .cg-label { background: #f0f2f5; font-weight: 700; font-size: 0.8rem; padding: 9px 10px; border: 1px solid #eef0f4; }
+  .dot-yes { color: #27ae60; font-weight: 700; }
+  .dot-no { color: #c0392b; font-weight: 700; }
+  .dot-part { color: #f39c12; font-weight: 700; }
+
+  /* Application section */
+  .apply-table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+  .apply-table th { background: #533483; color: white; padding: 12px 14px; text-align: left; font-size: 0.88rem; }
+  .apply-table td { padding: 11px 14px; border-bottom: 1px solid #eef0f4; font-size: 0.86rem; vertical-align: top; }
+  .apply-table tr:last-child td { border-bottom: none; }
+  .priority { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 0.75rem; font-weight: 700; }
+  .p-high { background: #fde8ec; color: #c0392b; }
+  .p-med { background: #fef3e8; color: #c07a20; }
+  .p-low { background: #f0f0f0; color: #888; }
+
+  /* SAL comparison */
+  .sal-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 10px 0; }
+  .sal-box { border-radius: 8px; padding: 14px 16px; }
+  .sal-old { background: #fde8ec; border: 1px solid #f5b7c0; }
+  .sal-new { background: #e8fdf0; border: 1px solid #a8e6c0; }
+  .sal-box h5 { font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; }
+  .sal-old h5 { color: #c0392b; }
+  .sal-new h5 { color: #1a8a4a; }
+  .sal-box code { font-size: 0.8rem; font-family: 'Courier New', monospace; }
+
+  footer { text-align: center; padding: 32px; color: #aaa; font-size: 0.82rem; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>CFO 同步論文深度分析</h1>
+  <p>五篇精選論文完整技術摘要與實作對應</p>
+  <div class="meta">整理日期：2026-05-10 ｜ 對應專案：ref_rx_packed.cpp CFO 優化</div>
+</div>
+
+<div class="container">
+
+  <!-- ========== OVERVIEW TABLE ========== -->
+  <div class="section-title">快速比較總覽</div>
+
+  <table class="overview-table">
+    <tr>
+      <th>#</th>
+      <th>論文</th>
+      <th>核心方法</th>
+      <th>目標標準</th>
+      <th>CFO 類型</th>
+      <th>FPGA 友善度</th>
+      <th>對你的優先度</th>
+    </tr>
+    <tr>
+      <td><span class="tag tag-red">1</span></td>
+      <td><b>Classen CFO Synchronization</b><br><small>review paper</small></td>
+      <td>Capture + Tracking 雙模</td>
+      <td>通用 OFDM</td>
+      <td>Integer + Fractional</td>
+      <td><span class="tag tag-orange">中（概念層）</span></td>
+      <td><span class="tag tag-red">最高（架構依據）</span></td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-blue">2</span></td>
+      <td><b>FFT-Based ICFO Estimator</b><br><small>Low Complexity FPGA</small></td>
+      <td>FFT cross-correlator 取代逐一掃描</td>
+      <td>IEEE 802.15.4g</td>
+      <td>Integer CFO</td>
+      <td><span class="tag tag-green">高（已驗證 FPGA）</span></td>
+      <td><span class="tag tag-orange">中（需 training symbol）</span></td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-purple">3</span></td>
+      <td><b>SAL Algorithm</b><br><small>Adjacent Subcarrier Similarity</small></td>
+      <td>絕對值加法取代平方，省 DSP</td>
+      <td>通用 OFDM</td>
+      <td>Integer CFO</td>
+      <td><span class="tag tag-green">極高（LUT -90%）</span></td>
+      <td><span class="tag tag-red">高（能量計算直接可用）</span></td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-orange">4</span></td>
+      <td><b>Decision Feedback Estimator</b><br><small>Data-Pilot Multiplexed</small></td>
+      <td>data+pilot 聯合估測消除 ICI error floor</td>
+      <td>通用 OFDM</td>
+      <td>Residual Fractional</td>
+      <td><span class="tag tag-orange">中</span></td>
+      <td><span class="tag tag-blue">低（BER=0 暫不需要）</span></td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-green">5</span></td>
+      <td><b>Easy Hardware LS</b><br><small>Shift-Add CFO Tracking</small></td>
+      <td>LS 公式展開成 shift-add，省 75% DSP</td>
+      <td>IEEE 802.11a</td>
+      <td>Residual Fractional 只</td>
+      <td><span class="tag tag-green">極高（DSP -75%）</span></td>
+      <td><span class="tag tag-blue">低（你暫無 fractional 需求）</span></td>
+    </tr>
+  </table>
+
+  <!-- ========== PAPER 1 ========== -->
+  <div class="section-title">論文詳細分析</div>
+
+  <div class="paper-card p1">
+    <div class="paper-header" style="background: linear-gradient(135deg, #fde8ec, #fff);">
+      <div class="paper-num">1</div>
+      <div>
+        <div class="paper-title">Carrier Frequency Offset-Based OFDM Synchronization Technology</div>
+        <div class="paper-subtitle">Classen &amp; Meyr 兩階段同步方法的 Review 分析</div>
+      </div>
+    </div>
+    <div class="paper-body">
+
+      <div class="subsection">
+        <h4>核心架構：Capture + Tracking 雙模</h4>
+        <div class="two-col">
+          <div class="info-block">
+            <h5>Capture Mode（大掃描）</h5>
+            <ul>
+              <li>估測 integer CFO + fractional CFO</li>
+              <li>補償量 = integer + fractional 之和</li>
+              <li>對應你的：啟動時 141-offset 掃描</li>
+            </ul>
+          </div>
+          <div class="info-block">
+            <h5>Tracking Mode（trace mode）</h5>
+            <ul>
+              <li>只估測並補償 fine CFO</li>
+              <li>使用 pilot 的相位旋轉量計算</li>
+              <li>對應你的：neighbor energy check</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h4>Tracking Mode 數學公式</h4>
+        <div class="formula-box">
+ε̂_f = (1 / 2π·T_sub·D) · arg{ Σ(j=1 to L-1) Y_{l+D}[p, ε̂_acq] · Y_l*[p, ε̂_acq] · X_{l+D}*[p] · X_l[p] }
+
+其中：
+  Y      = 接收到的頻域信號
+  X      = 已知 pilot 符號（訓練序列）
+  p      = pilot subcarrier 索引
+  ε̂_acq = capture phase 取得的粗 CFO 估測值
+  D      = 符號間距（用相鄰 pilot 之間的相位差）
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h4>Pilot 結構要求</h4>
+        <div class="alert alert-info">
+          每個 OFDM symbol 都要嵌入 pilot，才能做連續追蹤（your 273 pilots/frame 符合此要求）。Pilot 位置固定於特定 subcarrier index p，公式中對所有 j 個連續符號的 pilot 相關值加總。
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h4>缺失資訊（此為 review paper 的限制）</h4>
+        <div class="alert alert-warn">
+          ⚠ 切換觸發條件未指定：論文未說明何時從 tracking mode 回到 capture mode（你需要自己設計 neighbor energy check 觸發邏輯）<br>
+          ⚠ 計算複雜度未與 exhaustive search 比較<br>
+          ⚠ Pilot 數量未給出具體數字
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h4>對你的價值</h4>
+        <div class="alert alert-good">
+          ✅ 學術引用依據：你的 CFO cache 設計（掃一次 → 只做 neighbor check）在學術上有名稱叫 "Classen capture+tracking two-mode"，可引用此論文作為方法論基礎。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== PAPER 2 ========== -->
+  <div class="paper-card p2">
+    <div class="paper-header" style="background: linear-gradient(135deg, #e8f0fd, #fff);">
+      <div class="paper-num">2</div>
+      <div>
+        <div class="paper-title">An Implementation of a Low Complexity Integer CFO Estimator for OFDM</div>
+        <div class="paper-subtitle">FFT-Based Cross-Correlator｜Altera Cyclone V FPGA｜IEEE 802.15.4g</div>
+      </div>
+    </div>
+    <div class="paper-body">
+
+      <div class="subsection">
+        <h4>硬體架構流程</h4>
+        <div class="arch-flow">
+          <div class="arch-box">接收 time-domain LTF</div>
+          <div class="arch-arrow">×</div>
+          <div class="arch-box">conj(本地 LTF 參考)</div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-box">FFT (radix-2 CORDIC)</div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-box">Peak Searcher (CORDIC vectoring)</div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-box">ICFO = peak index</div>
+        </div>
+        <p style="font-size:0.83rem; color:#666; margin-top:6px;">Peak Searcher = CORDIC vectoring mode 計算 magnitude + comparator 找最大值</p>
+      </div>
+
+      <div class="subsection">
+        <h4>速度對比（FFT size = 128）</h4>
+        <table class="speed-table">
+          <tr>
+            <th>方法</th>
+            <th>時脈數（cycles）</th>
+            <th>相對速度</th>
+          </tr>
+          <tr>
+            <td>Serial exhaustive search</td>
+            <td>16,384</td>
+            <td>1× (baseline)</td>
+          </tr>
+          <tr>
+            <td>Parallel exhaustive search</td>
+            <td>4,096</td>
+            <td>4×</td>
+          </tr>
+          <tr style="background:#e8fdf0;">
+            <td class="best">FFT-based（此論文）</td>
+            <td class="best">576</td>
+            <td class="best">28.4× 快（vs serial）｜7× 快（vs parallel）</td>
+          </tr>
+        </table>
+        <p style="font-size:0.82rem; color:#666; margin-top:6px;">公式：log₂(N) × N/2 + N = 7×64 + 128 = 576 cycles（N=128）</p>
+      </div>
+
+      <div class="subsection">
+        <h4>FPGA 資源節省</h4>
+        <div class="metric-row">
+          <div class="metric-box highlight">
+            <div class="val">-70%</div>
+            <div class="lbl">Registers</div>
+          </div>
+          <div class="metric-box highlight">
+            <div class="val">-39%</div>
+            <div class="lbl">Combinational Logic</div>
+          </div>
+          <div class="metric-box">
+            <div class="val">28.4×</div>
+            <div class="lbl">速度提升 vs serial</div>
+          </div>
+          <div class="metric-box">
+            <div class="val">128-pt</div>
+            <div class="lbl">FFT 大小</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h4>限制與假設</h4>
+        <div class="alert alert-warn">
+          ⚠ <b>需要 perfect timing sync</b>：必須先完成 symbol timing synchronization，才能做 ICFO 估測<br>
+          ⚠ <b>需要 training symbol（LTF）</b>：使用 Long Training Field（值域 {+1, -1, 0}），不是 scattered pilot。若你的 frame 沒有專用 training symbol，此架構不能直接套用<br>
+          ⚠ AWGN + multipath 測試通過；multipath 影響小
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h4>對你的價值</h4>
+        <div class="alert alert-info">
+          ℹ 你目前的 141-offset 掃描用的是 scattered pilots（每 frame 273 個 pilot），不是 LTF 訓練序列，架構不能直接套用。<br>
+          但若未來重新設計 frame 結構加入 preamble，此方案可做初始啟動掃描（28.4× 加速）。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== PAPER 3 ========== -->
+  <div class="paper-card p3">
+    <div class="paper-header" style="background: linear-gradient(135deg, #f0e8fd, #fff);">
+      <div class="paper-num">3</div>
+      <div>
+        <div class="paper-title">A Novel Integer Frequency Offset Estimation Method for OFDM Based on Preamble</div>
+        <div class="paper-subtitle">SAL Algorithm｜Adjacent Subcarrier Similarity｜絕對值取代平方</div>
+      </div>
+    </div>
+    <div class="paper-body">
+
+      <div class="subsection">
+        <h4>核心數學原理：鄰近 Subcarrier 相似性</h4>
+        <div class="formula-box">
+/* 傳統做法（SAH）：最小化差值能量 */
+Ĝ = argmin_g Σ_k |Z(k) - Z(k-1)|²
+  其中 Z(k) = Y(k) · X*(k-g)，Y=接收，X=preamble，g=候選 IFO
+
+/* SAL（低複雜度版）：改用絕對值之和 */
+Ĝ = argmin_g Σ_k ( |Re(M(k))| + |Im(M(k))| )
+  其中 M(k) = Z(k) - Z(k-1)
+
+/* 直覺解釋：
+   g 正確時 → Z(k)≈1 → M(k)≈0 → |Re|+|Im| 最小
+   g 錯誤時 → Z(k) 隨機複數 → M(k) 大 → |Re|+|Im| 大    */
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h4>硬體優化關鍵：兩個省乘法器技巧</h4>
+        <div class="sal-compare">
+          <div class="sal-box sal-old">
+            <h5>❌ 傳統方法（SAH）</h5>
+            <code>energy = Re² + Im²<br>需要 2 個 multiplier per subcarrier<br>141 offsets × 273 pilots =<br>~38,493 次乘法</code>
+          </div>
+          <div class="sal-box sal-new">
+            <h5>✅ SAL 方法</h5>
+            <code>energy = |Re| + |Im|<br>只需 abs() = sign bit 操作<br>完全不需要 multiplier！<br>Conjugate mul → bit swap/invert</code>
+          </div>
+        </div>
+        <div class="alert alert-info">
+          因為 preamble 值域限制在 {1, j, -1, -j}，X*(k-g) 的共軛乘法可以化簡成 real/imaginary 部分的交換或取反，無需真正的複數乘法器。
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h4>FPGA 資源節省</h4>
+        <div class="metric-row">
+          <div class="metric-box highlight">
+            <div class="val">-90%</div>
+            <div class="lbl">LUT 使用量<br><small>vs SAH</small></div>
+          </div>
+          <div class="metric-box highlight">
+            <div class="val">-94%</div>
+            <div class="lbl">Flip Flop 使用量<br><small>vs SAH</small></div>
+          </div>
+          <div class="metric-box">
+            <div class="val">[-N/2, N/2-1]</div>
+            <div class="lbl">最大估測範圍</div>
+          </div>
+          <div class="metric-box">
+            <div class="val">&gt; CAF ML</div>
+            <div class="lbl">性能（失敗率更低）</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h4>Preamble 結構要求</h4>
+        <div class="info-block">
+          <h5>需求</h5>
+          <ul>
+            <li>只需 <b>1 個已知 preamble symbol</b></li>
+            <li>值域限制：每個 subcarrier ∈ {1, j, -1, -j}（QPSK-like）</li>
+            <li>覆蓋整個 IFFT 大小 N 個 subcarrier</li>
+            <li>你有 273 個 pilot + QPSK/8PSK 調制值不符合 {1,j,-1,-j} 限制</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h4>對你的直接可用部分</h4>
+        <div class="alert alert-good">
+          ✅ <b>能量計算技巧可直接移植</b>：你的 Loop_CFO_Scan 目前計算<br>
+          &nbsp;&nbsp;&nbsp;<code>sum(sq_i*sq_i + sq_q*sq_q)</code> 可改成 <code>sum(abs(sq_i) + abs(sq_q))</code><br>
+          不影響 argmax 結果（單調等價），但省掉所有平方乘法，HLS 不再推斷 DSP48。
+        </div>
+        <div class="alert alert-warn">
+          ⚠ Conjugate 乘法省略技巧：你的 pilot 值不是 {1,j,-1,-j}，所以 conjugate multiplication 仍然需要，只能省掉平方那步。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== PAPER 4 ========== -->
+  <div class="paper-card p4">
+    <div class="paper-header" style="background: linear-gradient(135deg, #fef3e8, #fff);">
+      <div class="paper-num">4</div>
+      <div>
+        <div class="paper-title">Decision Feedback Frequency Offset Estimator for Data-Pilot Multiplexed OFDM</div>
+        <div class="paper-subtitle">兩步驟決策回饋｜消除 ICI Error Floor｜高 SNR 性能優化</div>
+      </div>
+    </div>
+    <div class="paper-body">
+
+      <div class="subsection">
+        <h4>兩步驟流程</h4>
+        <div class="two-col">
+          <div class="info-block">
+            <h5>Step 1：Coarse + 決策回饋</h5>
+            <ul>
+              <li>用 scattered pilots 做粗 CFO 補償（Classen/Bai）</li>
+              <li>執行通道估測</li>
+              <li>解調 data symbols（決策回饋）</li>
+              <li>重建完整 OFDM symbol：pilot + detected data</li>
+            </ul>
+          </div>
+          <div class="info-block">
+            <h5>Step 2：精細 CFO 估測</h5>
+            <ul>
+              <li>用 <b>所有 subcarrier</b>（pilot + data）聯合估測</li>
+              <li>迭代計算 CFO 並補償</li>
+              <li>SNR &gt; 14 dB 時 error floor 完全消失</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h4>性能提升重點</h4>
+        <div class="metric-row">
+          <div class="metric-box">
+            <div class="val">14 dB</div>
+            <div class="lbl">SNR 門檻：超過此值<br>error floor 消失</div>
+          </div>
+          <div class="metric-box">
+            <div class="val">25%</div>
+            <div class="lbl">論文使用 pilot density<br>（8 pilots / 32 subcarriers）</div>
+          </div>
+          <div class="metric-box highlight">
+            <div class="val">ICI</div>
+            <div class="lbl">消除 inter-carrier<br>interference floor</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h4>Error Floor 問題解釋</h4>
+        <div class="formula-box">
+傳統 pilot-only tracking 問題：
+  - 在高 SNR 時，殘餘 CFO 造成的 ICI 不可忽略
+  - 但 pilot 太稀疏，無法精確估計這個 residual CFO
+  - 結果：BER 在高 SNR 不再下降 → error floor
+
+Decision Feedback 解法：
+  - 先把 data symbols 解碼（反正 SNR 高，初步解碼準確）
+  - 把解碼後的 data 當作已知符號
+  - 用 ALL subcarriers 做精細 CFO 估計 → residual CFO 準確到位
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h4>對你的價值</h4>
+        <div class="alert alert-info">
+          ℹ 你目前 BER=0，ZCU208 loopback CFO≈0，不存在 ICI error floor 問題。<br>
+          未來部署到 RF 鏈路（USRP、不同 FPGA），若出現高 SNR BER floor，這是解法。<b>暫時不需要實作。</b>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== PAPER 5 ========== -->
+  <div class="paper-card p5">
+    <div class="paper-header" style="background: linear-gradient(135deg, #e8fdf0, #fff);">
+      <div class="paper-num">5</div>
+      <div>
+        <div class="paper-title">Easy-Hardware-Implementation Algorithm of CFO and SFO Estimation in OFDM</div>
+        <div class="paper-subtitle">LS → Shift-Add 近似｜802.11a 4 Pilots｜DSP -75%</div>
+      </div>
+    </div>
+    <div class="paper-body">
+
+      <div class="subsection">
+        <h4>LS 公式展開成 Shift-Add</h4>
+        <div class="formula-box">
+/* 802.11a 的 4 個 pilot 位置：-21, -7, +7, +21 */
+
+/* 原始 LS slope 公式（需要乘法器） */
+λ = (-3θ(-21) - θ(-7) + θ(7) + 3θ(21)) / K    ← K 不是 2 的次方
+
+/* 近似展開為 3 個 2 的次方分母之和 */
+λ ≈ X/128 - X/2048 - X/4096
+  其中 X = -3θ(-21) - θ(-7) + θ(7) + 3θ(21)
+
+/* 硬體實作 */
+X/128  → X >> 7    (右移 7 位)
+X/2048 → X >> 11   (右移 11 位)
+X/4096 → X >> 12   (右移 12 位)
+3θ = (θ << 1) + θ  (shift-add，不用 multiplier)
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h4>FPGA 資源節省</h4>
+        <div class="metric-row">
+          <div class="metric-box">
+            <div class="val">32</div>
+            <div class="lbl">標準 LS 需要 DSP blocks</div>
+          </div>
+          <div class="metric-box highlight">
+            <div class="val">8</div>
+            <div class="lbl">Shift-Add 需要 DSP blocks</div>
+          </div>
+          <div class="metric-box highlight">
+            <div class="val">-75%</div>
+            <div class="lbl">DSP block 節省</div>
+          </div>
+          <div class="metric-box">
+            <div class="val">4</div>
+            <div class="lbl">使用的 Pilot 數量</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h4>重要限制</h4>
+        <div class="alert alert-warn">
+          ⚠ <b>只處理 Fractional / Residual CFO</b>：論文明確說明此方法估測並補償"殘餘 CFO"，Integer CFO 需由獨立模組先處理<br>
+          ⚠ <b>專為 802.11a 設計</b>：4 個固定位置 pilot，你的 273 pilots 結構不同，公式需重新推導<br>
+          ⚠ <b>ZCU208 loopback CFO≈0</b>：你目前沒有需要追蹤的 fractional CFO
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h4>對你的價值</h4>
+        <div class="alert alert-info">
+          ℹ 若未來加入 fractional CFO 補償（RF 部署後），此論文的 shift-add 思路可用於設計 FPGA-friendly LS estimator。當前不需要實作。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== COMPARISON DEEP DIVE ========== -->
+  <div class="section-title">六維比較矩陣</div>
+
+  <table class="overview-table">
+    <tr>
+      <th>比較維度</th>
+      <th>Classen</th>
+      <th>FFT-Based ICFO</th>
+      <th>SAL Algorithm</th>
+      <th>Decision Feedback</th>
+      <th>Easy LS</th>
+    </tr>
+    <tr>
+      <td><b>CFO 類型</b></td>
+      <td>Integer + Fractional</td>
+      <td>Integer 只</td>
+      <td>Integer 只</td>
+      <td>Residual Fractional</td>
+      <td>Residual Fractional 只</td>
+    </tr>
+    <tr>
+      <td><b>需要 training symbol?</b></td>
+      <td>否（用 data pilot）</td>
+      <td><b>是（LTF 專用）</b></td>
+      <td><b>是（preamble）</b></td>
+      <td>否（scattered pilot）</td>
+      <td>否（pilot subchannel）</td>
+    </tr>
+    <tr>
+      <td><b>Pilot 格式限制</b></td>
+      <td>無特別限制</td>
+      <td>{+1, -1, 0}</td>
+      <td>{1, j, -1, -j}</td>
+      <td>無特別限制</td>
+      <td>802.11a 固定 4 個位置</td>
+    </tr>
+    <tr>
+      <td><b>FPGA 友善度</b></td>
+      <td>概念層，未說明實作</td>
+      <td>Reg -70%, Logic -39%</td>
+      <td>LUT -90%, FF -94%</td>
+      <td>無 FPGA 數據</td>
+      <td>DSP -75%</td>
+    </tr>
+    <tr>
+      <td><b>估測速度</b></td>
+      <td>未比較</td>
+      <td>28.4× faster（vs serial）</td>
+      <td>未量化（仍需掃 N 個 offset）</td>
+      <td>迭代，較慢</td>
+      <td>快（單次計算）</td>
+    </tr>
+    <tr>
+      <td><b>可直接用於你的 code?</b></td>
+      <td>✅ 概念引用</td>
+      <td>⚠ 需改 frame 結構</td>
+      <td>✅ energy 計算可移植</td>
+      <td>❌ 暫不需要</td>
+      <td>❌ 暫不需要</td>
+    </tr>
+  </table>
+
+  <!-- ========== ACTION PLAN ========== -->
+  <div class="section-title">對應 ref_rx_packed.cpp 的具體行動</div>
+
+  <table class="apply-table">
+    <tr>
+      <th>優先度</th>
+      <th>動作</th>
+      <th>來源論文</th>
+      <th>預期效益</th>
+      <th>實作難度</th>
+    </tr>
+    <tr>
+      <td><span class="priority p-high">立即</span></td>
+      <td>
+        <b>CFO Cache 架構實作</b><br>
+        <small>best_cfo 從 local variable 改為 static，第一幀掃完後保留，之後只做 neighbor check</small>
+      </td>
+      <td>論文 1（Classen）</td>
+      <td>節省 428 µs/frame，理論提升至 ~2.59 Mbps</td>
+      <td>低（已有設計）</td>
+    </tr>
+    <tr>
+      <td><span class="priority p-high">立即</span></td>
+      <td>
+        <b>Energy 計算改用絕對值</b><br>
+        <small>Loop_CFO_Scan 的 <code>sq_i*sq_i + sq_q*sq_q</code> 改成 <code>abs(sq_i) + abs(sq_q)</code></small>
+      </td>
+      <td>論文 3（SAL）</td>
+      <td>省掉 38,493 次平方乘法，HLS 不推 DSP48，面積更小</td>
+      <td>低（單行改動）</td>
+    </tr>
+    <tr>
+      <td><span class="priority p-med">中期</span></td>
+      <td>
+        <b>加入 preamble training symbol</b><br>
+        <small>Frame 結構加入 1 個 LTF-like training symbol，讓 FFT-based ICFO 可以使用</small>
+      </td>
+      <td>論文 2（FFT-Based）</td>
+      <td>啟動掃描 28.4× 加速，從 ~428µs 降到 ~15µs</td>
+      <td>高（需改 TX/RX frame 結構）</td>
+    </tr>
+    <tr>
+      <td><span class="priority p-low">RF 部署後</span></td>
+      <td>
+        <b>Decision Feedback Tracking</b><br>
+        <small>出現 high-SNR BER floor 時加入</small>
+      </td>
+      <td>論文 4（Decision Feedback）</td>
+      <td>消除 ICI error floor</td>
+      <td>高</td>
+    </tr>
+    <tr>
+      <td><span class="priority p-low">RF 部署後</span></td>
+      <td>
+        <b>Fractional CFO Tracking（LS shift-add）</b><br>
+        <small>不同硬體 RF 部署，需要追蹤 fractional drift</small>
+      </td>
+      <td>論文 5（Easy LS）</td>
+      <td>DSP -75%，實現 fractional CFO 補償</td>
+      <td>中</td>
+    </tr>
+  </table>
+
+  <!-- ========== IMMEDIATE CODE CHANGE ========== -->
+  <div class="section-title">可立即實作的 Code 改動（來自 SAL 論文）</div>
+
+  <div class="paper-card" style="border-top: 4px solid #27ae60;">
+    <div class="paper-body" style="padding-top: 20px;">
+      <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:12px; color:#1a8a4a;">Loop_CFO_Scan 能量計算優化</h4>
+      <div class="sal-compare">
+        <div class="sal-box sal-old">
+          <h5>❌ 目前（需要 multiplier）</h5>
+          <code style="display:block; white-space:pre; font-size:0.78rem;">// 每個 offset × 每個 pilot
+int sq_i = ...; // pilot 乘積 real
+int sq_q = ...; // pilot 乘積 imag
+energy += sq_i * sq_i + sq_q * sq_q;
+// → HLS 推斷 2 個 DSP multiplier</code>
+        </div>
+        <div class="sal-box sal-new">
+          <h5>✅ SAL 改法（只需 abs）</h5>
+          <code style="display:block; white-space:pre; font-size:0.78rem;">// 完全等價的 argmax 結果
+int sq_i = ...;
+int sq_q = ...;
+energy += (sq_i < 0 ? -sq_i : sq_i)
+        + (sq_q < 0 ? -sq_q : sq_q);
+// → 純加法，0 個 multiplier</code>
+        </div>
+      </div>
+      <div class="alert alert-good" style="margin-top:12px;">
+        ✅ argmax 不受影響：L1 norm（|Re|+|Im|）和 L2 norm（Re²+Im²）對同一組數據的 argmax 結果相同，因為兩者都是正單調函數。
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  整理自 NotebookLM notebook「Zadoff-Chu Synchronization for Short-Burst OFDM Signals」｜2026-05-10<br>
+  五篇選自 21 篇論文中最直接相關者｜對應 C:\VitisProject\Vitis\OFDM\RX\Refer\ref_rx_packed.cpp
+</footer>
+
+</body>
+</html>

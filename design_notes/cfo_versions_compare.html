@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>CFO 優化版本比較 — ref_rx_packed</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Segoe UI", "Microsoft JhengHei", sans-serif; background: #0f1117; color: #e2e8f0; line-height: 1.7; padding: 40px 32px; }
+
+  h1 { font-size: 2em; color: #90cdf4; border-bottom: 2px solid #2d3748; padding-bottom: 12px; margin-bottom: 8px; }
+  .subtitle { color: #718096; margin-bottom: 40px; font-size: 0.95em; }
+
+  h2 { font-size: 1.3em; color: #90cdf4; margin: 48px 0 16px; padding-left: 12px; border-left: 4px solid #3182ce; }
+  h3 { font-size: 1.05em; color: #a0aec0; margin: 20px 0 8px; }
+
+  /* ── 比較表 ── */
+  table { border-collapse: collapse; width: 100%; margin: 16px 0 32px; font-size: 0.93em; }
+  th { background: #1a3a5c; color: #90cdf4; padding: 10px 14px; text-align: center; border: 1px solid #2d3748; }
+  th.label { text-align: left; }
+  td { border: 1px solid #2d3748; padding: 10px 14px; text-align: center; }
+  td.label { text-align: left; color: #cbd5e0; font-weight: 500; }
+  tr.adopt td { background: #1a4731; }
+  tr.adopt td.label { color: #68d391; font-weight: 700; }
+  tr:not(.adopt):hover td { background: #1a202c; }
+
+  .ok   { color: #68d391; font-weight: bold; }
+  .bad  { color: #fc8181; font-weight: bold; }
+  .warn { color: #f6e05e; font-weight: bold; }
+  .dim  { color: #4a5568; }
+
+  /* ── 版本卡片 ── */
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 16px 0 40px; }
+  .card { background: #1a202c; border: 1px solid #2d3748; border-radius: 10px; overflow: hidden; }
+  .card.current { border-color: #744210; }
+  .card.adopt   { border-color: #276749; }
+  .card-header  { padding: 12px 18px; font-weight: 700; font-size: 1em; display: flex; align-items: center; gap: 10px; }
+  .card.current .card-header { background: #744210; color: #fbd38d; }
+  .card.v1 .card-header      { background: #2d3748; color: #a0aec0; }
+  .card.v2 .card-header      { background: #2d3748; color: #a0aec0; }
+  .card.adopt .card-header   { background: #276749; color: #9ae6b4; }
+  .card-body  { padding: 16px 18px; }
+  .card-body p { font-size: 0.88em; color: #a0aec0; margin-bottom: 10px; }
+
+  .badge { display: inline-block; border-radius: 999px; padding: 2px 10px; font-size: 0.78em; font-weight: 700; }
+  .badge.red    { background: #742a2a; color: #fc8181; }
+  .badge.yellow { background: #744210; color: #fbd38d; }
+  .badge.green  { background: #1c4532; color: #68d391; }
+  .badge.gray   { background: #2d3748; color: #a0aec0; }
+
+  /* ── 程式碼區塊 ── */
+  pre { background: #0d1117; border: 1px solid #2d3748; border-radius: 8px; padding: 16px 18px; overflow-x: auto; font-size: 0.82em; line-height: 1.6; margin: 8px 0 0; }
+  .c  { color: #6a737d; }   /* comment */
+  .k  { color: #c792ea; }   /* keyword */
+  .t  { color: #80cbc4; }   /* type */
+  .n  { color: #f78c6c; }   /* number */
+  .s  { color: #c3e88d; }   /* string / good */
+  .bad-line { color: #fc8181; }
+  .good-line { color: #68d391; }
+
+  /* ── diff 區塊 ── */
+  .diff { background: #0d1117; border: 1px solid #2d3748; border-radius: 8px; overflow: hidden; font-size: 0.83em; line-height: 1.8; margin: 12px 0; }
+  .diff-header { background: #1a202c; padding: 6px 16px; color: #718096; font-size: 0.8em; border-bottom: 1px solid #2d3748; }
+  .diff pre { border: none; border-radius: 0; margin: 0; padding: 14px 16px; }
+  .del { background: #3d1515; color: #fc8181; display: block; }
+  .add { background: #0f2a1e; color: #68d391; display: block; }
+  .ctx { color: #718096; display: block; }
+
+  /* ── 流程圖 ── */
+  .flow { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+  .flow-box { background: #1a202c; border: 1px solid #2d3748; border-radius: 6px; padding: 8px 14px; font-size: 0.85em; text-align: center; }
+  .flow-box.hot  { border-color: #c05621; background: #2d1a0e; color: #fbd38d; }
+  .flow-box.cool { border-color: #276749; background: #0f2a1e; color: #68d391; }
+  .flow-box.neu  { border-color: #2b6cb0; background: #1a2d42; color: #90cdf4; }
+  .arrow { color: #4a5568; font-size: 1.2em; }
+  .flow-time { font-size: 0.75em; color: #718096; display: block; }
+
+  /* ── 結果欄 ── */
+  .result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+  .result-card { background: #1a202c; border: 1px solid #2d3748; border-radius: 8px; padding: 16px; text-align: center; }
+  .result-card .val { font-size: 1.8em; font-weight: 700; margin: 8px 0 4px; }
+  .result-card .lbl { font-size: 0.8em; color: #718096; }
+  .result-card.good { border-color: #276749; }
+  .result-card.good .val { color: #68d391; }
+
+  /* ── 標注 ── */
+  .note { background: #1a3a5c; border-left: 4px solid #3182ce; border-radius: 0 6px 6px 0; padding: 12px 16px; margin: 16px 0; font-size: 0.88em; color: #bee3f8; }
+
+  hr { border: none; border-top: 1px solid #2d3748; margin: 40px 0; }
+</style>
+</head>
+<body>
+
+<h1>CFO 優化版本比較</h1>
+<div class="subtitle">ref_rx_packed.cpp — Loop_CFO_Scan 優化設計 | 2026-05-11</div>
+
+<!-- ══════════════════════════════════════════
+     Section 1: 問題描述
+═══════════════════════════════════════════ -->
+<h2>1. 問題：每幀都跑 141 次完整 CFO 掃描</h2>
+
+<div class="flow">
+  <div class="flow-box hot">
+    Load IQ<br><span class="flow-time">~20 µs</span>
+  </div>
+  <div class="arrow">→</div>
+  <div class="flow-box hot">
+    Loop_CFO_Scan<br><span class="flow-time"><strong>428 µs（94%）</strong></span>
+  </div>
+  <div class="arrow">→</div>
+  <div class="flow-box">
+    Loop_Process_Packed<br><span class="flow-time">~220 µs</span>
+  </div>
+  <div class="arrow">→</div>
+  <div class="flow-box">
+    Output<br><span class="flow-time">~9 µs</span>
+  </div>
+</div>
+
+<pre><span class="c">// 現行：141 offsets × 273 pilots = 38,493 次能量計算</span>
+<span class="k">for</span> (<span class="t">int</span> offset = -<span class="n">70</span>; offset &lt;= <span class="n">70</span>; offset++)   <span class="c">// 141 次，無條件跑</span>
+{
+    <span class="k">for</span> (<span class="t">int</span> p = <span class="n">0</span>; p &lt; <span class="n">273</span>; p++)
+    {
+        <span class="t">half</span> vi = fixed16_to_half(buf_i[idx]);
+        <span class="t">half</span> vq = fixed16_to_half(buf_q[idx]);
+        p_metric[p &amp; <span class="n">0x3</span>] += (vi * vi + vq * vq);   <span class="c">// 浮點乘法 × 38,493</span>
+    }
+    <span class="k">if</span> (metric &gt; max_metric) best_cfo = offset;
+}</pre>
+
+<div class="note">
+  <strong>CFO 是什麼：</strong> 發射端與接收端載波頻率不一致，掃描找「哪個 subcarrier offset 讓 pilot 能量最大」。
+  一旦找到後，在硬體振盪器穩定的情況下這個值幾乎不會改變，重掃是純冗餘計算。
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════
+     Section 2: 四版比較表
+═══════════════════════════════════════════ -->
+<h2>2. 四個版本總覽</h2>
+
+<table>
+  <tr>
+    <th class="label">比較項目</th>
+    <th>原始版本</th>
+    <th>A：Simple Cache</th>
+    <th>B：Neighbor Check</th>
+    <th>C：Tracking Mode ★</th>
+  </tr>
+  <tr>
+    <td class="label">穩定時代價</td>
+    <td class="bad">428 µs</td>
+    <td class="ok">~0 µs</td>
+    <td class="ok">~9 µs</td>
+    <td class="ok">~9 µs</td>
+  </tr>
+  <tr>
+    <td class="label">Doppler 漂移代價</td>
+    <td class="bad">428 µs</td>
+    <td class="bad">錯誤（不追蹤）</td>
+    <td class="bad">428 µs/幀（重掃）</td>
+    <td class="ok">~9 µs（跟著走）</td>
+  </tr>
+  <tr>
+    <td class="label">適合 ZCU208 loopback</td>
+    <td class="ok">✅</td>
+    <td class="ok">✅</td>
+    <td class="ok">✅</td>
+    <td class="ok">✅</td>
+  </tr>
+  <tr>
+    <td class="label">適合衛星通訊（Doppler）</td>
+    <td class="bad">❌</td>
+    <td class="bad">❌</td>
+    <td class="bad">❌</td>
+    <td class="ok">✅</td>
+  </tr>
+  <tr class="adopt">
+    <td class="label">結論</td>
+    <td class="dim">現行</td>
+    <td class="dim">不實作</td>
+    <td class="dim">不實作</td>
+    <td class="ok">採用 ✅</td>
+  </tr>
+</table>
+
+<hr>
+
+<!-- ══════════════════════════════════════════
+     Section 3: 各版本說明
+═══════════════════════════════════════════ -->
+<h2>3. 各版本設計說明</h2>
+
+<div class="cards">
+
+  <!-- 原始 -->
+  <div class="card current">
+    <div class="card-header">
+      <span class="badge red">原始版本</span> 每幀完整掃描
+    </div>
+    <div class="card-body">
+      <p>best_cfo 是 local 變數，每幀重置，無條件跑 141 次。</p>
+      <pre><span class="c">// local → 每幀歸零</span>
+<span class="t">int</span> best_cfo = <span class="n">0</span>;
+
+<span class="k">for</span> (offset = -<span class="n">70</span>; offset &lt;= <span class="n">70</span>; offset++) {
+    <span class="c">// 273 pilots × 141 = 38,493 次</span>
+    energy += vi*vi + vq*vq;
+}</pre>
+      <p><span class="bad">代價：每幀 428 µs，無論如何都跑。</span></p>
+    </div>
+  </div>
+
+  <!-- A -->
+  <div class="card v1">
+    <div class="card-header">
+      <span class="badge gray">版本 A</span> Simple Cache
+    </div>
+    <div class="card-body">
+      <p>best_cfo 改 static，只掃一次，永久鎖定。</p>
+      <pre><span class="k">static</span> <span class="t">int</span>  best_cfo   = <span class="n">0</span>;
+<span class="k">static</span> <span class="t">bool</span> locked     = <span class="n">false</span>;
+
+<span class="k">if</span> (!locked) {
+    <span class="c">// 141 次掃描</span>
+    locked = <span class="n">true</span>;
+}
+<span class="c">// 之後完全不掃</span></pre>
+      <p><span class="bad">問題：Doppler 漂移時 best_cfo 已過期，無法追蹤。</span></p>
+    </div>
+  </div>
+
+  <!-- B -->
+  <div class="card v2">
+    <div class="card-header">
+      <span class="badge yellow">版本 B</span> Neighbor Check
+    </div>
+    <div class="card-body">
+      <p>每幀量測 ±1 鄰居，能量漂移才重掃。</p>
+      <pre><span class="k">if</span> (e_left &gt; e_cur || e_right &gt; e_cur) {
+    <span class="c">// 鄰居大 → 觸發完整 141 次重掃</span>
+    full_scan();
+}</pre>
+      <p><span class="bad">問題：Doppler 每幀都在漂移，每幀都觸發重掃，等同原始版本。</span></p>
+    </div>
+  </div>
+
+  <!-- C -->
+  <div class="card adopt">
+    <div class="card-header">
+      <span class="badge green">版本 C ★</span> Tracking Mode
+    </div>
+    <div class="card-body">
+      <p>鄰居大 → 直接移過去，不重掃。Doppler 漸進漂移，每幀跟著走。</p>
+      <pre><span class="k">if</span> (e_left &gt; e_cur &amp;&amp; e_left &gt; e_right)
+    best_cfo -= <span class="n">1</span>;    <span class="c">// 往左移一格</span>
+<span class="k">else if</span> (e_right &gt; e_cur &amp;&amp; e_right &gt; e_left)
+    best_cfo += <span class="n">1</span>;    <span class="c">// 往右移一格</span>
+<span class="c">// 永遠只有 3 × 273 次計算</span></pre>
+      <p><span class="ok">穩定 / Doppler 漂移 → 永遠 ~9 µs。</span></p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Doppler 說明 -->
+<div class="note">
+  <strong>為什麼 Tracking Mode 對衛星有效？</strong><br>
+  Doppler 是衛星移動造成的頻率漂移，特性是<strong>漸進</strong>，不會突然跳變。<br>
+  LEO 衛星（600 km）：速率 ~200 Hz/s，若 subcarrier 間距 15 kHz，每 75 秒才漂移 1 格。<br>
+  每幀（~1 ms）最多移 1 格 → Tracking Mode 完全追得上，不需要重掃。
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════
+     Section 4: 程式碼 Diff
+═══════════════════════════════════════════ -->
+<h2>4. 程式碼差異（原始 → Tracking Mode）</h2>
+
+<h3>變更 1：best_cfo 改 static，新增初始化旗標</h3>
+<div class="diff">
+  <div class="diff-header">ref_rx_packed.cpp — 變數宣告</div>
+  <pre><span class="del">- half max_metric = (half)-1.0f;</span>
+<span class="del">- int  best_cfo   = 0;</span>
+<span class="add">+ static int  best_cfo    = 0;</span>
+<span class="add">+ static bool initialized = false;</span></pre>
+</div>
+
+<h3>變更 2：Loop_CFO_Scan 改為條件執行</h3>
+<div class="diff">
+  <div class="diff-header">ref_rx_packed.cpp — CFO 掃描邏輯</div>
+  <pre><span class="del">- for (int offset = -CFO_RANGE; offset &lt;= CFO_RANGE; offset++)</span>
+<span class="del">- {</span>
+<span class="del">-     ... 273 次能量計算 ...</span>
+<span class="del">-     if (metric > max_metric) best_cfo = offset;</span>
+<span class="del">- }</span>
+
+<span class="add">+ if (!initialized) {</span>
+<span class="add">+     // 第一幀：完整 141 次掃描</span>
+<span class="add">+     for (int offset = -CFO_RANGE; offset &lt;= CFO_RANGE; offset++)</span>
+<span class="add">+     {</span>
+<span class="add">+         ... 273 次能量計算 (SAL 版) ...</span>
+<span class="add">+         if (energy > max_e) best_cfo = offset;</span>
+<span class="add">+     }</span>
+<span class="add">+     initialized = true;</span>
+<span class="add">+ } else {</span>
+<span class="add">+     // 第 2+ 幀：只看 3 個點</span>
+<span class="add">+     half e_left  = measure_energy(buf_i, buf_q, best_cfo - 1);</span>
+<span class="add">+     half e_cur   = measure_energy(buf_i, buf_q, best_cfo);</span>
+<span class="add">+     half e_right = measure_energy(buf_i, buf_q, best_cfo + 1);</span>
+<span class="add">+     if      (e_left  > e_cur && e_left  > e_right) best_cfo -= 1;</span>
+<span class="add">+     else if (e_right > e_cur && e_right > e_left)  best_cfo += 1;</span>
+<span class="add">+ }</span></pre>
+</div>
+
+<h3>變更 3：能量計算改 SAL（平方 → 絕對值）</h3>
+<div class="diff">
+  <div class="diff-header">ref_rx_packed.cpp — 第 43 行，energy 計算</div>
+  <pre><span class="del">- p_metric[p & 0x3] += (vi * vi + vq * vq);</span>
+<span class="add">+ p_metric[p & 0x3] += (vi &lt; (half)0 ? -vi : vi) + (vq &lt; (half)0 ? -vq : vq);</span></pre>
+</div>
+
+<div class="note">
+  <strong>SAL 為什麼等效：</strong>
+  CFO scan 只需要找「哪個 offset 能量最大（argmax）」，不需要精確數值。
+  L1 norm（|I|+|Q|）和 L2 norm（I²+Q²）對同一組數據的 argmax 結果相同。
+  改用絕對值可移除 38,493 次浮點乘法，減少 DSP48 使用。
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════
+     Section 5: 預期效果
+═══════════════════════════════════════════ -->
+<h2>5. 預期效果</h2>
+
+<div class="result-grid">
+  <div class="result-card">
+    <div class="lbl">CFO Scan 代價（第 2+ 幀）</div>
+    <div class="val" style="color:#fc8181;">428 µs</div>
+    <div class="lbl">→</div>
+    <div class="val" style="color:#68d391;">~9 µs</div>
+    <div class="lbl">減少 97.9%</div>
+  </div>
+  <div class="result-card good">
+    <div class="lbl">QPSK Frame Time</div>
+    <div class="val">~573 µs</div>
+    <div class="lbl">現行 1001 µs</div>
+  </div>
+  <div class="result-card good">
+    <div class="lbl">QPSK Data Rate（估算）</div>
+    <div class="val">~2.6 Mbps</div>
+    <div class="lbl">現行 1.5 Mbps</div>
+  </div>
+</div>
+
+<div class="note">
+  <strong>注意：</strong> 2.6 Mbps 為估算值。Viterbi (~657 µs) 若在關鍵路徑上，實際上限為 ~2.29 Mbps。
+  確切數字需上板實測。
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════
+     Section 6: 實作計畫
+═══════════════════════════════════════════ -->
+<h2>6. 實作計畫</h2>
+
+<table>
+  <tr>
+    <th>步驟</th>
+    <th>動作</th>
+    <th>驗證方式</th>
+    <th>風險</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>SAL：能量計算改絕對值（第 43 行）</td>
+    <td>csim — 確認 argmax 不變，BER=0</td>
+    <td class="ok">極低（單行）</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Tracking Mode：best_cfo 改 static，加初始化邏輯</td>
+    <td>csim — 多幀驗證，BER=0</td>
+    <td class="warn">中（邏輯變化）</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>cosim</td>
+    <td>確認 RTL 時序正確</td>
+    <td class="ok">低</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>上板實測</td>
+    <td>量測 QPSK frame time，確認 Data Rate</td>
+    <td class="ok">低</td>
+  </tr>
+</table>
+
+<p style="margin-top:32px; color:#4a5568; font-size:0.82em;">
+  對應原始碼：<code style="color:#90cdf4;">Vitis/OFDM/RX/Refer/ref_rx_packed.cpp</code> |
+  設計文件：<code style="color:#90cdf4;">design_notes/cfo_cache_design.md</code>
+</p>
+
+</body>
+</html>
