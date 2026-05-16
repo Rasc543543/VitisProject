@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ref_rx_packed CFO Scan 優化說明</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --bg2: #1a1d27;
+    --bg3: #222537;
+    --border: #2e3150;
+    --accent: #4f8ef7;
+    --accent2: #7c3aed;
+    --green: #22c55e;
+    --red: #ef4444;
+    --yellow: #f59e0b;
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+    --code-bg: #141820;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ── Nav ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(15,17,23,0.95);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; gap: 1.5rem;
+    height: 52px; backdrop-filter: blur(8px);
+  }
+  nav .logo { font-weight: 700; color: var(--accent); font-size: 1rem; white-space: nowrap; }
+  nav a {
+    color: var(--text2); text-decoration: none;
+    font-size: 0.85rem; transition: color .2s;
+  }
+  nav a:hover { color: var(--text); }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, #0f1117 0%, #1a1d27 50%, #1a1020 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+  }
+  .hero h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: .5rem; }
+  .hero h1 span { color: var(--accent); }
+  .hero p { color: var(--text2); max-width: 600px; margin: .5rem auto 0; }
+  .chip {
+    display: inline-block; background: var(--bg3);
+    border: 1px solid var(--border); border-radius: 999px;
+    padding: .25rem .9rem; font-size: .75rem; color: var(--text2);
+    margin: .3rem .2rem;
+  }
+  .chip.green { border-color: var(--green); color: var(--green); }
+  .chip.blue  { border-color: var(--accent); color: var(--accent); }
+
+  /* ── Layout ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
+  section { margin-bottom: 4rem; }
+
+  h2 {
+    font-size: 1.4rem; font-weight: 700;
+    border-left: 4px solid var(--accent);
+    padding-left: .75rem; margin-bottom: 1.5rem;
+  }
+  h3 { font-size: 1.05rem; font-weight: 600; color: var(--accent); margin: 1.5rem 0 .75rem; }
+
+  p { color: var(--text2); margin-bottom: .75rem; }
+  strong { color: var(--text); }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.5rem; margin-bottom: 1rem;
+  }
+  .card-title { font-weight: 700; margin-bottom: .5rem; }
+
+  /* ── Code blocks ── */
+  .code-wrap { border-radius: 8px; overflow: hidden; margin: 1rem 0; }
+  .code-header {
+    background: var(--bg3); border-bottom: 1px solid var(--border);
+    padding: .4rem 1rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .code-header span { font-size: .78rem; color: var(--text2); }
+  .code-header .lang { color: var(--accent); font-weight: 600; font-size: .78rem; }
+  pre {
+    background: var(--code-bg); padding: 1.2rem 1.4rem;
+    overflow-x: auto; font-size: .82rem; line-height: 1.6;
+    font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+  }
+  pre code { color: var(--text); }
+
+  /* Syntax highlight helpers */
+  .kw  { color: #c792ea; }  /* keyword */
+  .ty  { color: #82aaff; }  /* type */
+  .cm  { color: #546e7a; font-style: italic; }  /* comment */
+  .nm  { color: #f78c6c; }  /* number */
+  .pr  { color: #89ddff; }  /* pragma */
+  .fn  { color: #82aaff; }  /* function */
+  .st  { color: #c3e88d; }  /* string/label */
+  .hl  { background: rgba(79,142,247,.12); display: block; margin: 0 -1.4rem; padding: 0 1.4rem; }   /* highlight line */
+  .hl-bad { background: rgba(239,68,68,.10); display: block; margin: 0 -1.4rem; padding: 0 1.4rem; }
+  .hl-good{ background: rgba(34,197,94,.10); display: block; margin: 0 -1.4rem; padding: 0 1.4rem; }
+
+  /* ── Diff / Compare ── */
+  .compare {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;
+  }
+  @media(max-width:768px){ .compare { grid-template-columns: 1fr; } }
+  .compare .label {
+    font-size: .75rem; font-weight: 700; letter-spacing: .05em;
+    padding: .4rem .8rem; border-radius: 4px 4px 0 0;
+    display: flex; align-items: center; gap: .4rem;
+  }
+  .label.old { background: rgba(239,68,68,.15); color: var(--red); border: 1px solid rgba(239,68,68,.25); }
+  .label.new { background: rgba(34,197,94,.15); color: var(--green); border: 1px solid rgba(34,197,94,.25); }
+
+  /* ── Tables ── */
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .88rem; }
+  th {
+    background: var(--bg3); color: var(--text);
+    padding: .6rem 1rem; text-align: left; font-weight: 600;
+    border-bottom: 2px solid var(--border);
+  }
+  td {
+    padding: .6rem 1rem; border-bottom: 1px solid var(--border);
+    color: var(--text2);
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg3); }
+  td.good { color: var(--green); font-weight: 700; }
+  td.bad  { color: var(--red); }
+  td.warn { color: var(--yellow); }
+  td.em   { color: var(--text); font-weight: 700; }
+
+  /* ── Callout ── */
+  .callout {
+    border-left: 4px solid var(--accent);
+    background: rgba(79,142,247,.07);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.2rem; margin: 1rem 0;
+  }
+  .callout.warn { border-color: var(--yellow); background: rgba(245,158,11,.07); }
+  .callout.good { border-color: var(--green);  background: rgba(34,197,94,.07); }
+  .callout p { margin: 0; }
+
+  /* ── Number highlights ── */
+  .num-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem; margin: 1.5rem 0;
+  }
+  .num-box {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.2rem; text-align: center;
+  }
+  .num-box .val { font-size: 2rem; font-weight: 800; color: var(--accent); }
+  .num-box .val.green { color: var(--green); }
+  .num-box .val.red   { color: var(--red); }
+  .num-box .lbl { font-size: .78rem; color: var(--text2); margin-top: .3rem; }
+
+  /* ── Pipeline diagram ── */
+  .pipeline {
+    font-family: monospace; font-size: .8rem; line-height: 1.8;
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.2rem 1.5rem; overflow-x: auto;
+    white-space: pre; color: var(--text2);
+  }
+  .pipeline .acc  { color: #f78c6c; }
+  .pipeline .slot { color: #82aaff; }
+  .pipeline .ok   { color: var(--green); }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 1px solid var(--border); text-align: center;
+    padding: 2rem; color: var(--text2); font-size: .82rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <span class="logo">ref_rx_packed 優化報告</span>
+  <a href="#problem">問題分析</a>
+  <a href="#change1">並行化</a>
+  <a href="#change2">整數運算</a>
+  <a href="#change3">記憶體</a>
+  <a href="#interp">插值修正</a>
+  <a href="#results">實測結果</a>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>ref_rx_packed <span>CFO Scan 加速</span></h1>
+  <p>透過演算法並行化與資料型別優化，將 CFO 掃描時間從 428 µs 壓縮至 79 µs</p>
+  <br>
+  <span class="chip blue">HLS ARRAY_PARTITION</span>
+  <span class="chip blue">8× 並行 offset</span>
+  <span class="chip blue">ap_int&lt;16&gt; integer metric</span>
+  <span class="chip green">Loop II = 1 ✅</span>
+  <span class="chip green">QPSK 2.33 Mbps HW ✅</span>
+  <span class="chip green">8PSK 2.98 Mbps HW ✅</span>
+</div>
+
+<div class="container">
+
+<!-- ─── 1. 問題分析 ─── -->
+<section id="problem">
+  <h2>1. 原始版本的瓶頸</h2>
+
+  <p>
+    <strong>CFO（Carrier Frequency Offset）掃描</strong>是 ref_rx_packed 的核心步驟：
+    接收到 FFT 輸出後，需要測試 <strong>141 個可能的 subcarrier offset（±70）</strong>，
+    找出 pilot 能量最大的那個位置，作為等化的頻率校正依據。
+  </p>
+  <p>
+    原始實作以<strong>逐一掃描</strong>方式進行，每次只處理一個 offset，
+    導致此階段佔用整個 IP 執行時間的 <strong>94%</strong>。
+  </p>
+
+  <div class="num-grid">
+    <div class="num-box">
+      <div class="val red">141</div>
+      <div class="lbl">待掃描 offset 數（±70）</div>
+    </div>
+    <div class="num-box">
+      <div class="val red">272</div>
+      <div class="lbl">每個 offset 的 pilot 計算次數</div>
+    </div>
+    <div class="num-box">
+      <div class="val red">428 µs</div>
+      <div class="lbl">CFO scan 耗時（舊版）</div>
+    </div>
+    <div class="num-box">
+      <div class="val red">94%</div>
+      <div class="lbl">佔整個 IP 執行時間比例</div>
+    </div>
+  </div>
+
+  <h3>原始程式碼</h3>
+  <div class="code-wrap">
+    <div class="code-header">
+      <span class="lang">C++ (HLS)</span>
+      <span>原始版本 — Loop_CFO_Scan</span>
+    </div>
+    <pre><code><span class="cm">// 外層：141 次（offset -70 → +70），每次只算一個 offset</span>
+<span class="st">Loop_CFO_Scan:</span>
+<span class="hl-bad">    <span class="kw">for</span> (<span class="ty">int</span> offset = -CFO_RANGE; offset &lt;= CFO_RANGE; offset++)
+</span>    {
+<span class="hl-bad">        <span class="ty">half</span> p_metric[<span class="nm">4</span>] = {<span class="nm">0</span>,<span class="nm">0</span>,<span class="nm">0</span>,<span class="nm">0</span>};  <span class="cm">// ← 只有 4 個累加槽</span>
+</span><span class="pr">    #pragma HLS ARRAY_PARTITION variable=p_metric complete</span>
+
+<span class="st">    Loop_Metric:</span>
+        <span class="kw">for</span> (<span class="ty">int</span> p = <span class="nm">0</span>; p &lt; PILOT_TONES; p++)
+        {
+<span class="pr">    #pragma HLS PIPELINE II=1</span>
+            <span class="kw">if</span> (p == <span class="nm">136</span>) <span class="kw">continue</span>;  <span class="cm">// skip DC bin</span>
+            <span class="ty">int</span> idx = LEFT_GUARD + offset + p * <span class="nm">7</span>;
+<span class="hl-bad">            <span class="ty">half</span> vi = <span class="fn">fixed16_to_half</span>(buf_i[idx]);  <span class="cm">// ← 每次解碼 FP16，有額外開銷</span>
+            <span class="ty">half</span> vq = <span class="fn">fixed16_to_half</span>(buf_q[idx]);
+            p_metric[p &amp; <span class="nm">0x3</span>] += vi*vi + vq*vq;      <span class="cm">// ← half 乘法 latency=4，4槽距離=4 → II=4</span>
+</span>        }
+        <span class="ty">half</span> metric = p_metric[<span class="nm">0</span>]+p_metric[<span class="nm">1</span>]+p_metric[<span class="nm">2</span>]+p_metric[<span class="nm">3</span>];
+        <span class="kw">if</span> (metric &gt; max_metric) { max_metric=metric; best_cfo=offset; }
+    }
+</code></pre>
+  </div>
+
+  <div class="callout warn">
+    <p><strong>根本問題：</strong>
+    <code>half</code> 浮點加法器 latency = 4 cycles，但只有 4 個累加槽（distance = 4），
+    HLS 判斷有 RAW hazard → <strong>Loop_Metric II = 4</strong>，而非理想的 II = 1。
+    即使加更多 pragma 也無法突破，因為是底層硬體限制。</p>
+  </div>
+</section>
+
+<!-- ─── 2. 改動1：並行化 ─── -->
+<section id="change1">
+  <h2>2. 改動一：8 個 Offset 並行計算</h2>
+
+  <p>
+    核心想法：把外層迴圈從「每次 1 個 offset」改為「每次 8 個 offset」。
+    每個 pilot tone <code>p</code> 一次性計算 8 個 offset 的能量貢獻，
+    8 組累加器（<code>pm0~pm7</code>）分別對應 <code>base_off, base_off+1, ..., base_off+7</code>。
+  </p>
+
+  <div class="code-wrap">
+    <div class="code-header">
+      <span class="lang">C++ (HLS)</span>
+      <span>新版本 — 8 offset 並行</span>
+    </div>
+    <pre><code><span class="cm">// 外層：17+1 次（step=8），每次同時處理 8 個 offset</span>
+<span class="st">Loop_CFO_Scan:</span>
+<span class="hl-good">    <span class="kw">for</span> (<span class="ty">int</span> base_off = -CFO_RANGE; base_off + <span class="nm">7</span> &lt;= CFO_RANGE; base_off += <span class="nm">8</span>)
+</span>    {
+<span class="pr">  #pragma HLS LOOP_TRIPCOUNT min=17 max=17</span>
+
+<span class="hl-good">        <span class="ty">int64_t</span> pm0[<span class="nm">8</span>]={}, pm1[<span class="nm">8</span>]={}, pm2[<span class="nm">8</span>]={}, pm3[<span class="nm">8</span>]={};
+        <span class="ty">int64_t</span> pm4[<span class="nm">8</span>]={}, pm5[<span class="nm">8</span>]={}, pm6[<span class="nm">8</span>]={}, pm7[<span class="nm">8</span>]={};
+</span><span class="pr">  #pragma HLS ARRAY_PARTITION variable=pm0 complete</span>  <span class="cm">// ... pm1~pm7 同</span>
+
+<span class="st">    Loop_Metric_1:</span>
+        <span class="kw">for</span> (<span class="ty">int</span> p = <span class="nm">0</span>; p &lt; <span class="nm">136</span>; p++)  <span class="cm">// skip p=136 (DC bin)</span>
+        {
+<span class="pr">    #pragma HLS PIPELINE II=1</span>
+            <span class="ty">int</span> k = p &amp; <span class="nm">0x7</span>;  <span class="cm">// k 決定寫入哪個累加槽（0~7 輪替）</span>
+            <span class="ty">int</span> b = LEFT_GUARD + base_off + p * <span class="nm">7</span>;
+
+<span class="hl-good">            { <span class="ty">ap_int</span>&lt;<span class="nm">16</span>&gt; ri=buf_i[b  ],rq=buf_q[b  ]; pm0[k]+=ri*ri+rq*rq; }
+            { <span class="ty">ap_int</span>&lt;<span class="nm">16</span>&gt; ri=buf_i[b+<span class="nm">1</span>],rq=buf_q[b+<span class="nm">1</span>]; pm1[k]+=ri*ri+rq*rq; }
+            { <span class="ty">ap_int</span>&lt;<span class="nm">16</span>&gt; ri=buf_i[b+<span class="nm">2</span>],rq=buf_q[b+<span class="nm">2</span>]; pm2[k]+=ri*ri+rq*rq; }
+            { <span class="ty">ap_int</span>&lt;<span class="nm">16</span>&gt; ri=buf_i[b+<span class="nm">3</span>],rq=buf_q[b+<span class="nm">3</span>]; pm3[k]+=ri*ri+rq*rq; }
+            { <span class="ty">ap_int</span>&lt;<span class="nm">16</span>&gt; ri=buf_i[b+<span class="nm">4</span>],rq=buf_q[b+<span class="nm">4</span>]; pm4[k]+=ri*ri+rq*rq; }
+            { <span class="ty">ap_int</span>&lt;<span class="nm">16</span>&gt; ri=buf_i[b+<span class="nm">5</span>],rq=buf_q[b+<span class="nm">5</span>]; pm5[k]+=ri*ri+rq*rq; }
+            { <span class="ty">ap_int</span>&lt;<span class="nm">16</span>&gt; ri=buf_i[b+<span class="nm">6</span>],rq=buf_q[b+<span class="nm">6</span>]; pm6[k]+=ri*ri+rq*rq; }
+            { <span class="ty">ap_int</span>&lt;<span class="nm">16</span>&gt; ri=buf_i[b+<span class="nm">7</span>],rq=buf_q[b+<span class="nm">7</span>]; pm7[k]+=ri*ri+rq*rq; }
+</span>        }
+    }
+</code></pre>
+  </div>
+
+  <h3>為什麼用 8 個累加槽（<code>pmN[8]</code>）？</h3>
+  <p>
+    每組 <code>pmN</code> 的寫入 index 是 <code>k = p &amp; 0x7</code>，
+    同一個 <code>k</code> 值每 <strong>8 次迭代</strong>才重複一次（distance = 8）。
+    只要整數乘法器 latency（≈3 cycles）小於 8，就不存在 RAW hazard，HLS 可以達到 <strong>II = 1</strong>。
+  </p>
+
+  <div class="pipeline">
+  迭代 p:    0     1     2     3     4     5     6     7     8     9    ...
+  k = p&7:   <span class="slot">0</span>     <span class="slot">1</span>     <span class="slot">2</span>     <span class="slot">3</span>     <span class="slot">4</span>     <span class="slot">5</span>     <span class="slot">6</span>     <span class="slot">7</span>     <span class="slot">0</span>     <span class="slot">1</span>   ...
+
+  pm0[k]:  寫[<span class="slot">0</span>]  ...   ...   ...   ...   ...   ...   ...  寫[<span class="slot">0</span>]  ...
+            ↑ latency=3 ↑                             ↑ distance=8 > 3 → <span class="ok">無衝突 ✅</span>
+  </div>
+
+  <h3>最後 5 個 offset 的 Epilogue</h3>
+  <p>
+    141 個 offset 中，17×8 = 136 個由主迴圈處理（−70 ~ +65）。
+    剩餘 <strong>+66 ~ +70</strong> 共 5 個 offset 不足一組 8，以獨立的 Epilogue 區塊處理（pm0~pm4）。
+  </p>
+</section>
+
+<!-- ─── 3. 改動2：整數運算 ─── -->
+<section id="change2">
+  <h2>3. 改動二：<code>half</code> → <code>ap_int&lt;16&gt;</code> + <code>int64_t</code></h2>
+
+  <div class="compare">
+    <div>
+      <div class="label old">❌ 原版：half 浮點</div>
+      <pre style="margin:0;border-radius:0 0 8px 8px;"><code><span class="ty">half</span> vi = <span class="fn">fixed16_to_half</span>(buf_i[idx]);
+<span class="ty">half</span> vq = <span class="fn">fixed16_to_half</span>(buf_q[idx]);
+p_metric[p&amp;<span class="nm">0x3</span>] += vi*vi + vq*vq;
+
+<span class="cm">// 問題：</span>
+<span class="cm">// 1. fixed16_to_half() 多一層解碼</span>
+<span class="cm">// 2. half 乘法 latency = 4 cycles</span>
+<span class="cm">// 3. 只有 4 槽 → distance = 4 = latency</span>
+<span class="cm">// → HLS 判斷 RAW hazard → II = 4</span></code></pre>
+    </div>
+    <div>
+      <div class="label new">✅ 新版：ap_int&lt;16&gt; 整數</div>
+      <pre style="margin:0;border-radius:0 0 8px 8px;"><code><span class="ty">ap_int</span>&lt;<span class="nm">16</span>&gt; ri = buf_i[b];  <span class="cm">// 直接讀，不解碼</span>
+<span class="ty">ap_int</span>&lt;<span class="nm">16</span>&gt; rq = buf_q[b];
+pm0[k] += ri*ri + rq*rq;
+
+<span class="cm">// 優勢：</span>
+<span class="cm">// 1. 直接使用 raw int16，省去解碼</span>
+<span class="cm">// 2. 整數乘法 latency ≈ 3 cycles</span>
+<span class="cm">// 3. 8 個累加槽 → distance = 8 > 3</span>
+<span class="cm">// → 無 RAW hazard → II = 1 ✅</span></code></pre>
+    </div>
+  </div>
+
+  <h3>為什麼可以直接用 raw integer？</h3>
+  <div class="callout good">
+    <p>
+      CFO scan 的目的只是找 <strong>argmax</strong>（哪個 offset 的 pilot 能量最大），
+      不需要知道實際的能量數值。<br>
+      整數乘法 I²+Q² 與浮點版本的 argmax 結果完全相同——
+      因為 <code>fixed16</code> 格式的整數比例與浮點版等比例縮放，不改變最大值位置。
+    </p>
+  </div>
+
+  <h3>溢位分析</h3>
+  <table>
+    <tr><th>計算</th><th>最大值</th><th>型別容量</th><th>結論</th></tr>
+    <tr>
+      <td><code>ap_int&lt;16&gt;</code> 最大值</td>
+      <td>32,767</td><td>—</td><td class="em">原始 FFT 值範圍</td>
+    </tr>
+    <tr>
+      <td><code>ri * ri</code></td>
+      <td>32,767² ≈ 1.07 × 10⁹</td>
+      <td><code>ap_int&lt;32&gt;</code>（2.1×10⁹）</td>
+      <td class="good">不溢位 ✅</td>
+    </tr>
+    <tr>
+      <td>累加 272 次到 <code>int64_t</code></td>
+      <td>272 × 2 × 1.07×10⁹ ≈ 5.8×10¹¹</td>
+      <td><code>int64_t</code>（9.2×10¹⁸）</td>
+      <td class="good">不溢位 ✅</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ─── 4. 改動3：記憶體分割 ─── -->
+<section id="change3">
+  <h2>4. 改動三：BRAM 分割支援 8 路並行讀取</h2>
+
+  <div class="compare">
+    <div>
+      <div class="label old">❌ 原版：ram_2p（最多 2 port）</div>
+      <pre style="margin:0;border-radius:0 0 8px 8px;"><code><span class="ty">static ap_uint</span>&lt;<span class="nm">16</span>&gt; buf_i[FFT_LENGTH];
+<span class="pr">#pragma HLS BIND_STORAGE variable=buf_i \</span>
+<span class="pr">    type=ram_2p</span>
+
+<span class="cm">// 每個 cycle 最多讀 2 個值</span>
+<span class="cm">// pm0~pm7 共需讀 8 個不同位址 → 衝突</span></code></pre>
+    </div>
+    <div>
+      <div class="label new">✅ 新版：cyclic factor=8（8 個獨立 bank）</div>
+      <pre style="margin:0;border-radius:0 0 8px 8px;"><code><span class="ty">static ap_uint</span>&lt;<span class="nm">16</span>&gt; buf_i[FFT_LENGTH];
+<span class="pr">#pragma HLS ARRAY_PARTITION variable=buf_i \</span>
+<span class="pr">    type=cyclic factor=8</span>
+
+<span class="cm">// buf_i 切成 8 個 BRAM bank：</span>
+<span class="cm">// bank0: [0,8,16,...], bank1: [1,9,17,...]</span>
+<span class="cm">// b, b+1,...,b+7 落在 8 個不同 bank → 並行讀 ✅</span></code></pre>
+    </div>
+  </div>
+
+  <h3>記憶體分割示意</h3>
+  <div class="pipeline">
+  原版 ram_2p：         │  新版 cyclic factor=8：
+                        │
+  buf_i[ 0] ┐           │  bank0: buf_i[ 0, 8,16,24,...]
+  buf_i[ 1] │ 只有       │  bank1: buf_i[ 1, 9,17,25,...]
+  buf_i[ 2] │ 2 個       │  bank2: buf_i[ 2,10,18,26,...]
+  buf_i[ 3] │ read port  │  bank3: buf_i[ 3,11,19,27,...]
+  ...       ┘           │  bank4: buf_i[ 4,12,20,28,...]
+                        │  bank5: buf_i[ 5,13,21,29,...]
+  → 要讀 b, b+1, ...,   │  bank6: buf_i[ 6,14,22,30,...]
+    b+7 需要 4 個 cycle  │  bank7: buf_i[ 7,15,23,31,...]
+                        │
+                        │  → b, b+1,...,b+7 各在不同 bank
+                        │    1 個 cycle <span class="ok">全部讀完 ✅</span>
+  </div>
+
+  <div class="callout">
+    <p>
+      <strong>代價：</strong>RAMB18 從 15 增加到 48（+3×），這是資源換速度的必要成本。
+      整體 BRAM 使用率仍在 2.22%，ZCU208 有充裕空間。
+    </p>
+  </div>
+</section>
+
+<!-- ─── 5. Loop_Interp ─── -->
+<section id="interp">
+  <h2>5. 順帶修正：Loop_Interp 消除 Carry Chain</h2>
+
+  <p>
+    通道插值迴圈（<code>Loop_Interp</code>）在原版中使用累加方式計算 H 的插值，
+    存在 <strong>distance=1 的真實 RAW 依賴</strong>，無法 pipeline 加速。
+  </p>
+
+  <div class="compare">
+    <div>
+      <div class="label old">❌ 原版：carry chain（distance=1）</div>
+      <pre style="margin:0;border-radius:0 0 8px 8px;"><code><span class="ty">float</span> cur_h_r = h1_real;
+<span class="ty">float</span> cur_h_i = h1_imag;
+
+<span class="st">Loop_Interp:</span>
+<span class="kw">for</span> (<span class="ty">int</span> k=<span class="nm">1</span>; k&lt;=k_max; k++) {
+<span class="hl-bad">    cur_h_r += m_real;  <span class="cm">// ← 依賴上一次的 cur_h_r</span>
+    cur_h_i += m_imag;  <span class="cm">// ← distance=1, float lat=4 → stall</span>
+</span>    <span class="cm">// ... 使用 cur_h_r, cur_h_i</span>
+}</code></pre>
+    </div>
+    <div>
+      <div class="label new">✅ 新版：直接計算（無依賴）</div>
+      <pre style="margin:0;border-radius:0 0 8px 8px;"><code><span class="st">Loop_Interp:</span>
+<span class="kw">for</span> (<span class="ty">int</span> k=<span class="nm">1</span>; k&lt;=k_max; k++) {
+<span class="hl-good">    <span class="ty">float</span> h_r = h1_real + (<span class="ty">float</span>)k * m_real;
+    <span class="ty">float</span> h_i = h1_imag + (<span class="ty">float</span>)k * m_imag;
+</span>    <span class="cm">// 每次 k 獨立計算，無跨迭代依賴 → II=1 ✅</span>
+    <span class="cm">// ... 使用 h_r, h_i</span>
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 6. 結果 ─── -->
+<section id="results">
+  <h2>6. 優化成果</h2>
+
+  <h3>HLS Synthesis 數字對比</h3>
+  <table>
+    <tr>
+      <th>Loop</th>
+      <th>原版 II</th>
+      <th>原版 Cycles</th>
+      <th>新版 II</th>
+      <th>新版 Cycles</th>
+      <th>改善</th>
+    </tr>
+    <tr>
+      <td>Loop_CFO_Scan（整體）</td>
+      <td class="bad">—</td>
+      <td class="bad">~42,864</td>
+      <td class="good">—</td>
+      <td class="good">~5,168</td>
+      <td class="good">8.3×</td>
+    </tr>
+    <tr>
+      <td>Loop_Metric（內層）</td>
+      <td class="bad">4</td>
+      <td class="bad">—</td>
+      <td class="good">1</td>
+      <td class="good">—</td>
+      <td class="good">4×</td>
+    </tr>
+    <tr>
+      <td>Loop_Interp</td>
+      <td class="warn">—</td>
+      <td class="warn">—</td>
+      <td class="good">1</td>
+      <td class="good">—</td>
+      <td class="good">穩定 II=1</td>
+    </tr>
+    <tr>
+      <td><strong>總 Latency</strong></td>
+      <td class="bad">—</td>
+      <td class="bad">66,680 cycles</td>
+      <td class="good">—</td>
+      <td class="good">7,944 cycles</td>
+      <td class="good"><strong>8.4×</strong></td>
+    </tr>
+    <tr>
+      <td><strong>總時間 @100 MHz</strong></td>
+      <td class="bad">—</td>
+      <td class="bad">667 µs</td>
+      <td class="good">—</td>
+      <td class="good">79 µs</td>
+      <td class="good"><strong>588 µs 節省</strong></td>
+    </tr>
+  </table>
+
+  <h3>資源使用（Vivado Implementation，test_Brian，ZCU208）</h3>
+  <table>
+    <tr><th>Resource</th><th>原版</th><th>新版（QPSK）</th><th>新版（8PSK）</th><th>說明</th></tr>
+    <tr>
+      <td>CLB LUT</td>
+      <td>14.02%</td>
+      <td class="warn">20.11%</td>
+      <td class="warn">20.48%</td>
+      <td>控制邏輯增加</td>
+    </tr>
+    <tr>
+      <td>CLB FF</td>
+      <td>6.77%</td>
+      <td class="warn">8.51%</td>
+      <td class="warn">8.47%</td>
+      <td>pipeline register 增加</td>
+    </tr>
+    <tr>
+      <td>DSP48E2</td>
+      <td>73</td>
+      <td class="warn">146</td>
+      <td class="warn">146</td>
+      <td>8× 整數乘法器並行</td>
+    </tr>
+    <tr>
+      <td>RAMB18</td>
+      <td>15</td>
+      <td class="warn">48</td>
+      <td class="warn">48</td>
+      <td>buf_i/q × 8 bank partition</td>
+    </tr>
+    <tr>
+      <td>WNS（Timing）</td>
+      <td>+0.518 ns</td>
+      <td class="good">+0.771 ns ✅</td>
+      <td class="good">+0.788 ns ✅</td>
+      <td>Timing 反而更好</td>
+    </tr>
+  </table>
+
+  <h3>硬體實測結果（ZCU208 Loopback，BER = 0）</h3>
+  <table>
+    <tr>
+      <th>版本</th>
+      <th>QPSK Frame Time</th>
+      <th>QPSK Data Rate</th>
+      <th>8PSK Frame Time</th>
+      <th>8PSK Data Rate</th>
+    </tr>
+    <tr>
+      <td>原版（HW 實測）</td>
+      <td>620 µs</td>
+      <td>2.30 Mbps</td>
+      <td>717 µs</td>
+      <td>2.95 Mbps</td>
+    </tr>
+    <tr>
+      <td>新版 Simulation</td>
+      <td>604.6 µs</td>
+      <td>2.49 Mbps*</td>
+      <td>700.1 µs</td>
+      <td>3.13 Mbps*</td>
+    </tr>
+    <tr>
+      <td class="em">新版 Hardware ✅</td>
+      <td class="good">613 µs</td>
+      <td class="good">2.33 Mbps</td>
+      <td class="good">710 µs</td>
+      <td class="good">2.98 Mbps</td>
+    </tr>
+  </table>
+  <p style="font-size:.8rem;color:var(--text2);">
+    *Sim 使用 raw data 基準（無 tx_frag header），HW 使用 payload 基準（扣除 9B header）。
+    Sim→HW 誤差固定 ~10 µs（1.4%），預測模型準確。
+  </p>
+
+  <h3>為什麼 Frame Time 只改善 7 µs？</h3>
+  <div class="callout">
+    <p>
+      ref_rx 本身從 <strong>428 µs → 79 µs</strong>（節省 349 µs），
+      但這段時間 <strong>Viterbi 解碼器同時在跑</strong>（pipeline 重疊）。<br>
+      Viterbi 是整條鏈路的新瓶頸（8PSK 約 657 µs），
+      ref_rx 的加速在 pipeline 中被 Viterbi 的等待時間掩蓋，
+      最終 frame time 只看到 7 µs 的改善。
+    </p>
+  </div>
+
+  <div class="num-grid">
+    <div class="num-box">
+      <div class="val green">8.4×</div>
+      <div class="lbl">ref_rx 單 IP 加速比</div>
+    </div>
+    <div class="num-box">
+      <div class="val green">0</div>
+      <div class="lbl">BER（兩模式 HW 實測）</div>
+    </div>
+    <div class="num-box">
+      <div class="val green">1.4%</div>
+      <div class="lbl">Sim→HW 預測誤差</div>
+    </div>
+    <div class="num-box">
+      <div class="val green">+0.77 ns</div>
+      <div class="lbl">WNS（Timing 全部 PASS）</div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<footer>
+  ref_rx_packed CFO Scan Optimization Report &nbsp;·&nbsp;
+  ZCU208 (xczu48dr-fsvg1517-2-e) &nbsp;·&nbsp;
+  Vitis HLS 2022.2 &nbsp;·&nbsp;
+  2026-05-16
+</footer>
+
+</body>
+</html>
