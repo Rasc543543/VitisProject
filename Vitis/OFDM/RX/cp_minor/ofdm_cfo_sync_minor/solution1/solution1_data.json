@@ -1,0 +1,2416 @@
+{
+  "Top": "ofdm_cfo_sync",
+  "RtlTop": "ofdm_cfo_sync",
+  "RtlPrefix": "",
+  "RtlSubPrefix": "ofdm_cfo_sync_",
+  "SourceLanguage": "cpp",
+  "HostMachineBits": "64",
+  "FunctionProtocol": "ap_ctrl_none",
+  "ResetStyle": "control",
+  "Target": {
+    "Family": "zynquplus",
+    "Device": "xczu48dr",
+    "Package": "-fsvg1517",
+    "Speed": "-2-e",
+    "Triple": "fpga64-xilinx-none"
+  },
+  "Args": {
+    "input_stream": {
+      "index": "0",
+      "direction": "in",
+      "srcType": "stream<hls::axis<ap_uint<32>, 0, 0, 0>, 0>&",
+      "srcSize": "96",
+      "hwRefs": [{
+          "type": "interface",
+          "interface": "input_stream",
+          "name": "",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "output_stream": {
+      "index": "1",
+      "direction": "out",
+      "srcType": "stream<hls::axis<ap_uint<32>, 0, 0, 0>, 0>&",
+      "srcSize": "96",
+      "hwRefs": [{
+          "type": "interface",
+          "interface": "output_stream",
+          "name": "",
+          "usage": "data",
+          "direction": "out"
+        }]
+    }
+  },
+  "HlsSolution": {
+    "FlowTarget": "vivado",
+    "ConfigTcl": [
+      "config_interface -m_axi_latency=0",
+      "config_export -description {OFDM CP Sync + CFO Correction}",
+      "config_export -format=ip_catalog",
+      "config_export -output=C:\/VitisProject\/Vitis\/OFDM\/RX\/cp_minor\/output",
+      "config_export -version=1.0"
+    ],
+    "DirectiveTcl": ["set_directive_top ofdm_cfo_sync -name ofdm_cfo_sync"],
+    "ProfileOption": "0",
+    "ProfileType": "none",
+    "KernelName": "ofdm_cfo_sync"
+  },
+  "ClockInfo": {
+    "ClockName": "ap_clk",
+    "ClockPeriod": "10",
+    "Uncertainty": "1.25",
+    "IsCombinational": "0",
+    "II": "undef",
+    "Latency": "undef"
+  },
+  "Xdc": {"OocClocks": ["create_clock -name ap_clk -period 10.000 [get_ports ap_clk]"]},
+  "Ipx": {
+    "Vendor": "xilinx.com",
+    "Library": "hls",
+    "Name": "ofdm_cfo_sync",
+    "Version": "1.0",
+    "DisplayName": "Ofdm_cfo_sync",
+    "Revision": "2114630160",
+    "Description": "OFDM CP Sync + CFO Correction",
+    "Taxonomy": "\/VITIS_HLS_IP",
+    "AutoFamilySupport": "",
+    "ZipFile": "xilinx_com_hls_ofdm_cfo_sync_1_0.zip"
+  },
+  "Files": {
+    "CSource": ["C:\/VitisProject\/Vitis\/OFDM\/RX\/cp_minor\/ofdm_cfo_sync.cc"],
+    "Vhdl": [
+      "impl\/vhdl\/ofdm_cfo_sync_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_atan2_cordic_float_s.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_atan2_generic_float_s.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_calc_power_and_corr.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_calc_power_and_corr_delay_line_128_M_real_V_RAM_2P_LUTRAM_1R1W.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_calc_power_and_corr_delay_mem_2048_M_real_V_RAM_2P_BRAM_1R1W.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_cfo_correction.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_cfo_correction_Pipeline_VITIS_LOOP_328_2.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_cfo_correction_Pipeline_VITIS_LOOP_328_2_sin_lut_V_ROM_AUTO_1R.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_cfo_estimator.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fadd_32ns_32ns_32_4_full_dsp_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fcmp_32ns_32ns_1_2_no_dsp_0.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fdiv_32ns_32ns_32_8_no_dsp_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fifo_w1_d256_S.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fifo_w32_d2_S.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fifo_w32_d256_A.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fifo_w33_d2048_A.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fifo_w64_d256_A.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fifo_w150_d2_S.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_flow_control_loop_pipe_sequential_init.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fmul_32ns_32ns_32_2_max_dsp_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fpext_32ns_64_2_no_dsp_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fsub_32ns_32ns_32_4_full_dsp_0.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_mac_muladd_16s_16s_32s_32_4_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_mac_mulsub_16s_16s_32s_32_4_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_moving_sum_and_metric9.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_moving_sum_and_metric9_delay_pwr_V_RAM_2P_LUTRAM_1R1W.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_mul_25s_25s_50_1_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_mul_mul_16s_16s_32_4_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_regslice_both.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_sitofp_32ns_32_3_no_dsp_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_start_for_calc_power_and_corr_U0.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_start_for_cfo_correction_U0.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_start_for_cfo_estimator_U0.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_start_for_moving_sum_and_metric9_U0.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_unpack_axis.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync.vhd"
+    ],
+    "Verilog": [
+      "impl\/verilog\/ofdm_cfo_sync_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s.v",
+      "impl\/verilog\/ofdm_cfo_sync_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s.v",
+      "impl\/verilog\/ofdm_cfo_sync_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s.v",
+      "impl\/verilog\/ofdm_cfo_sync_atan2_cordic_float_s.v",
+      "impl\/verilog\/ofdm_cfo_sync_atan2_generic_float_s.v",
+      "impl\/verilog\/ofdm_cfo_sync_calc_power_and_corr.v",
+      "impl\/verilog\/ofdm_cfo_sync_calc_power_and_corr_delay_line_128_M_real_V_RAM_2P_LUTRAM_1R1W.dat",
+      "impl\/verilog\/ofdm_cfo_sync_calc_power_and_corr_delay_line_128_M_real_V_RAM_2P_LUTRAM_1R1W.v",
+      "impl\/verilog\/ofdm_cfo_sync_calc_power_and_corr_delay_mem_2048_M_real_V_RAM_2P_BRAM_1R1W.dat",
+      "impl\/verilog\/ofdm_cfo_sync_calc_power_and_corr_delay_mem_2048_M_real_V_RAM_2P_BRAM_1R1W.v",
+      "impl\/verilog\/ofdm_cfo_sync_cfo_correction.v",
+      "impl\/verilog\/ofdm_cfo_sync_cfo_correction_Pipeline_VITIS_LOOP_328_2.v",
+      "impl\/verilog\/ofdm_cfo_sync_cfo_correction_Pipeline_VITIS_LOOP_328_2_sin_lut_V_ROM_AUTO_1R.dat",
+      "impl\/verilog\/ofdm_cfo_sync_cfo_correction_Pipeline_VITIS_LOOP_328_2_sin_lut_V_ROM_AUTO_1R.v",
+      "impl\/verilog\/ofdm_cfo_sync_cfo_estimator.v",
+      "impl\/verilog\/ofdm_cfo_sync_fadd_32ns_32ns_32_4_full_dsp_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_fcmp_32ns_32ns_1_2_no_dsp_0.v",
+      "impl\/verilog\/ofdm_cfo_sync_fdiv_32ns_32ns_32_8_no_dsp_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_fifo_w1_d256_S.v",
+      "impl\/verilog\/ofdm_cfo_sync_fifo_w32_d2_S.v",
+      "impl\/verilog\/ofdm_cfo_sync_fifo_w32_d256_A.v",
+      "impl\/verilog\/ofdm_cfo_sync_fifo_w33_d2048_A.v",
+      "impl\/verilog\/ofdm_cfo_sync_fifo_w64_d256_A.v",
+      "impl\/verilog\/ofdm_cfo_sync_fifo_w150_d2_S.v",
+      "impl\/verilog\/ofdm_cfo_sync_flow_control_loop_pipe_sequential_init.v",
+      "impl\/verilog\/ofdm_cfo_sync_fmul_32ns_32ns_32_2_max_dsp_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_fpext_32ns_64_2_no_dsp_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_fsub_32ns_32ns_32_4_full_dsp_0.v",
+      "impl\/verilog\/ofdm_cfo_sync_hls_deadlock_detection_unit.v",
+      "impl\/verilog\/ofdm_cfo_sync_hls_deadlock_detector.vh",
+      "impl\/verilog\/ofdm_cfo_sync_hls_deadlock_idx0_monitor.v",
+      "impl\/verilog\/ofdm_cfo_sync_hls_deadlock_kernel_monitor_top.vh",
+      "impl\/verilog\/ofdm_cfo_sync_hls_deadlock_report_unit.vh",
+      "impl\/verilog\/ofdm_cfo_sync_mac_muladd_16s_16s_32s_32_4_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_mac_mulsub_16s_16s_32s_32_4_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_moving_sum_and_metric9.v",
+      "impl\/verilog\/ofdm_cfo_sync_moving_sum_and_metric9_delay_pwr_V_RAM_2P_LUTRAM_1R1W.dat",
+      "impl\/verilog\/ofdm_cfo_sync_moving_sum_and_metric9_delay_pwr_V_RAM_2P_LUTRAM_1R1W.v",
+      "impl\/verilog\/ofdm_cfo_sync_mul_25s_25s_50_1_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_mul_mul_16s_16s_32_4_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_regslice_both.v",
+      "impl\/verilog\/ofdm_cfo_sync_sitofp_32ns_32_3_no_dsp_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_start_for_calc_power_and_corr_U0.v",
+      "impl\/verilog\/ofdm_cfo_sync_start_for_cfo_correction_U0.v",
+      "impl\/verilog\/ofdm_cfo_sync_start_for_cfo_estimator_U0.v",
+      "impl\/verilog\/ofdm_cfo_sync_start_for_moving_sum_and_metric9_U0.v",
+      "impl\/verilog\/ofdm_cfo_sync_unpack_axis.v",
+      "impl\/verilog\/ofdm_cfo_sync.v"
+    ],
+    "IpMisc": ["impl\/misc\/logo.png"],
+    "Subcore": [
+      "impl\/misc\/ofdm_cfo_sync_fadd_32ns_32ns_32_4_full_dsp_1_ip.tcl",
+      "impl\/misc\/ofdm_cfo_sync_fcmp_32ns_32ns_1_2_no_dsp_0_ip.tcl",
+      "impl\/misc\/ofdm_cfo_sync_fdiv_32ns_32ns_32_8_no_dsp_1_ip.tcl",
+      "impl\/misc\/ofdm_cfo_sync_fmul_32ns_32ns_32_2_max_dsp_1_ip.tcl",
+      "impl\/misc\/ofdm_cfo_sync_fpext_32ns_64_2_no_dsp_1_ip.tcl",
+      "impl\/misc\/ofdm_cfo_sync_fsub_32ns_32ns_32_4_full_dsp_0_ip.tcl",
+      "impl\/misc\/ofdm_cfo_sync_sitofp_32ns_32_3_no_dsp_1_ip.tcl"
+    ],
+    "CsynthXml": "syn\/report\/csynth.xml",
+    "DebugDir": ".debug",
+    "KernelXml": ".autopilot\/db\/kernel.internal.xml",
+    "Xo": "",
+    "XoHlsDir": "",
+    "ProtoInst": [".debug\/ofdm_cfo_sync.protoinst"]
+  },
+  "SubcoreInfo": {
+    "HasXpmMemory": false,
+    "HasClockedDsp": false,
+    "Ip": [
+      {
+        "Name": "ofdm_cfo_sync_fadd_32ns_32ns_32_4_full_dsp_1_ip",
+        "Vlnv": "xilinx.com:ip:floating_point:7.1",
+        "Params": "CONFIG.a_precision_type Single CONFIG.a_tuser_width 1 CONFIG.add_sub_value Add CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 8 CONFIG.c_a_fraction_width 24 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 2 CONFIG.c_mult_usage Full_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 8 CONFIG.c_result_fraction_width 24 CONFIG.component_name ofdm_cfo_sync_fadd_32ns_32ns_32_4_full_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken true CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Add_Subtract CONFIG.result_precision_type Single CONFIG.result_tlast_behv Null"
+      },
+      {
+        "Name": "ofdm_cfo_sync_fcmp_32ns_32ns_1_2_no_dsp_0_ip",
+        "Vlnv": "xilinx.com:ip:floating_point:7.1",
+        "Params": "CONFIG.a_precision_type Single CONFIG.a_tuser_width 1 CONFIG.add_sub_value Both CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 8 CONFIG.c_a_fraction_width 24 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 0 CONFIG.c_mult_usage No_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 1 CONFIG.c_result_fraction_width 0 CONFIG.component_name ofdm_cfo_sync_fcmp_32ns_32ns_1_2_no_dsp_0_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken false CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Compare CONFIG.result_precision_type Single CONFIG.result_tlast_behv Null"
+      },
+      {
+        "Name": "ofdm_cfo_sync_fdiv_32ns_32ns_32_8_no_dsp_1_ip",
+        "Vlnv": "xilinx.com:ip:floating_point:7.1",
+        "Params": "CONFIG.a_precision_type Single CONFIG.a_tuser_width 1 CONFIG.add_sub_value Both CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 8 CONFIG.c_a_fraction_width 24 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 6 CONFIG.c_mult_usage No_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 8 CONFIG.c_result_fraction_width 24 CONFIG.component_name ofdm_cfo_sync_fdiv_32ns_32ns_32_8_no_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken true CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Divide CONFIG.result_precision_type Single CONFIG.result_tlast_behv Null"
+      },
+      {
+        "Name": "ofdm_cfo_sync_fmul_32ns_32ns_32_2_max_dsp_1_ip",
+        "Vlnv": "xilinx.com:ip:floating_point:7.1",
+        "Params": "CONFIG.a_precision_type Single CONFIG.a_tuser_width 1 CONFIG.add_sub_value Both CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 8 CONFIG.c_a_fraction_width 24 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 0 CONFIG.c_mult_usage Max_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 8 CONFIG.c_result_fraction_width 24 CONFIG.component_name ofdm_cfo_sync_fmul_32ns_32ns_32_2_max_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken false CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Multiply CONFIG.result_precision_type Single CONFIG.result_tlast_behv Null"
+      },
+      {
+        "Name": "ofdm_cfo_sync_fpext_32ns_64_2_no_dsp_1_ip",
+        "Vlnv": "xilinx.com:ip:floating_point:7.1",
+        "Params": "CONFIG.a_precision_type Single CONFIG.a_tuser_width 1 CONFIG.add_sub_value Both CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 8 CONFIG.c_a_fraction_width 24 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 0 CONFIG.c_mult_usage No_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 11 CONFIG.c_result_fraction_width 53 CONFIG.component_name ofdm_cfo_sync_fpext_32ns_64_2_no_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken false CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Float_to_Float CONFIG.result_precision_type Double CONFIG.result_tlast_behv Null"
+      },
+      {
+        "Name": "ofdm_cfo_sync_fsub_32ns_32ns_32_4_full_dsp_0_ip",
+        "Vlnv": "xilinx.com:ip:floating_point:7.1",
+        "Params": "CONFIG.a_precision_type Single CONFIG.a_tuser_width 1 CONFIG.add_sub_value Subtract CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 8 CONFIG.c_a_fraction_width 24 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 2 CONFIG.c_mult_usage Full_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 8 CONFIG.c_result_fraction_width 24 CONFIG.component_name ofdm_cfo_sync_fsub_32ns_32ns_32_4_full_dsp_0_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken true CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Add_Subtract CONFIG.result_precision_type Single CONFIG.result_tlast_behv Null"
+      },
+      {
+        "Name": "ofdm_cfo_sync_sitofp_32ns_32_3_no_dsp_1_ip",
+        "Vlnv": "xilinx.com:ip:floating_point:7.1",
+        "Params": "CONFIG.a_precision_type Custom CONFIG.a_tuser_width 1 CONFIG.add_sub_value Both CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 32 CONFIG.c_a_fraction_width 0 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 1 CONFIG.c_mult_usage No_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 8 CONFIG.c_result_fraction_width 24 CONFIG.component_name ofdm_cfo_sync_sitofp_32ns_32_3_no_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken true CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Fixed_to_Float CONFIG.result_precision_type Single CONFIG.result_tlast_behv Null"
+      }
+    ]
+  },
+  "Interfaces": {
+    "input_stream": {
+      "type": "axi4stream",
+      "busTypeName": "axis",
+      "mode": "slave",
+      "dataWidth": "32",
+      "portPrefix": "input_stream_",
+      "ports": [
+        "input_stream_TDATA",
+        "input_stream_TKEEP",
+        "input_stream_TLAST",
+        "input_stream_TREADY",
+        "input_stream_TSTRB",
+        "input_stream_TVALID"
+      ],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "axis",
+          "register_option": "0",
+          "register_mode": "both",
+          "argName": "input_stream"
+        }]
+    },
+    "output_stream": {
+      "type": "axi4stream",
+      "busTypeName": "axis",
+      "mode": "master",
+      "dataWidth": "32",
+      "portPrefix": "output_stream_",
+      "ports": [
+        "output_stream_TDATA",
+        "output_stream_TKEEP",
+        "output_stream_TLAST",
+        "output_stream_TREADY",
+        "output_stream_TSTRB",
+        "output_stream_TVALID"
+      ],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "axis",
+          "register_option": "0",
+          "register_mode": "both",
+          "argName": "output_stream"
+        }]
+    },
+    "ap_clk": {
+      "type": "clock",
+      "busTypeName": "clock",
+      "mode": "slave",
+      "busParams": {
+        "ASSOCIATED_BUSIF": "input_stream:output_stream",
+        "ASSOCIATED_RESET": "ap_rst_n"
+      },
+      "portMap": {"ap_clk": "CLK"},
+      "ports": ["ap_clk"]
+    },
+    "ap_rst_n": {
+      "type": "reset",
+      "busTypeName": "reset",
+      "mode": "slave",
+      "busParams": {"POLARITY": "ACTIVE_LOW"},
+      "portMap": {"ap_rst_n": "RST"},
+      "ports": ["ap_rst_n"]
+    }
+  },
+  "RtlPorts": {
+    "input_stream_TDATA": {
+      "dir": "in",
+      "width": "32"
+    },
+    "input_stream_TKEEP": {
+      "dir": "in",
+      "width": "4"
+    },
+    "input_stream_TSTRB": {
+      "dir": "in",
+      "width": "4"
+    },
+    "input_stream_TLAST": {
+      "dir": "in",
+      "width": "1",
+      "isVector": "true"
+    },
+    "input_stream_TVALID": {
+      "dir": "in",
+      "width": "1"
+    },
+    "input_stream_TREADY": {
+      "dir": "out",
+      "width": "1"
+    },
+    "output_stream_TDATA": {
+      "dir": "out",
+      "width": "32"
+    },
+    "output_stream_TKEEP": {
+      "dir": "out",
+      "width": "4"
+    },
+    "output_stream_TSTRB": {
+      "dir": "out",
+      "width": "4"
+    },
+    "output_stream_TLAST": {
+      "dir": "out",
+      "width": "1",
+      "isVector": "true"
+    },
+    "output_stream_TVALID": {
+      "dir": "out",
+      "width": "1"
+    },
+    "output_stream_TREADY": {
+      "dir": "in",
+      "width": "1"
+    },
+    "ap_clk": {
+      "dir": "in",
+      "width": "1"
+    },
+    "ap_rst_n": {
+      "dir": "in",
+      "width": "1"
+    }
+  },
+  "ModuleInfo": {
+    "Hierarchy": {
+      "ModuleName": "ofdm_cfo_sync",
+      "Instances": [
+        {
+          "ModuleName": "unpack_axis",
+          "InstanceName": "unpack_axis_U0"
+        },
+        {
+          "ModuleName": "calc_power_and_corr",
+          "InstanceName": "calc_power_and_corr_U0"
+        },
+        {
+          "ModuleName": "moving_sum_and_metric9",
+          "InstanceName": "moving_sum_and_metric9_U0"
+        },
+        {
+          "ModuleName": "cfo_estimator",
+          "InstanceName": "cfo_estimator_U0",
+          "Instances": [
+            {
+              "ModuleName": "atan2_cordic_float_s",
+              "InstanceName": "grp_atan2_cordic_float_s_fu_453",
+              "Instances": [{
+                  "ModuleName": "atan2_generic_float_s",
+                  "InstanceName": "grp_atan2_generic_float_s_fu_158",
+                  "Instances": [
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_348"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_1_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_659"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_3_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_355"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_4_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_666"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_6_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_363"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_7_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_674"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_2_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_978"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_5_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_987"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_8_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_996"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_9_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_371"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_s_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_682"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_10_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1005"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_11_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_378"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_12_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_689"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_13_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1014"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_14_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_386"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_15_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_697"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_16_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1023"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_17_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_394"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_18_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_705"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_20_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_402"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_21_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_713"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_19_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1032"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_22_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1040"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_23_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_410"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_24_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_721"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_25_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1049"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_26_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_417"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_27_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_728"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_28_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1058"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_29_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_425"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_30_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_736"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_31_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1067"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_32_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_433"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_33_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_744"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_34_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1076"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_35_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_441"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_36_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_752"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_37_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1085"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_38_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_449"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_39_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_760"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_40_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1093"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_41_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_456"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_42_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_767"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_43_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1102"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_44_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_464"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_45_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_775"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_46_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1111"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_47_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_472"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_48_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_783"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_49_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1120"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_50_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_480"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_51_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_791"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_52_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1129"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_53_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_488"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_54_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_799"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_55_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1138"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_56_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_495"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_57_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_806"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_58_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1146"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_59_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_503"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_60_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_814"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_61_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1155"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_62_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_511"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_63_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_822"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_64_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1164"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_65_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_519"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_66_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_830"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_67_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1173"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_68_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_527"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_69_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_838"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_70_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1182"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_71_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_534"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_72_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_845"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_73_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1190"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_74_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_542"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_75_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_853"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_76_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1199"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_77_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_550"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_78_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_861"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_79_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1208"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_80_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_558"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_81_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_869"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_82_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1217"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_83_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_566"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_84_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_877"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_85_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1226"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_86_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_573"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_87_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_884"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_88_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1234"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_89_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_581"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_90_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_892"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_91_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1243"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_92_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_589"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_93_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_900"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_94_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1252"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_95_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_597"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_96_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_908"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_97_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1261"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_98_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_605"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_99_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_916"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_100_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1270"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_101_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_612"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_102_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_923"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_103_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1278"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_104_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_620"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_105_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_931"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_106_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1287"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_107_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_628"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_108_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_939"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_109_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1296"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_110_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_636"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_111_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_947"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_112_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1305"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_113_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_644"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_114_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_955"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_115_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1314"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_116_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_651"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_117_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_962"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_118_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1322"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_119_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_970"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_120_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1331"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_121_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1340"
+                    }
+                  ]
+                }]
+            },
+            {
+              "ModuleName": "atan2_cordic_float_s",
+              "InstanceName": "grp_atan2_cordic_float_s_fu_461",
+              "Instances": [{
+                  "ModuleName": "atan2_generic_float_s",
+                  "InstanceName": "grp_atan2_generic_float_s_fu_158",
+                  "Instances": [
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_348"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_1_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_659"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_3_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_355"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_4_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_666"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_6_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_363"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_7_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_674"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_2_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_978"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_5_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_987"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_8_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_996"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_9_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_371"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_s_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_682"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_10_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1005"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_11_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_378"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_12_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_689"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_13_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1014"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_14_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_386"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_15_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_697"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_16_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1023"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_17_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_394"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_18_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_705"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_20_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_402"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_21_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_713"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_19_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1032"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_22_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1040"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_23_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_410"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_24_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_721"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_25_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1049"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_26_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_417"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_27_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_728"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_28_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1058"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_29_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_425"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_30_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_736"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_31_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1067"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_32_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_433"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_33_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_744"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_34_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1076"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_35_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_441"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_36_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_752"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_37_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1085"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_38_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_449"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_39_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_760"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_40_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1093"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_41_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_456"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_42_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_767"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_43_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1102"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_44_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_464"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_45_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_775"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_46_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1111"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_47_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_472"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_48_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_783"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_49_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1120"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_50_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_480"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_51_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_791"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_52_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1129"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_53_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_488"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_54_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_799"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_55_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1138"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_56_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_495"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_57_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_806"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_58_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1146"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_59_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_503"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_60_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_814"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_61_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1155"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_62_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_511"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_63_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_822"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_64_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1164"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_65_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_519"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_66_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_830"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_67_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1173"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_68_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_527"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_69_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_838"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_70_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1182"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_71_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_534"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_72_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_845"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_73_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1190"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_74_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_542"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_75_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_853"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_76_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1199"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_77_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_550"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_78_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_861"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_79_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1208"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_80_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_558"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_81_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_869"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_82_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1217"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_83_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_566"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_84_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_877"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_85_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1226"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_86_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_573"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_87_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_884"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_88_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1234"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_89_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_581"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_90_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_892"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_91_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1243"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_92_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_589"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_93_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_900"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_94_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1252"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_95_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_597"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_96_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_908"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_97_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1261"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_98_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_605"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_99_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_916"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_100_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1270"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_101_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_612"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_102_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_923"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_103_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1278"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_104_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_620"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_105_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_931"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_106_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1287"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_107_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_628"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_108_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_939"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_109_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1296"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_110_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_636"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_111_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_947"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_112_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1305"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_113_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_644"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_114_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_955"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_115_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1314"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_116_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_651"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_117_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_962"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_118_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1322"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_119_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_970"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_120_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1331"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_121_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1340"
+                    }
+                  ]
+                }]
+            },
+            {
+              "ModuleName": "atan2_cordic_float_s",
+              "InstanceName": "grp_atan2_cordic_float_s_fu_469",
+              "Instances": [{
+                  "ModuleName": "atan2_generic_float_s",
+                  "InstanceName": "grp_atan2_generic_float_s_fu_158",
+                  "Instances": [
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_348"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_1_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_659"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_3_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_355"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_4_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_666"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_6_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_363"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_7_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_674"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_2_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_978"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_5_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_987"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_8_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_996"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_9_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_371"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_s_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_682"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_10_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1005"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_11_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_378"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_12_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_689"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_13_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1014"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_14_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_386"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_15_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_697"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_16_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1023"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_17_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_394"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_18_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_705"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_20_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_402"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_21_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_713"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_19_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1032"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_22_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1040"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_23_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_410"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_24_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_721"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_25_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1049"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_26_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_417"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_27_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_728"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_28_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1058"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_29_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_425"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_30_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_736"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_31_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1067"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_32_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_433"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_33_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_744"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_34_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1076"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_35_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_441"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_36_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_752"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_37_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1085"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_38_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_449"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_39_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_760"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_40_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1093"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_41_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_456"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_42_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_767"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_43_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1102"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_44_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_464"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_45_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_775"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_46_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1111"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_47_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_472"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_48_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_783"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_49_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1120"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_50_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_480"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_51_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_791"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_52_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1129"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_53_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_488"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_54_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_799"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_55_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1138"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_56_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_495"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_57_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_806"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_58_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1146"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_59_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_503"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_60_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_814"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_61_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1155"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_62_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_511"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_63_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_822"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_64_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1164"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_65_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_519"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_66_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_830"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_67_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1173"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_68_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_527"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_69_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_838"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_70_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1182"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_71_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_534"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_72_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_845"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_73_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1190"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_74_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_542"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_75_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_853"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_76_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1199"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_77_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_550"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_78_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_861"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_79_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1208"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_80_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_558"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_81_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_869"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_82_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1217"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_83_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_566"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_84_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_877"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_85_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1226"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_86_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_573"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_87_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_884"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_88_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1234"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_89_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_581"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_90_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_892"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_91_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1243"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_92_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_589"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_93_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_900"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_94_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1252"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_95_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_597"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_96_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_908"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_97_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1261"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_98_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_605"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_99_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_916"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_100_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1270"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_101_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_612"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_102_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_923"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_103_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1278"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_104_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_620"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_105_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_931"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_106_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1287"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_107_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_628"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_108_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_939"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_109_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1296"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_110_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_636"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_111_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_947"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_112_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1305"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_113_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_644"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_114_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_955"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_115_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1314"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_116_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s_fu_651"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_117_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_962"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_118_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1322"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s",
+                      "InstanceName": "trunc_ln813_119_addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s_fu_970"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_120_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1331"
+                    },
+                    {
+                      "ModuleName": "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s",
+                      "InstanceName": "trunc_ln813_121_addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s_fu_1340"
+                    }
+                  ]
+                }]
+            }
+          ]
+        },
+        {
+          "ModuleName": "cfo_correction",
+          "InstanceName": "cfo_correction_U0",
+          "Instances": [{
+              "ModuleName": "cfo_correction_Pipeline_VITIS_LOOP_328_2",
+              "InstanceName": "grp_cfo_correction_Pipeline_VITIS_LOOP_328_2_fu_128"
+            }]
+        }
+      ]
+    },
+    "Info": {
+      "unpack_axis": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "calc_power_and_corr": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "moving_sum_and_metric9": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "1",
+        "isOneStateSeq": "0"
+      },
+      "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "1",
+        "isOneStateSeq": "0"
+      },
+      "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "1",
+        "isOneStateSeq": "0"
+      },
+      "atan2_generic_float_s": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "atan2_cordic_float_s": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "cfo_estimator": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "cfo_correction_Pipeline_VITIS_LOOP_328_2": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "cfo_correction": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "ofdm_cfo_sync": {
+        "FunctionProtocol": "ap_ctrl_none",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      }
+    },
+    "Metrics": {
+      "unpack_axis": {
+        "Latency": {
+          "LatencyBest": "",
+          "LatencyAvg": "",
+          "LatencyWorst": "",
+          "PipelineII": "",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "2.920"
+        },
+        "Loops": [{
+            "Name": "VITIS_LOOP_54_1",
+            "TripCount": "inf",
+            "Latency": "",
+            "PipelineII": "1",
+            "PipelineDepth": "1"
+          }],
+        "Area": {
+          "FF": "3",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "54",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "calc_power_and_corr": {
+        "Latency": {
+          "LatencyBest": "",
+          "LatencyAvg": "",
+          "LatencyWorst": "",
+          "PipelineII": "",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "2.920"
+        },
+        "Loops": [{
+            "Name": "VITIS_LOOP_69_1",
+            "TripCount": "inf",
+            "Latency": "",
+            "PipelineII": "1",
+            "PipelineDepth": "7"
+          }],
+        "Area": {
+          "BRAM_18K": "4",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "~0",
+          "DSP": "14",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "830",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "594",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "moving_sum_and_metric9": {
+        "Latency": {
+          "LatencyBest": "",
+          "LatencyAvg": "",
+          "LatencyWorst": "",
+          "PipelineII": "",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "7.475"
+        },
+        "Loops": [{
+            "Name": "VITIS_LOOP_156_1",
+            "TripCount": "inf",
+            "Latency": "",
+            "PipelineII": "1",
+            "PipelineDepth": "3"
+          }],
+        "Area": {
+          "DSP": "6",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "2190",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "2209",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_ap_uint_1_s": {
+        "Latency": {
+          "LatencyBest": "0",
+          "LatencyAvg": "0",
+          "LatencyWorst": "0",
+          "PipelineII": "1",
+          "PipelineDepth": "1",
+          "PipelineType": "yes"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "1.447"
+        },
+        "Area": {
+          "FF": "0",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "0",
+          "LUT": "139",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "addsub_0_0_ap_fixed_43_4_5_3_0_ap_fixed_43_4_5_3_0_bool_s": {
+        "Latency": {
+          "LatencyBest": "0",
+          "LatencyAvg": "0",
+          "LatencyWorst": "0",
+          "PipelineII": "1",
+          "PipelineDepth": "1",
+          "PipelineType": "yes"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "1.447"
+        },
+        "Area": {
+          "FF": "0",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "0",
+          "LUT": "139",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "addsub_0_0_ap_fixed_40_1_5_3_0_ap_fixed_40_1_0_3_0_ap_uint_1_s": {
+        "Latency": {
+          "LatencyBest": "0",
+          "LatencyAvg": "0",
+          "LatencyWorst": "0",
+          "PipelineII": "1",
+          "PipelineDepth": "1",
+          "PipelineType": "yes"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "1.344"
+        },
+        "Area": {
+          "FF": "0",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "0",
+          "LUT": "130",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "atan2_generic_float_s": {
+        "Latency": {
+          "LatencyBest": "9",
+          "LatencyAvg": "9",
+          "LatencyWorst": "9",
+          "PipelineII": "1",
+          "PipelineDepth": "10",
+          "PipelineType": "yes"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "8.314"
+        },
+        "Area": {
+          "FF": "1865",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "18208",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "4",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "atan2_cordic_float_s": {
+        "Latency": {
+          "LatencyBest": "20",
+          "LatencyAvg": "20",
+          "LatencyWorst": "20",
+          "PipelineII": "1",
+          "PipelineDepth": "21",
+          "PipelineType": "yes"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "8.314"
+        },
+        "Area": {
+          "DSP": "4",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "4963",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "19759",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "4",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "cfo_estimator": {
+        "Latency": {
+          "LatencyBest": "",
+          "LatencyAvg": "",
+          "LatencyWorst": "",
+          "PipelineII": "",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "8.569"
+        },
+        "Loops": [{
+            "Name": "VITIS_LOOP_271_1",
+            "TripCount": "inf",
+            "Latency": "",
+            "PipelineII": "1",
+            "PipelineDepth": "71"
+          }],
+        "Area": {
+          "DSP": "36",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "23830",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "2",
+          "LUT": "69307",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "16",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "cfo_correction_Pipeline_VITIS_LOOP_328_2": {
+        "Latency": {
+          "LatencyBest": "2053",
+          "LatencyAvg": "2053",
+          "LatencyWorst": "2053",
+          "PipelineII": "2053",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "2.855"
+        },
+        "Loops": [{
+            "Name": "VITIS_LOOP_328_2",
+            "TripCount": "2048",
+            "Latency": "2051",
+            "PipelineII": "1",
+            "PipelineDepth": "5"
+          }],
+        "Area": {
+          "BRAM_18K": "1",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "~0",
+          "DSP": "4",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "102",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "235",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "cfo_correction": {
+        "Latency": {
+          "LatencyBest": "",
+          "LatencyAvg": "",
+          "LatencyWorst": "",
+          "PipelineII": "",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "8.419"
+        },
+        "Loops": [{
+            "Name": "VITIS_LOOP_317_1",
+            "TripCount": "inf",
+            "Latency": "",
+            "PipelineII": "",
+            "PipelineDepth": "2060"
+          }],
+        "Area": {
+          "BRAM_18K": "1",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "~0",
+          "DSP": "7",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "335",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "978",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "ofdm_cfo_sync": {
+        "Latency": {
+          "LatencyBest": "",
+          "LatencyAvg": "",
+          "LatencyWorst": "",
+          "PipelineII": "",
+          "PipelineDepth": "",
+          "PipelineType": "dataflow"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "8.569"
+        },
+        "Area": {
+          "BRAM_18K": "27",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "1",
+          "DSP": "63",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "1",
+          "FF": "28602",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "3",
+          "LUT": "74029",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "17",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      }
+    }
+  },
+  "GenerateBdFiles": "0",
+  "GenData": {
+    "DataVersion": "0.2",
+    "Time": "2026-05-29 14:00:57 +0800",
+    "ToolName": "vitis_hls",
+    "ToolVersion": "2022.2"
+  }
+}

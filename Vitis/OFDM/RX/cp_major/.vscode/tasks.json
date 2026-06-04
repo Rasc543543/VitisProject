@@ -1,0 +1,70 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "HLS: Create Project",
+            "type": "shell",
+            "command": "C:/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls.bat",
+            "args": ["-f", "scripts/create_project.tcl"],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": { "executable": "cmd.exe", "args": ["/c"] }
+            },
+            "group": "build",
+            "presentation": { "reveal": "always", "panel": "shared" },
+            "problemMatcher": []
+        },
+        {
+            "label": "HLS: csim → syn → cosim → export (all)",
+            "type": "shell",
+            "command": "C:/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls.bat",
+            "args": ["-nolog", "-f", "scripts/run_all.tcl"],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": { "executable": "cmd.exe", "args": ["/c"] }
+            },
+            "group": { "kind": "build", "isDefault": true },
+            "presentation": { "reveal": "always", "panel": "shared" },
+            "problemMatcher": []
+        },
+        {
+            "label": "HLS: C Simulation only",
+            "type": "shell",
+            "command": "C:/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls.bat",
+            "args": ["-f", "scripts/run_all.tcl", "-tclargs", "csim_only"],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": { "executable": "cmd.exe", "args": ["/c"] }
+            },
+            "group": "test",
+            "presentation": { "reveal": "always", "panel": "shared" },
+            "problemMatcher": []
+        },
+        {
+            "label": "HLS: Synthesis only",
+            "type": "shell",
+            "command": "C:/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls.bat",
+            "args": ["-f", "scripts/run_all.tcl", "-tclargs", "syn_only"],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": { "executable": "cmd.exe", "args": ["/c"] }
+            },
+            "group": "build",
+            "presentation": { "reveal": "always", "panel": "shared" },
+            "problemMatcher": []
+        },
+        {
+            "label": "HLS: csim + syn only",
+            "type": "shell",
+            "command": "C:/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls.bat",
+            "args": ["-f", "scripts/run_all.tcl", "-tclargs", "csim_syn"],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": { "executable": "cmd.exe", "args": ["/c"] }
+            },
+            "group": "build",
+            "presentation": { "reveal": "always", "panel": "shared" },
+            "problemMatcher": []
+        }
+    ]
+}

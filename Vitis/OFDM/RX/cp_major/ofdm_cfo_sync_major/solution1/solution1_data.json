@@ -1,0 +1,811 @@
+{
+  "Top": "ofdm_cfo_sync",
+  "RtlTop": "ofdm_cfo_sync",
+  "RtlPrefix": "",
+  "RtlSubPrefix": "ofdm_cfo_sync_",
+  "SourceLanguage": "cpp",
+  "HostMachineBits": "64",
+  "FunctionProtocol": "ap_ctrl_none",
+  "ResetStyle": "control",
+  "Target": {
+    "Family": "zynquplus",
+    "Device": "xczu48dr",
+    "Package": "-fsvg1517",
+    "Speed": "-2-e",
+    "Triple": "fpga64-xilinx-none"
+  },
+  "Args": {
+    "input_stream": {
+      "index": "0",
+      "direction": "in",
+      "srcType": "stream<hls::axis<ap_uint<32>, 0, 0, 0>, 0>&",
+      "srcSize": "96",
+      "hwRefs": [{
+          "type": "interface",
+          "interface": "input_stream",
+          "name": "",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "output_stream": {
+      "index": "1",
+      "direction": "out",
+      "srcType": "stream<hls::axis<ap_uint<32>, 0, 0, 0>, 0>&",
+      "srcSize": "96",
+      "hwRefs": [{
+          "type": "interface",
+          "interface": "output_stream",
+          "name": "",
+          "usage": "data",
+          "direction": "out"
+        }]
+    }
+  },
+  "HlsSolution": {
+    "FlowTarget": "vivado",
+    "ConfigTcl": [
+      "config_interface -m_axi_latency=0",
+      "config_export -description {OFDM CP Sync + CFO Correction}",
+      "config_export -format=ip_catalog",
+      "config_export -output=C:\/VitisProject\/Vitis\/OFDM\/RX\/cp_major\/output",
+      "config_export -version=1.0"
+    ],
+    "DirectiveTcl": ["set_directive_top ofdm_cfo_sync -name ofdm_cfo_sync"],
+    "ProfileOption": "0",
+    "ProfileType": "none",
+    "KernelName": "ofdm_cfo_sync"
+  },
+  "ClockInfo": {
+    "ClockName": "ap_clk",
+    "ClockPeriod": "10",
+    "Uncertainty": "1.25",
+    "IsCombinational": "0",
+    "II": "undef",
+    "Latency": "undef"
+  },
+  "Xdc": {"OocClocks": ["create_clock -name ap_clk -period 10.000 [get_ports ap_clk]"]},
+  "Ipx": {
+    "Vendor": "xilinx.com",
+    "Library": "hls",
+    "Name": "ofdm_cfo_sync",
+    "Version": "1.0",
+    "DisplayName": "Ofdm_cfo_sync",
+    "Revision": "2114637839",
+    "Description": "OFDM CP Sync + CFO Correction",
+    "Taxonomy": "\/VITIS_HLS_IP",
+    "AutoFamilySupport": "",
+    "ZipFile": "xilinx_com_hls_ofdm_cfo_sync_1_0.zip"
+  },
+  "Files": {
+    "CSource": ["C:\/VitisProject\/Vitis\/OFDM\/RX\/cp_major\/ofdm_cfo_sync.cc"],
+    "Vhdl": [
+      "impl\/vhdl\/ofdm_cfo_sync_atan2_cordic_float_s.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_atan2_generic_float_s.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_atan2_generic_float_s_cordic_ctab_table_128_V_ROM_AUTO_1R.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_calc_power_and_corr2.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_calc_power_and_corr2_delay_line_128_M_real_V_RAM_2P_LUTRAM_1R1W.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_calc_power_and_corr2_delay_mem_2048_M_real_V_RAM_2P_BRAM_1R1W.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_combined_correction.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_combined_correction_Pipeline_VITIS_LOOP_347_2.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_combined_correction_Pipeline_VITIS_LOOP_347_2_sin_lut_V_ROM_AUTO_1R.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_faddfsub_32ns_32ns_32_4_full_dsp_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fcmp_32ns_32ns_1_2_no_dsp_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fdiv_32ns_32ns_32_8_no_dsp_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fifo_w1_d2_S.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fifo_w1_d256_S.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fifo_w32_d256_A.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fifo_w33_d2_S.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fifo_w64_d256_A.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fifo_w150_d2_S.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_flow_control_loop_pipe_sequential_init.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fmul_32ns_32ns_32_2_max_dsp_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fpext_32ns_64_2_no_dsp_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_fsub_32ns_32ns_32_4_full_dsp_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_mac_muladd_16s_16s_32s_32_4_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_mac_mulsub_16s_16s_32s_32_4_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_mul_25s_25s_50_1_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_mul_mul_16s_16s_32_4_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_payload_gate.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_regslice_both.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_sitofp_32ns_32_3_no_dsp_1.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_start_for_calc_power_and_corr2_U0.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_start_for_combined_correction_U0.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_start_for_payload_gate_U0.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_start_for_sync_search9_U0.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_sync_search9.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_sync_search9_delay_pwr_V_RAM_2P_LUTRAM_1R1W.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync_unpack_axis.vhd",
+      "impl\/vhdl\/ofdm_cfo_sync.vhd"
+    ],
+    "Verilog": [
+      "impl\/verilog\/ofdm_cfo_sync_atan2_cordic_float_s.v",
+      "impl\/verilog\/ofdm_cfo_sync_atan2_generic_float_s.v",
+      "impl\/verilog\/ofdm_cfo_sync_atan2_generic_float_s_cordic_ctab_table_128_V_ROM_AUTO_1R.dat",
+      "impl\/verilog\/ofdm_cfo_sync_atan2_generic_float_s_cordic_ctab_table_128_V_ROM_AUTO_1R.v",
+      "impl\/verilog\/ofdm_cfo_sync_calc_power_and_corr2.v",
+      "impl\/verilog\/ofdm_cfo_sync_calc_power_and_corr2_delay_line_128_M_real_V_RAM_2P_LUTRAM_1R1W.dat",
+      "impl\/verilog\/ofdm_cfo_sync_calc_power_and_corr2_delay_line_128_M_real_V_RAM_2P_LUTRAM_1R1W.v",
+      "impl\/verilog\/ofdm_cfo_sync_calc_power_and_corr2_delay_mem_2048_M_real_V_RAM_2P_BRAM_1R1W.dat",
+      "impl\/verilog\/ofdm_cfo_sync_calc_power_and_corr2_delay_mem_2048_M_real_V_RAM_2P_BRAM_1R1W.v",
+      "impl\/verilog\/ofdm_cfo_sync_combined_correction.v",
+      "impl\/verilog\/ofdm_cfo_sync_combined_correction_Pipeline_VITIS_LOOP_347_2.v",
+      "impl\/verilog\/ofdm_cfo_sync_combined_correction_Pipeline_VITIS_LOOP_347_2_sin_lut_V_ROM_AUTO_1R.dat",
+      "impl\/verilog\/ofdm_cfo_sync_combined_correction_Pipeline_VITIS_LOOP_347_2_sin_lut_V_ROM_AUTO_1R.v",
+      "impl\/verilog\/ofdm_cfo_sync_faddfsub_32ns_32ns_32_4_full_dsp_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_fcmp_32ns_32ns_1_2_no_dsp_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_fdiv_32ns_32ns_32_8_no_dsp_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_fifo_w1_d2_S.v",
+      "impl\/verilog\/ofdm_cfo_sync_fifo_w1_d256_S.v",
+      "impl\/verilog\/ofdm_cfo_sync_fifo_w32_d256_A.v",
+      "impl\/verilog\/ofdm_cfo_sync_fifo_w33_d2_S.v",
+      "impl\/verilog\/ofdm_cfo_sync_fifo_w64_d256_A.v",
+      "impl\/verilog\/ofdm_cfo_sync_fifo_w150_d2_S.v",
+      "impl\/verilog\/ofdm_cfo_sync_flow_control_loop_pipe_sequential_init.v",
+      "impl\/verilog\/ofdm_cfo_sync_fmul_32ns_32ns_32_2_max_dsp_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_fpext_32ns_64_2_no_dsp_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_fsub_32ns_32ns_32_4_full_dsp_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_hls_deadlock_detection_unit.v",
+      "impl\/verilog\/ofdm_cfo_sync_hls_deadlock_detector.vh",
+      "impl\/verilog\/ofdm_cfo_sync_hls_deadlock_idx0_monitor.v",
+      "impl\/verilog\/ofdm_cfo_sync_hls_deadlock_kernel_monitor_top.vh",
+      "impl\/verilog\/ofdm_cfo_sync_hls_deadlock_report_unit.vh",
+      "impl\/verilog\/ofdm_cfo_sync_mac_muladd_16s_16s_32s_32_4_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_mac_mulsub_16s_16s_32s_32_4_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_mul_25s_25s_50_1_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_mul_mul_16s_16s_32_4_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_payload_gate.v",
+      "impl\/verilog\/ofdm_cfo_sync_regslice_both.v",
+      "impl\/verilog\/ofdm_cfo_sync_sitofp_32ns_32_3_no_dsp_1.v",
+      "impl\/verilog\/ofdm_cfo_sync_start_for_calc_power_and_corr2_U0.v",
+      "impl\/verilog\/ofdm_cfo_sync_start_for_combined_correction_U0.v",
+      "impl\/verilog\/ofdm_cfo_sync_start_for_payload_gate_U0.v",
+      "impl\/verilog\/ofdm_cfo_sync_start_for_sync_search9_U0.v",
+      "impl\/verilog\/ofdm_cfo_sync_sync_search9.v",
+      "impl\/verilog\/ofdm_cfo_sync_sync_search9_delay_pwr_V_RAM_2P_LUTRAM_1R1W.dat",
+      "impl\/verilog\/ofdm_cfo_sync_sync_search9_delay_pwr_V_RAM_2P_LUTRAM_1R1W.v",
+      "impl\/verilog\/ofdm_cfo_sync_unpack_axis.v",
+      "impl\/verilog\/ofdm_cfo_sync.v"
+    ],
+    "IpMisc": ["impl\/misc\/logo.png"],
+    "Subcore": [
+      "impl\/misc\/ofdm_cfo_sync_faddfsub_32ns_32ns_32_4_full_dsp_1_ip.tcl",
+      "impl\/misc\/ofdm_cfo_sync_fcmp_32ns_32ns_1_2_no_dsp_1_ip.tcl",
+      "impl\/misc\/ofdm_cfo_sync_fdiv_32ns_32ns_32_8_no_dsp_1_ip.tcl",
+      "impl\/misc\/ofdm_cfo_sync_fmul_32ns_32ns_32_2_max_dsp_1_ip.tcl",
+      "impl\/misc\/ofdm_cfo_sync_fpext_32ns_64_2_no_dsp_1_ip.tcl",
+      "impl\/misc\/ofdm_cfo_sync_fsub_32ns_32ns_32_4_full_dsp_1_ip.tcl",
+      "impl\/misc\/ofdm_cfo_sync_sitofp_32ns_32_3_no_dsp_1_ip.tcl"
+    ],
+    "CsynthXml": "syn\/report\/csynth.xml",
+    "DebugDir": ".debug",
+    "KernelXml": ".autopilot\/db\/kernel.internal.xml",
+    "Xo": "",
+    "XoHlsDir": "",
+    "ProtoInst": [".debug\/ofdm_cfo_sync.protoinst"]
+  },
+  "SubcoreInfo": {
+    "HasXpmMemory": false,
+    "HasClockedDsp": false,
+    "Ip": [
+      {
+        "Name": "ofdm_cfo_sync_faddfsub_32ns_32ns_32_4_full_dsp_1_ip",
+        "Vlnv": "xilinx.com:ip:floating_point:7.1",
+        "Params": "CONFIG.a_precision_type Single CONFIG.a_tuser_width 1 CONFIG.add_sub_value Both CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 8 CONFIG.c_a_fraction_width 24 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 2 CONFIG.c_mult_usage Full_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 8 CONFIG.c_result_fraction_width 24 CONFIG.component_name ofdm_cfo_sync_faddfsub_32ns_32ns_32_4_full_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken true CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Add_Subtract CONFIG.result_precision_type Single CONFIG.result_tlast_behv Null"
+      },
+      {
+        "Name": "ofdm_cfo_sync_fcmp_32ns_32ns_1_2_no_dsp_1_ip",
+        "Vlnv": "xilinx.com:ip:floating_point:7.1",
+        "Params": "CONFIG.a_precision_type Single CONFIG.a_tuser_width 1 CONFIG.add_sub_value Both CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 8 CONFIG.c_a_fraction_width 24 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 0 CONFIG.c_mult_usage No_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 1 CONFIG.c_result_fraction_width 0 CONFIG.component_name ofdm_cfo_sync_fcmp_32ns_32ns_1_2_no_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken false CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Compare CONFIG.result_precision_type Single CONFIG.result_tlast_behv Null"
+      },
+      {
+        "Name": "ofdm_cfo_sync_fdiv_32ns_32ns_32_8_no_dsp_1_ip",
+        "Vlnv": "xilinx.com:ip:floating_point:7.1",
+        "Params": "CONFIG.a_precision_type Single CONFIG.a_tuser_width 1 CONFIG.add_sub_value Both CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 8 CONFIG.c_a_fraction_width 24 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 6 CONFIG.c_mult_usage No_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 8 CONFIG.c_result_fraction_width 24 CONFIG.component_name ofdm_cfo_sync_fdiv_32ns_32ns_32_8_no_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken true CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Divide CONFIG.result_precision_type Single CONFIG.result_tlast_behv Null"
+      },
+      {
+        "Name": "ofdm_cfo_sync_fmul_32ns_32ns_32_2_max_dsp_1_ip",
+        "Vlnv": "xilinx.com:ip:floating_point:7.1",
+        "Params": "CONFIG.a_precision_type Single CONFIG.a_tuser_width 1 CONFIG.add_sub_value Both CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 8 CONFIG.c_a_fraction_width 24 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 0 CONFIG.c_mult_usage Max_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 8 CONFIG.c_result_fraction_width 24 CONFIG.component_name ofdm_cfo_sync_fmul_32ns_32ns_32_2_max_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken false CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Multiply CONFIG.result_precision_type Single CONFIG.result_tlast_behv Null"
+      },
+      {
+        "Name": "ofdm_cfo_sync_fpext_32ns_64_2_no_dsp_1_ip",
+        "Vlnv": "xilinx.com:ip:floating_point:7.1",
+        "Params": "CONFIG.a_precision_type Single CONFIG.a_tuser_width 1 CONFIG.add_sub_value Both CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 8 CONFIG.c_a_fraction_width 24 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 0 CONFIG.c_mult_usage No_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 11 CONFIG.c_result_fraction_width 53 CONFIG.component_name ofdm_cfo_sync_fpext_32ns_64_2_no_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken false CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Float_to_Float CONFIG.result_precision_type Double CONFIG.result_tlast_behv Null"
+      },
+      {
+        "Name": "ofdm_cfo_sync_fsub_32ns_32ns_32_4_full_dsp_1_ip",
+        "Vlnv": "xilinx.com:ip:floating_point:7.1",
+        "Params": "CONFIG.a_precision_type Single CONFIG.a_tuser_width 1 CONFIG.add_sub_value Subtract CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 8 CONFIG.c_a_fraction_width 24 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 2 CONFIG.c_mult_usage Full_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 8 CONFIG.c_result_fraction_width 24 CONFIG.component_name ofdm_cfo_sync_fsub_32ns_32ns_32_4_full_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken true CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Add_Subtract CONFIG.result_precision_type Single CONFIG.result_tlast_behv Null"
+      },
+      {
+        "Name": "ofdm_cfo_sync_sitofp_32ns_32_3_no_dsp_1_ip",
+        "Vlnv": "xilinx.com:ip:floating_point:7.1",
+        "Params": "CONFIG.a_precision_type Custom CONFIG.a_tuser_width 1 CONFIG.add_sub_value Both CONFIG.b_tuser_width 1 CONFIG.c_a_exponent_width 32 CONFIG.c_a_fraction_width 0 CONFIG.c_compare_operation Programmable CONFIG.c_has_divide_by_zero false CONFIG.c_has_invalid_op false CONFIG.c_has_overflow false CONFIG.c_has_underflow false CONFIG.c_latency 1 CONFIG.c_mult_usage No_Usage CONFIG.c_optimization Speed_Optimized CONFIG.c_rate 1 CONFIG.c_result_exponent_width 8 CONFIG.c_result_fraction_width 24 CONFIG.component_name ofdm_cfo_sync_sitofp_32ns_32_3_no_dsp_1_ip CONFIG.flow_control NonBlocking CONFIG.has_a_tlast false CONFIG.has_a_tuser false CONFIG.has_aclken true CONFIG.has_aresetn false CONFIG.has_b_tlast false CONFIG.has_b_tuser false CONFIG.has_operation_tlast false CONFIG.has_operation_tuser false CONFIG.has_result_tready false CONFIG.maximum_latency false CONFIG.operation_tuser_width 1 CONFIG.operation_type Fixed_to_Float CONFIG.result_precision_type Single CONFIG.result_tlast_behv Null"
+      }
+    ]
+  },
+  "Interfaces": {
+    "input_stream": {
+      "type": "axi4stream",
+      "busTypeName": "axis",
+      "mode": "slave",
+      "dataWidth": "32",
+      "portPrefix": "input_stream_",
+      "ports": [
+        "input_stream_TDATA",
+        "input_stream_TKEEP",
+        "input_stream_TLAST",
+        "input_stream_TREADY",
+        "input_stream_TSTRB",
+        "input_stream_TVALID"
+      ],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "axis",
+          "register_option": "0",
+          "register_mode": "both",
+          "argName": "input_stream"
+        }]
+    },
+    "output_stream": {
+      "type": "axi4stream",
+      "busTypeName": "axis",
+      "mode": "master",
+      "dataWidth": "32",
+      "portPrefix": "output_stream_",
+      "ports": [
+        "output_stream_TDATA",
+        "output_stream_TKEEP",
+        "output_stream_TLAST",
+        "output_stream_TREADY",
+        "output_stream_TSTRB",
+        "output_stream_TVALID"
+      ],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "axis",
+          "register_option": "0",
+          "register_mode": "both",
+          "argName": "output_stream"
+        }]
+    },
+    "ap_clk": {
+      "type": "clock",
+      "busTypeName": "clock",
+      "mode": "slave",
+      "busParams": {
+        "ASSOCIATED_BUSIF": "input_stream:output_stream",
+        "ASSOCIATED_RESET": "ap_rst_n"
+      },
+      "portMap": {"ap_clk": "CLK"},
+      "ports": ["ap_clk"]
+    },
+    "ap_rst_n": {
+      "type": "reset",
+      "busTypeName": "reset",
+      "mode": "slave",
+      "busParams": {"POLARITY": "ACTIVE_LOW"},
+      "portMap": {"ap_rst_n": "RST"},
+      "ports": ["ap_rst_n"]
+    }
+  },
+  "RtlPorts": {
+    "input_stream_TDATA": {
+      "dir": "in",
+      "width": "32"
+    },
+    "input_stream_TKEEP": {
+      "dir": "in",
+      "width": "4"
+    },
+    "input_stream_TSTRB": {
+      "dir": "in",
+      "width": "4"
+    },
+    "input_stream_TLAST": {
+      "dir": "in",
+      "width": "1",
+      "isVector": "true"
+    },
+    "input_stream_TVALID": {
+      "dir": "in",
+      "width": "1"
+    },
+    "input_stream_TREADY": {
+      "dir": "out",
+      "width": "1"
+    },
+    "output_stream_TDATA": {
+      "dir": "out",
+      "width": "32"
+    },
+    "output_stream_TKEEP": {
+      "dir": "out",
+      "width": "4"
+    },
+    "output_stream_TSTRB": {
+      "dir": "out",
+      "width": "4"
+    },
+    "output_stream_TLAST": {
+      "dir": "out",
+      "width": "1",
+      "isVector": "true"
+    },
+    "output_stream_TVALID": {
+      "dir": "out",
+      "width": "1"
+    },
+    "output_stream_TREADY": {
+      "dir": "in",
+      "width": "1"
+    },
+    "ap_clk": {
+      "dir": "in",
+      "width": "1"
+    },
+    "ap_rst_n": {
+      "dir": "in",
+      "width": "1"
+    }
+  },
+  "ModuleInfo": {
+    "Hierarchy": {
+      "ModuleName": "ofdm_cfo_sync",
+      "Instances": [
+        {
+          "ModuleName": "unpack_axis",
+          "InstanceName": "unpack_axis_U0"
+        },
+        {
+          "ModuleName": "calc_power_and_corr2",
+          "InstanceName": "calc_power_and_corr2_U0"
+        },
+        {
+          "ModuleName": "sync_search9",
+          "InstanceName": "sync_search9_U0"
+        },
+        {
+          "ModuleName": "payload_gate",
+          "InstanceName": "payload_gate_U0"
+        },
+        {
+          "ModuleName": "combined_correction",
+          "InstanceName": "combined_correction_U0",
+          "Instances": [
+            {
+              "ModuleName": "atan2_cordic_float_s",
+              "InstanceName": "grp_atan2_cordic_float_s_fu_523",
+              "Instances": [{
+                  "ModuleName": "atan2_generic_float_s",
+                  "InstanceName": "grp_atan2_generic_float_s_fu_160"
+                }]
+            },
+            {
+              "ModuleName": "combined_correction_Pipeline_VITIS_LOOP_347_2",
+              "InstanceName": "grp_combined_correction_Pipeline_VITIS_LOOP_347_2_fu_537"
+            }
+          ]
+        }
+      ]
+    },
+    "Info": {
+      "unpack_axis": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "calc_power_and_corr2": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "sync_search9": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "payload_gate": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "atan2_generic_float_s": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "atan2_cordic_float_s": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "combined_correction_Pipeline_VITIS_LOOP_347_2": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "combined_correction": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "ofdm_cfo_sync": {
+        "FunctionProtocol": "ap_ctrl_none",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      }
+    },
+    "Metrics": {
+      "unpack_axis": {
+        "Latency": {
+          "LatencyBest": "",
+          "LatencyAvg": "",
+          "LatencyWorst": "",
+          "PipelineII": "",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "2.920"
+        },
+        "Loops": [{
+            "Name": "VITIS_LOOP_56_1",
+            "TripCount": "inf",
+            "Latency": "",
+            "PipelineII": "1",
+            "PipelineDepth": "1"
+          }],
+        "Area": {
+          "FF": "3",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "54",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "calc_power_and_corr2": {
+        "Latency": {
+          "LatencyBest": "",
+          "LatencyAvg": "",
+          "LatencyWorst": "",
+          "PipelineII": "",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "2.920"
+        },
+        "Loops": [{
+            "Name": "VITIS_LOOP_85_1",
+            "TripCount": "inf",
+            "Latency": "",
+            "PipelineII": "1",
+            "PipelineDepth": "7"
+          }],
+        "Area": {
+          "BRAM_18K": "4",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "~0",
+          "DSP": "14",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "894",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "594",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "sync_search9": {
+        "Latency": {
+          "LatencyBest": "",
+          "LatencyAvg": "",
+          "LatencyWorst": "",
+          "PipelineII": "",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "7.902"
+        },
+        "Loops": [{
+            "Name": "VITIS_LOOP_163_1",
+            "TripCount": "inf",
+            "Latency": "",
+            "PipelineII": "1",
+            "PipelineDepth": "3"
+          }],
+        "Area": {
+          "DSP": "6",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "2425",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "2497",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "payload_gate": {
+        "Latency": {
+          "LatencyBest": "",
+          "LatencyAvg": "",
+          "LatencyWorst": "",
+          "PipelineII": "",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "4.040"
+        },
+        "Loops": [{
+            "Name": "VITIS_LOOP_278_1",
+            "TripCount": "inf",
+            "Latency": "",
+            "PipelineII": "1",
+            "PipelineDepth": "2"
+          }],
+        "Area": {
+          "FF": "51",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "151",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "atan2_generic_float_s": {
+        "Latency": {
+          "LatencyBest": "1",
+          "LatencyAvg": "46",
+          "LatencyWorst": "87",
+          "PipelineIIMin": "1",
+          "PipelineIIMax": "87",
+          "PipelineII": "1 ~ 87",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "8.748"
+        },
+        "Loops": [{
+            "Name": "Loop 1",
+            "TripCount": "42",
+            "Latency": "84",
+            "PipelineII": "",
+            "PipelineDepth": "2"
+          }],
+        "Area": {
+          "BRAM_18K": "4",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "~0",
+          "FF": "209",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "2189",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "DSP": "0",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "atan2_cordic_float_s": {
+        "Latency": {
+          "LatencyBest": "1",
+          "LatencyAvg": "9",
+          "LatencyWorst": "98",
+          "PipelineIIMin": "1",
+          "PipelineIIMax": "98",
+          "PipelineII": "1 ~ 98",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "8.748"
+        },
+        "Area": {
+          "BRAM_18K": "4",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "~0",
+          "DSP": "2",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "706",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "3031",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "combined_correction_Pipeline_VITIS_LOOP_347_2": {
+        "Latency": {
+          "LatencyBest": "2053",
+          "LatencyAvg": "2053",
+          "LatencyWorst": "2053",
+          "PipelineII": "2053",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "2.855"
+        },
+        "Loops": [{
+            "Name": "VITIS_LOOP_347_2",
+            "TripCount": "2048",
+            "Latency": "2051",
+            "PipelineII": "1",
+            "PipelineDepth": "5"
+          }],
+        "Area": {
+          "BRAM_18K": "1",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "~0",
+          "DSP": "4",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "102",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "235",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "~0",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "combined_correction": {
+        "Latency": {
+          "LatencyBest": "",
+          "LatencyAvg": "",
+          "LatencyWorst": "",
+          "PipelineII": "",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "8.763"
+        },
+        "Loops": [{
+            "Name": "VITIS_LOOP_313_1",
+            "TripCount": "inf",
+            "Latency": "",
+            "PipelineII": "",
+            "PipelineDepthMin": "2115",
+            "PipelineDepthMax": "2406",
+            "PipelineDepth": "2115 ~ 2406"
+          }],
+        "Area": {
+          "BRAM_18K": "5",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "~0",
+          "DSP": "11",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "2654",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "11684",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "2",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      },
+      "ofdm_cfo_sync": {
+        "Latency": {
+          "LatencyBest": "",
+          "LatencyAvg": "",
+          "LatencyWorst": "",
+          "PipelineII": "",
+          "PipelineDepth": "",
+          "PipelineType": "dataflow"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "1.25",
+          "Estimate": "8.763"
+        },
+        "Area": {
+          "BRAM_18K": "27",
+          "AVAIL_BRAM": "2160",
+          "UTIL_BRAM": "1",
+          "DSP": "31",
+          "AVAIL_DSP": "4272",
+          "UTIL_DSP": "~0",
+          "FF": "7377",
+          "AVAIL_FF": "850560",
+          "UTIL_FF": "~0",
+          "LUT": "15872",
+          "AVAIL_LUT": "425280",
+          "UTIL_LUT": "3",
+          "URAM": "0",
+          "AVAIL_URAM": "80",
+          "UTIL_URAM": "0"
+        }
+      }
+    }
+  },
+  "GenerateBdFiles": "0",
+  "GenData": {
+    "DataVersion": "0.2",
+    "Time": "2026-06-03 21:59:46 +0800",
+    "ToolName": "vitis_hls",
+    "ToolVersion": "2022.2"
+  }
+}
